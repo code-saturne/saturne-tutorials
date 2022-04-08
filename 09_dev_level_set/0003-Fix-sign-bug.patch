@@ -1,0 +1,27 @@
+From 3b9a433e41b4bc8fca88527ad52b1d36182d1ec8 Mon Sep 17 00:00:00 2001
+From: Martin FERRAND <martin.ferrand@ponts.org>
+Date: Wed, 8 Nov 2017 19:36:38 +0100
+Subject: [PATCH 3/3] Fix sign bug.
+
+---
+ src/base/phyvar.f90 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/base/phyvar.f90 b/src/base/phyvar.f90
+index 01e9282..cad9e84 100644
+--- a/src/base/phyvar.f90
++++ b/src/base/phyvar.f90
+@@ -771,8 +771,8 @@ do iel = 1, ncel
+ 
+   ! rho1 is density of the liquid
+   ! rho2 is density of the vapor
+-  viscl(iel) = viscl0 - (viscl0/rho2*rho1 - viscl0)*heavyside(iel)
+-  crom(iel) = rho2 - (rho1 - rho2)*heavyside(iel)
++  viscl(iel) = viscl0 + (viscl0/rho2*rho1 - viscl0)*heavyside(iel)
++  crom(iel) = rho2 + (rho1 - rho2)*heavyside(iel)
+ enddo
+ 
+ 
+-- 
+2.1.4
+
