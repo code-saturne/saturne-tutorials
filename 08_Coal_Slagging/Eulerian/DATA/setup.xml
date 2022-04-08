@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="Eulerian" solver_version="5.0;6.1-alpha" study="08_Coal_Slagging" version="2.0">
+  <additional_scalars/>
+  <analysis_control>
+    <error_estimator/>
+    <output>
+      <listing_printing_frequency>1</listing_printing_frequency>
+      <mesh id="-1" label="Fluid domain" type="cells">
+        <all_variables status="on"/>
+        <location>all[]</location>
+        <writer id="-1"/>
+      </mesh>
+      <mesh id="-2" label="Boundary" type="boundary_faces">
+        <all_variables status="on"/>
+        <location>all[]</location>
+        <writer id="-1"/>
+      </mesh>
+      <probe_format choice="DAT"/>
+      <probe_recording_frequency>1</probe_recording_frequency>
+      <writer id="-1" label="results">
+        <directory name="postprocessing"/>
+        <format name="ensight" options="binary"/>
+        <frequency period="time_step">100</frequency>
+        <output_at_end status="on"/>
+        <time_dependency choice="fixed_mesh"/>
+      </writer>
+    </output>
+    <profiles/>
+    <time_averages/>
+    <time_parameters>
+      <iterations>3000</iterations>
+      <max_courant_num>1</max_courant_num>
+      <max_fourier_num>10</max_fourier_num>
+      <property label="CourantNb" name="courant_number">
+        <probes_recording status="off"/>
+      </property>
+      <property label="FourierNb" name="fourier_number">
+        <probes_recording status="off"/>
+      </property>
+      <property label="LocalTime" name="local_time_step">
+        <probes_recording status="off"/>
+      </property>
+      <time_passing>2</time_passing>
+      <time_step_max_factor>1000</time_step_max_factor>
+      <time_step_min_factor>0.001</time_step_min_factor>
+      <time_step_ref>0.001</time_step_ref>
+      <time_step_var>0.1</time_step_var>
+    </time_parameters>
+  </analysis_control>
+  <boundary_conditions>
+    <boundary label="BC_1" name="1" nature="inlet">AIRPRIM</boundary>
+    <boundary label="BC_2" name="2" nature="inlet">AIRSEC</boundary>
+    <boundary label="BC_3" name="3" nature="inlet">AIRTER</boundary>
+    <boundary label="BC_4" name="4" nature="outlet">OUTLET</boundary>
+    <boundary label="BC_5" name="5" nature="wall">WALL</boundary>
+    <inlet field_id="none" label="BC_1">
+      <scalar choice="dirichlet" name="enthalpy" type="thermal">
+        <dirichlet>0</dirichlet>
+      </scalar>
+      <turbulence choice="hydraulic_diameter">
+        <hydraulic_diameter>0.0758</hydraulic_diameter>
+      </turbulence>
+      <velocity_pressure choice="flow1" direction="normal">
+        <coal name="coal01">
+          <flow1>0.125</flow1>
+          <ratio name="class01">100</ratio>
+          <temperature>310</temperature>
+        </coal>
+        <coal name="coal02">
+          <flow1>0</flow1>
+          <ratio name="class01">100</ratio>
+          <temperature>310</temperature>
+        </coal>
+        <flow1>0.194</flow1>
+        <oxydant>1</oxydant>
+        <temperature>310</temperature>
+      </velocity_pressure>
+    </inlet>
+    <inlet field_id="none" label="BC_2">
+      <scalar choice="dirichlet" name="enthalpy" type="thermal">
+        <dirichlet>0</dirichlet>
+      </scalar>
+      <turbulence choice="hydraulic_diameter">
+        <hydraulic_diameter>0.0774</hydraulic_diameter>
+      </turbulence>
+      <velocity_pressure choice="flow1" direction="formula">
+        <direction_formula>dir_x = 1;
+dir_y = z/sqrt((y^2)+(z^2));
+dir_z = -y/sqrt((y^2)+(z^2));</direction_formula>
+        <flow1>0.639</flow1>
+        <oxydant>1</oxydant>
+        <temperature>623</temperature>
+      </velocity_pressure>
+    </inlet>
+    <inlet field_id="none" label="BC_3">
+      <scalar choice="dirichlet" name="enthalpy" type="thermal">
+        <dirichlet>0</dirichlet>
+      </scalar>
+      <turbulence choice="hydraulic_diameter">
+        <hydraulic_diameter>0.048</hydraulic_diameter>
+      </turbulence>
+      <velocity_pressure choice="flow1" direction="normal">
+        <flow1>0.583</flow1>
+        <oxydant>1</oxydant>
+        <temperature>310</temperature>
+      </velocity_pressure>
+    </inlet>
+    <outlet field_id="none" label="BC_4">
+      <scalar choice="neumann" name="enthalpy" type="thermal">
+        <neumann>0</neumann>
+      </scalar>
+    </outlet>
+    <wall field_id="none" label="BC_5">
+      <radiative_data choice="itpimp">
+        <emissivity>0.7</emissivity>
+        <external_temperature_profile>300</external_temperature_profile>
+        <flux>0</flux>
+        <internal_temperature_profile>773</internal_temperature_profile>
+        <thickness>0.1</thickness>
+        <wall_thermal_conductivity>3</wall_thermal_conductivity>
+      </radiative_data>
+      <scalar choice="neumann" name="enthalpy" type="thermal">
+        <neumann>0</neumann>
+      </scalar>
+      <velocity_pressure choice="off">
+        <dirichlet component="0" name="velocity">0</dirichlet>
+        <dirichlet component="1" name="velocity">0</dirichlet>
+        <dirichlet component="2" name="velocity">0</dirichlet>
+      </velocity_pressure>
+    </wall>
+  </boundary_conditions>
+  <calculation_management>
+    <run_type>standard</run_type>
+  </calculation_management>
+  <lagrangian model="off"/>
+  <numerical_parameters>
+    <density_relaxation>0.95</density_relaxation>
+    <gradient_reconstruction choice="0"/>
+    <gradient_transposed status="on"/>
+    <hydrostatic_pressure status="off"/>
+    <pressure_relaxation>1</pressure_relaxation>
+    <velocity_pressure_algo choice="simplec">
+      <piso_sweep_number>1</piso_sweep_number>
+    </velocity_pressure_algo>
+    <velocity_pressure_coupling status="off"/>
+    <wall_pressure_extrapolation>0</wall_pressure_extrapolation>
+  </numerical_parameters>
+  <physical_properties>
+    <fluid_properties>
+      <material choice="user_material"/>
+      <method choice="user_properties"/>
+      <property choice="predefined_law" label="Density" name="density">
+        <initial_value>1.17862</initial_value>
+        <probes_recording status="off"/>
+      </property>
+      <property choice="constant" label="DiffDyn" name="dynamic_diffusion">
+        <initial_value>0.01</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="LamVisc" name="molecular_viscosity">
+        <initial_value>1.83e-05</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="SpecHeat" name="specific_heat">
+        <initial_value>1017.24</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="ThermalCond" name="thermal_conductivity">
+        <initial_value>0.02495</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <reference choice="user_material"/>
+      <reference_molar_mass>0.028966</reference_molar_mass>
+      <reference_pressure>101325</reference_pressure>
+      <reference_temperature>1273.15</reference_temperature>
+    </fluid_properties>
+    <gravity>
+      <gravity_x>0</gravity_x>
+      <gravity_y>0</gravity_y>
+      <gravity_z>0</gravity_z>
+    </gravity>
+    <notebook/>
+  </physical_properties>
+  <solution_domain>
+    <extrusion/>
+    <faces_cutting status="off"/>
+    <joining/>
+    <mesh_smoothing status="off"/>
+    <meshes_list>
+      <mesh name="Tutorial3D.cgns"/>
+    </meshes_list>
+    <periodicity/>
+    <thin_walls/>
+    <volumic_conditions>
+      <zone groundwater_law="off" head_losses="off" id="1" initialization="on" label="all_cells" mass_source_term="off" momentum_source_term="off" porosity="off" scalar_source_term="off" thermal_source_term="off">all[]</zone>
+    </volumic_conditions>
+  </solution_domain>
+  <thermophysical_models>
+    <ale_method status="off"/>
+    <atmospheric_flows model="off"/>
+    <compressible_model model="off"/>
+    <conjugate_heat_transfer>
+      <external_coupling/>
+    </conjugate_heat_transfer>
+    <gas_combustion model="off" option="off"/>
+    <groundwater_model model="off"/>
+    <joule_effect model="off"/>
+    <radiative_transfer model="p-1">
+      <absorption_coefficient type="constant">0.85</absorption_coefficient>
+      <frequency>1</frequency>
+      <intensity_resolution_listing_printing>0</intensity_resolution_listing_printing>
+      <property label="Absorption" name="rad_absorption">
+        <probes_recording status="off"/>
+      </property>
+      <property label="Absorption_coefficient" name="rad_absorption_coeff">
+        <probes_recording status="off"/>
+      </property>
+      <property label="Coeff_ech_convectif" name="rad_exchange_coefficient" support="boundary"/>
+      <property label="Emission" name="rad_emission">
+        <probes_recording status="off"/>
+      </property>
+      <property label="Emissivity" name="emissivity" support="boundary"/>
+      <property label="Flux_convectif" name="rad_convective_flux" support="boundary"/>
+      <property label="Flux_incident" name="rad_incident_flux" support="boundary"/>
+      <property label="Flux_net" name="rad_net_flux" support="boundary"/>
+      <property label="Qrad" name="radiative_flux">
+        <probes_recording status="off"/>
+      </property>
+      <property label="Radiative_source_term" name="radiative_source_term">
+        <probes_recording status="off"/>
+      </property>
+      <property label="Thickness" name="thickness" support="boundary"/>
+      <property label="Thermal_conductivity" name="wall_thermal_conductivity" support="boundary"/>
+      <restart status="off"/>
+      <temperature_listing_printing>1</temperature_listing_printing>
+      <thermal_radiative_source_term>2</thermal_radiative_source_term>
+    </radiative_transfer>
+    <reference_values/>
+    <solid_fuels model="homogeneous_fuel_moisture">
+      <CO2_kinetics status="off"/>
+      <H2O_kinetics status="off"/>
+      <NOx_formation status="off"/>
+      <oxidants>
+        <oxidant ox_id="1">
+          <CO2_composition>0</CO2_composition>
+          <H2O_composition>0</H2O_composition>
+          <N2_composition>3.76</N2_composition>
+          <O2_composition>1</O2_composition>
+        </oxidant>
+        <oxidant_type>molar</oxidant_type>
+      </oxidants>
+      <property label="diam_p_01" name="diam_p_01">
+        <probes_recording status="off"/>
+      </property>
+      <property label="diam_p_02" name="diam_p_02">
+        <probes_recording status="off"/>
+      </property>
+      <property label="dissapear_rate_p_01" name="dissapear_rate_p_01">
+        <probes_recording status="off"/>
+      </property>
+      <property label="dissapear_rate_p_02" name="dissapear_rate_p_02">
+        <probes_recording status="off"/>
+      </property>
+      <property label="dry_ts_p01" name="dry_ts_p01">
+        <probes_recording status="off"/>
+      </property>
+      <property label="dry_ts_p02" name="dry_ts_p02">
+        <probes_recording status="off"/>
+      </property>
+      <property label="het_ts_o2_p_01" name="het_ts_o2_p_01">
+        <probes_recording status="off"/>
+      </property>
+      <property label="het_ts_o2_p_02" name="het_ts_o2_p_02">
+        <probes_recording status="off"/>
+      </property>
+      <property label="intensity" name="intensity">
+        <probes_recording status="off"/>
+      </property>
+      <property label="m_transfer_v1_p_01" name="m_transfer_v1_p_01">
+        <probes_recording status="off"/>
+      </property>
+      <property label="m_transfer_v1_p_02" name="m_transfer_v1_p_02">
+        <probes_recording status="off"/>
+      </property>
+      <property label="m_transfer_v2_p_01" name="m_transfer_v2_p_01">
+        <probes_recording status="off"/>
+      </property>
+      <property label="m_transfer_v2_p_02" name="m_transfer_v2_p_02">
+        <probes_recording status="off"/>
+      </property>
+      <property label="rho_gas" name="rho_gas">
+        <probes_recording status="off"/>
+      </property>
+      <property label="rho_p_01" name="rho_p_01">
+        <probes_recording status="off"/>
+      </property>
+      <property label="rho_p_02" name="rho_p_02">
+        <probes_recording status="off"/>
+      </property>
+      <property label="t_gas" name="t_gas">
+        <probes_recording status="off"/>
+      </property>
+      <property label="t_p_01" name="t_p_01">
+        <probes_recording status="off"/>
+      </property>
+      <property label="t_p_02" name="t_p_02">
+        <probes_recording status="off"/>
+      </property>
+      <property label="x_carbone" name="x_carbone">
+        <probes_recording status="off"/>
+      </property>
+      <property label="x_hydrogen" name="x_hydrogen">
+        <probes_recording status="off"/>
+      </property>
+      <property label="x_oxygen" name="x_oxygen">
+        <probes_recording status="off"/>
+      </property>
+      <property label="x_p_01" name="x_p_01">
+        <probes_recording status="off"/>
+      </property>
+      <property label="x_p_02" name="x_p_02">
+        <probes_recording status="off"/>
+      </property>
+      <property label="xm" name="xm">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_chx1m" name="ym_chx1m">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_chx2m" name="ym_chx2m">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_co" name="ym_co">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_co2" name="ym_co2">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_h2" name="ym_h2">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_h2o" name="ym_h2o">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_h2s" name="ym_h2s">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_hcn" name="ym_hcn">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_n2" name="ym_n2">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_nh3" name="ym_nh3">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_o2" name="ym_o2">
+        <probes_recording status="off"/>
+      </property>
+      <property label="ym_so2" name="ym_so2">
+        <probes_recording status="off"/>
+      </property>
+      <solid_fuel fuel_id="1" name="Tutorial_Coal" type="coal">
+        <C_coke_composition_on_dry>100</C_coke_composition_on_dry>
+        <C_composition_on_dry>76.65</C_composition_on_dry>
+        <H_coke_composition_on_dry>0</H_coke_composition_on_dry>
+        <H_composition_on_dry>5.16</H_composition_on_dry>
+        <Heating_model choice="LHV">
+          <value>30000000</value>
+        </Heating_model>
+        <N_coke_composition_on_dry>0</N_coke_composition_on_dry>
+        <N_composition_on_dry>0</N_composition_on_dry>
+        <O_coke_composition_on_dry>0</O_coke_composition_on_dry>
+        <O_composition_on_dry>9.9</O_composition_on_dry>
+        <S_coke_composition_on_dry>0</S_coke_composition_on_dry>
+        <S_composition_on_dry>0</S_composition_on_dry>
+        <ashes_enthalpy>0</ashes_enthalpy>
+        <ashes_thermal_capacity>1800</ashes_thermal_capacity>
+        <char_combustion>
+          <specie nature="O2">
+            <energy_of_activation>16.55</energy_of_activation>
+            <order_of_reaction choice="1"/>
+            <pre-exponential_constant>17.88</pre-exponential_constant>
+          </specie>
+          <specie nature="CO2"/>
+          <specie nature="H2O"/>
+        </char_combustion>
+        <class>
+          <diameter class_id="1">2.5e-05</diameter>
+        </class>
+        <density>1200</density>
+        <devolatilisation_parameters>
+          <A1_pre-exponential_factor>370000</A1_pre-exponential_factor>
+          <A2_pre-exponential_factor>1.3e+13</A2_pre-exponential_factor>
+          <E1_energy_of_activation>74000</E1_energy_of_activation>
+          <E2_energy_of_activation>250000</E2_energy_of_activation>
+          <stoichiometric_coefficient type="user_define">
+            <Y1>0.37</Y1>
+            <Y2>0.74</Y2>
+          </stoichiometric_coefficient>
+        </devolatilisation_parameters>
+        <diameter_type>automatic</diameter_type>
+        <moisture>0</moisture>
+        <nox_formation>
+          <improved_NOx_model status="off"/>
+          <nitrogen_in_char_at_high_temperatures>0.2</nitrogen_in_char_at_high_temperatures>
+          <nitrogen_in_char_at_low_temperatures>0.8</nitrogen_in_char_at_low_temperatures>
+          <percentage_HCN_char_combustion>1</percentage_HCN_char_combustion>
+        </nox_formation>
+        <rate_of_ashes_on_mass>6.21</rate_of_ashes_on_mass>
+        <specific_heat_average>1800</specific_heat_average>
+        <volatile_matter>0</volatile_matter>
+      </solid_fuel>
+      <solid_fuel fuel_id="2" name="Tutorial_Biomass" type="biomass">
+        <C_coke_composition_on_dry>100</C_coke_composition_on_dry>
+        <C_composition_on_dry>53</C_composition_on_dry>
+        <H_coke_composition_on_dry>0</H_coke_composition_on_dry>
+        <H_composition_on_dry>5.8</H_composition_on_dry>
+        <Heating_model choice="LHV">
+          <value>18614000</value>
+        </Heating_model>
+        <N_coke_composition_on_dry>0</N_coke_composition_on_dry>
+        <N_composition_on_dry>0</N_composition_on_dry>
+        <O_coke_composition_on_dry>0</O_coke_composition_on_dry>
+        <O_composition_on_dry>37.62</O_composition_on_dry>
+        <S_coke_composition_on_dry>0</S_coke_composition_on_dry>
+        <S_composition_on_dry>0</S_composition_on_dry>
+        <ashes_enthalpy>0</ashes_enthalpy>
+        <ashes_thermal_capacity>1500</ashes_thermal_capacity>
+        <char_combustion>
+          <specie nature="O2">
+            <energy_of_activation>16.55</energy_of_activation>
+            <order_of_reaction choice="1"/>
+            <pre-exponential_constant>17.88</pre-exponential_constant>
+          </specie>
+          <specie nature="CO2"/>
+          <specie nature="H2O"/>
+        </char_combustion>
+        <class>
+          <diameter class_id="1">0.0008</diameter>
+        </class>
+        <density>549.8</density>
+        <devolatilisation_parameters>
+          <A1_pre-exponential_factor>370000</A1_pre-exponential_factor>
+          <A2_pre-exponential_factor>1.3e+13</A2_pre-exponential_factor>
+          <E1_energy_of_activation>74000</E1_energy_of_activation>
+          <E2_energy_of_activation>250000</E2_energy_of_activation>
+          <stoichiometric_coefficient type="user_define">
+            <Y1>0.7507</Y1>
+            <Y2>0.7508</Y2>
+          </stoichiometric_coefficient>
+        </devolatilisation_parameters>
+        <diameter_type>automatic</diameter_type>
+        <moisture>8.88</moisture>
+        <nox_formation>
+          <improved_NOx_model status="off"/>
+          <nitrogen_in_char_at_high_temperatures>0.2</nitrogen_in_char_at_high_temperatures>
+          <nitrogen_in_char_at_low_temperatures>0.8</nitrogen_in_char_at_low_temperatures>
+          <percentage_HCN_char_combustion>1</percentage_HCN_char_combustion>
+        </nox_formation>
+        <rate_of_ashes_on_mass>2.74</rate_of_ashes_on_mass>
+        <specific_heat_average>1500</specific_heat_average>
+        <volatile_matter>0</volatile_matter>
+      </solid_fuel>
+      <variable label="f1f2_variance" name="f1f2_variance" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="fr_h2o" name="fr_h2o" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="fr_het_o2" name="fr_het_o2" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="fr_mv1_01" name="fr_mv1_01" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="fr_mv1_02" name="fr_mv1_02" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="fr_mv2_01" name="fr_mv2_01" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="fr_mv2_02" name="fr_mv2_02" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="n_p_01" name="n_p_01" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="n_p_02" name="n_p_02" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="x_c_co2" name="x_c_co2" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="x_c_h" name="x_c_h" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="x_p_char_01" name="x_p_char_01" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="x_p_char_02" name="x_p_char_02" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="x_p_coal_01" name="x_p_coal_01" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="x_p_coal_02" name="x_p_coal_02" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="x_p_h_01" name="x_p_h_01" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="x_p_h_02" name="x_p_h_02" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="x_p_wt_01" name="x_p_wt_01" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="x_p_wt_02" name="x_p_wt_02" type="model">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+    </solid_fuels>
+    <source_terms/>
+    <thermal_scalar model="enthalpy">
+      <property label="Dimensionless Thermal flux" name="boundary_layer_nusselt" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property label="Boundary temperature" name="boundary_temperature" support="boundary"/>
+      <property label="Thermal flux" name="thermal_flux" support="boundary"/>
+      <property label="Tplus" name="tplus" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <variable label="Enthalpy" name="enthalpy" type="thermal">
+        <blending_factor>1</blending_factor>
+        <formula zone_id="1">cp = 1017.24;
+enthalpy = 310. * cp;</formula>
+        <max_value>1e+12</max_value>
+        <min_value>0</min_value>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+        <turbulent_flux_model>SGDH</turbulent_flux_model>
+      </variable>
+    </thermal_scalar>
+    <turbulence model="k-epsilon-PL">
+      <initialization choice="reference_value" zone_id="1"/>
+      <property label="TurbVisc" name="turbulent_viscosity">
+        <probes_recording status="off"/>
+      </property>
+      <reference_velocity>1</reference_velocity>
+      <variable label="epsilon" name="epsilon">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="k" name="k">
+        <blending_factor>0</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <wall_function>3</wall_function>
+    </turbulence>
+    <velocity_pressure>
+      <initialization>
+        <formula zone_id="1">velocity[0] = 0.;
+velocity[1] = 0.;
+velocity[2] = 0.;</formula>
+      </initialization>
+      <property label="Stress" name="stress" support="boundary"/>
+      <property label="Stress, normal" name="stress_normal" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property label="Stress, tangential" name="stress_tangential" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property label="total_pressure" name="total_pressure">
+        <probes_recording status="off"/>
+      </property>
+      <property label="Yplus" name="yplus" support="boundary"/>
+      <variable label="Pressure" name="pressure">
+        <probes_recording status="off"/>
+        <rhs_reconstruction>2</rhs_reconstruction>
+      </variable>
+      <variable dimension="3" label="Velocity" name="velocity">
+        <blending_factor>1</blending_factor>
+        <probes_recording status="off"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+    </velocity_pressure>
+  </thermophysical_models>
+</Code_Saturne_GUI>
