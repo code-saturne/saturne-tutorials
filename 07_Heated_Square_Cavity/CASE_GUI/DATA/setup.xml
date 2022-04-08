@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="CASE1" solver_version="6.0;;7.1-alpha" study="HeatedSquareCavity" version="2.0">
+  <additional_scalars/>
+  <analysis_control>
+    <output>
+      <listing_printing_frequency>1</listing_printing_frequency>
+      <mesh id="-1" label="Fluid domain" type="cells">
+        <all_variables status="on"/>
+        <location>all[]</location>
+        <writer id="-1"/>
+      </mesh>
+      <mesh id="-2" label="Boundary" type="boundary_faces">
+        <all_variables status="on"/>
+        <location>all[]</location>
+        <writer id="-1"/>
+      </mesh>
+      <probe_format choice="CSV"/>
+      <probe_recording_frequency>1</probe_recording_frequency>
+      <probes_interpolation choice=""/>
+      <probes_snap choice=""/>
+      <writer id="-1" label="results">
+        <directory name="postprocessing"/>
+        <format name="ensight" options="separate_meshes"/>
+        <frequency period="none"/>
+        <output_at_end status="on"/>
+        <time_dependency choice="fixed_mesh"/>
+      </writer>
+    </output>
+    <profiles/>
+    <time_averages/>
+    <time_parameters>
+      <iterations>450</iterations>
+      <max_courant_num>8</max_courant_num>
+      <max_fourier_num>10</max_fourier_num>
+      <property label="CourantNb" name="courant_number"/>
+      <property label="FourierNb" name="fourier_number"/>
+      <property label="LocalTime" name="local_time_step">
+        <postprocessing_recording status="off"/>
+        <probes choice="0"/>
+      </property>
+      <thermal_time_step status="off"/>
+      <time_passing>1</time_passing>
+      <time_step_max_factor>1000</time_step_max_factor>
+      <time_step_min_factor>0.1</time_step_min_factor>
+      <time_step_ref>0.1</time_step_ref>
+      <time_step_var>0.1</time_step_var>
+    </time_parameters>
+  </analysis_control>
+  <boundary_conditions>
+    <boundary label="symmetry_planes" name="1" nature="symmetry">symmetry_planes</boundary>
+    <boundary label="adiabatic_walls" name="2" nature="wall">adiabatic_walls</boundary>
+    <boundary label="hot_wall" name="3" nature="wall">hot_wall</boundary>
+    <boundary label="cold_wall" name="4" nature="wall">cold_wall</boundary>
+    <symmetry field_id="none" label="symmetry_planes"/>
+    <wall field_id="none" label="adiabatic_walls">
+      <scalar choice="neumann" name="temperature" type="thermal">
+        <neumann>0</neumann>
+      </scalar>
+      <velocity_pressure choice="off">
+        <dirichlet component="0" name="velocity">0</dirichlet>
+        <dirichlet component="1" name="velocity">0</dirichlet>
+        <dirichlet component="2" name="velocity">0</dirichlet>
+      </velocity_pressure>
+    </wall>
+    <wall field_id="none" label="hot_wall">
+      <scalar choice="dirichlet" name="temperature" type="thermal">
+        <dirichlet>303.15</dirichlet>
+      </scalar>
+      <velocity_pressure choice="off">
+        <dirichlet component="0" name="velocity">0</dirichlet>
+        <dirichlet component="1" name="velocity">0</dirichlet>
+        <dirichlet component="2" name="velocity">0</dirichlet>
+      </velocity_pressure>
+    </wall>
+    <wall field_id="none" label="cold_wall">
+      <scalar choice="dirichlet" name="temperature" type="thermal">
+        <dirichlet>293.15</dirichlet>
+      </scalar>
+      <velocity_pressure choice="off">
+        <dirichlet component="0" name="velocity">0</dirichlet>
+        <dirichlet component="1" name="velocity">0</dirichlet>
+        <dirichlet component="2" name="velocity">0</dirichlet>
+      </velocity_pressure>
+    </wall>
+  </boundary_conditions>
+  <calculation_management/>
+  <lagrangian model="off"/>
+  <numerical_parameters>
+    <velocity_pressure_algo choice="simplec"/>
+  </numerical_parameters>
+  <physical_properties>
+    <fluid_properties>
+      <material choice="user_material"/>
+      <method choice="user_properties"/>
+      <property choice="user_law" label="Density" name="density">
+        <formula>density = rho0*(1.-lambda0*mu0*Ra*(temperature-T_cold)/(rho0^2*cp0*abs(gy)*(T_hot-T_cold)*L^3));</formula>
+        <initial_value>1.2039</initial_value>
+      </property>
+      <property choice="constant" label="DiffDyn" name="dynamic_diffusion">
+        <initial_value>0.01</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="LamVisc" name="molecular_viscosity">
+        <initial_value>1.83e-05</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="SpecHeat" name="specific_heat">
+        <initial_value>1004.84</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="ThermalCond" name="thermal_conductivity">
+        <initial_value>0.0259</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <reference_pressure>101325</reference_pressure>
+      <reference_temperature>293.15</reference_temperature>
+    </fluid_properties>
+    <gravity>
+      <gravity_x>0</gravity_x>
+      <gravity_y>-9.81</gravity_y>
+      <gravity_z>0</gravity_z>
+    </gravity>
+    <notebook>
+      <var editable="No" id="0" name="L" oturns="No" value="1.0"/>
+      <var editable="No" id="1" name="T_hot" oturns="No" value="303.15"/>
+      <var editable="No" id="2" name="T_cold" oturns="No" value="293.15"/>
+      <var editable="No" id="3" name="Ra" oturns="No" value="1000000.0"/>
+    </notebook>
+    <omega>
+      <omega_x>0</omega_x>
+      <omega_y>0</omega_y>
+      <omega_z>0</omega_z>
+    </omega>
+  </physical_properties>
+  <solution_domain>
+    <extrusion/>
+    <faces_cutting status="off"/>
+    <joining/>
+    <mesh_cartesian>
+      <x_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
+      <y_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
+      <z_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
+    </mesh_cartesian>
+    <mesh_smoothing status="off"/>
+    <meshes_list>
+      <mesh name="HSC_mesh.med"/>
+    </meshes_list>
+    <periodicity/>
+    <thin_walls/>
+    <volumic_conditions>
+      <zone groundwater_law="off" head_losses="off" id="1" initialization="on" label="all_cells" momentum_source_term="off" physical_properties="on" porosity="off" scalar_source_term="off" solid="off" thermal_source_term="off">all[]</zone>
+    </volumic_conditions>
+  </solution_domain>
+  <thermophysical_models>
+    <ale_method/>
+    <atmospheric_flows model="off">
+      <large_scale_meteo status="off"/>
+    </atmospheric_flows>
+    <compressible_model model="off"/>
+    <conjugate_heat_transfer>
+      <external_coupling>
+        <syrthes_instances/>
+      </external_coupling>
+    </conjugate_heat_transfer>
+    <gas_combustion model="off">
+      <soot_model model="off"/>
+      <thermodynamical_pressure status="off"/>
+    </gas_combustion>
+    <groundwater_model model="off"/>
+    <hgn_model model="off"/>
+    <internal_coupling>
+      <coupled_scalars/>
+      <solid_zones/>
+    </internal_coupling>
+    <joule_effect model="off"/>
+    <porosities/>
+    <radiative_transfer model="off">
+      <absorption_coefficient type="constant">0</absorption_coefficient>
+      <restart status="on"/>
+    </radiative_transfer>
+    <reference_values>
+      <length/>
+    </reference_values>
+    <solid_fuels model="off"/>
+    <source_terms/>
+    <thermal_scalar model="temperature_kelvin">
+      <property label="Dimensionless Thermal flux" name="boundary_layer_nusselt" support="boundary"/>
+      <property label="Boundary temperature" name="boundary_temperature" support="boundary"/>
+      <property label="Thermal flux" name="thermal_flux" support="boundary"/>
+      <property label="Tplus" name="tplus" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <variable label="TempK" name="temperature" type="thermal">
+        <blending_factor>1</blending_factor>
+        <formula zone_id="1">temperature = 293.15;</formula>
+        <max_value>1e+12</max_value>
+        <min_value>0</min_value>
+        <order_scheme choice="centered"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+        <slope_test status="off"/>
+      </variable>
+    </thermal_scalar>
+    <turbomachinery model="off">
+      <joining/>
+    </turbomachinery>
+    <turbulence model="off">
+      <initialization choice="reference_value" zone_id="1"/>
+      <reference_velocity>1</reference_velocity>
+      <wall_function>0</wall_function>
+    </turbulence>
+    <velocity_pressure>
+      <initialization>
+        <formula zone_id="1">velocity[0] = 0.;
+velocity[1] = 0.;
+velocity[2] = 0.;</formula>
+      </initialization>
+      <property label="Stress" name="stress" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property label="Stress, normal" name="stress_normal" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property label="Stress, tangential" name="stress_tangential" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property label="total_pressure" name="total_pressure"/>
+      <property label="Yplus" name="yplus" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <variable label="Pressure" name="pressure">
+        <rhs_reconstruction>2</rhs_reconstruction>
+      </variable>
+      <variable dimension="3" label="Velocity" name="velocity">
+        <blending_factor>1</blending_factor>
+        <order_scheme choice="centered"/>
+        <rhs_reconstruction>1</rhs_reconstruction>
+        <slope_test status="off"/>
+      </variable>
+    </velocity_pressure>
+  </thermophysical_models>
+</Code_Saturne_GUI>
