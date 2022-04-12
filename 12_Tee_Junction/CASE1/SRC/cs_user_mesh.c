@@ -10,7 +10,7 @@
  *   6) Smoothe the mesh.
  *============================================================================*/
 
-/* code_saturne version 7.2-alpha */
+/* VERS */
 
 /*
   This file is part of code_saturne, a general-purpose CFD tool.
