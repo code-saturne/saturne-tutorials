@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="case3" solver_version="5.2;7.0" study="2-full_domain" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="case3" solver_version="5.2;7.0" study="02_Full_Domain" version="2.0">
   <additional_scalars>
     <variable label="scalar2" name="scalar2" type="user">
-      <blending_factor>1</blending_factor>
       <formula zone_id="1">scalar2 = 10.;</formula>
       <max_value>400</max_value>
       <min_value>0</min_value>
@@ -317,7 +316,6 @@ density = temperature*(A*temperature +B) + C;</formula>
         <postprocessing_recording status="off"/>
       </property>
       <variable label="TempC" name="temperature" type="thermal">
-        <blending_factor>1</blending_factor>
         <formula zone_id="1">temperature = 20.;</formula>
         <max_value>400</max_value>
         <min_value>0</min_value>
@@ -325,7 +323,7 @@ density = temperature*(A*temperature +B) + C;</formula>
         <turbulent_flux_model>SGDH</turbulent_flux_model>
       </variable>
     </thermal_scalar>
-    <turbulence model="k-epsilon">
+    <turbulence model="k-epsilon-PL">
       <initialization choice="reference_value" zone_id="1"/>
       <property label="TurbVisc" name="turbulent_viscosity"/>
       <reference_velocity>1</reference_velocity>
@@ -360,7 +358,6 @@ velocity[2] = 0.;</formula>
         <rhs_reconstruction>2</rhs_reconstruction>
       </variable>
       <variable dimension="3" label="Velocity" name="velocity">
-        <blending_factor>1</blending_factor>
         <rhs_reconstruction>1</rhs_reconstruction>
       </variable>
     </velocity_pressure>
