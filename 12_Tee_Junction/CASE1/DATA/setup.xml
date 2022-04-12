@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="CASE1" solver_version="6.0;;7.2-alpha;7.0;7.2-alpha" study="12_Tjunction" version="2.0">
+  <additional_scalars/>
+  <analysis_control>
+    <output>
+      <listing_printing_frequency>1</listing_printing_frequency>
+      <mesh id="-1" label="Fluid domain" type="cells">
+        <all_variables status="on"/>
+        <location>all[]</location>
+        <writer id="-1"/>
+      </mesh>
+      <mesh id="-2" label="Boundary" type="boundary_faces">
+        <all_variables status="on"/>
+        <location>all[]</location>
+        <writer id="-1"/>
+      </mesh>
+      <probe id="1" name="1" status="on">
+        <probe_x>0</probe_x>
+        <probe_y>0</probe_y>
+        <probe_z>0</probe_z>
+      </probe>
+      <probe id="2" name="2" status="on">
+        <probe_x>0</probe_x>
+        <probe_y>0.1</probe_y>
+        <probe_z>0</probe_z>
+      </probe>
+      <probe id="3" name="3" status="on">
+        <probe_x>0</probe_x>
+        <probe_y>0.4</probe_y>
+        <probe_z>0</probe_z>
+      </probe>
+      <probe id="4" name="4" status="on">
+        <probe_x>0</probe_x>
+        <probe_y>1</probe_y>
+        <probe_z>0</probe_z>
+      </probe>
+      <probe id="5" name="5" status="on">
+        <probe_x>0.04</probe_x>
+        <probe_y>0.2</probe_y>
+        <probe_z>0.06</probe_z>
+      </probe>
+      <probe_format choice="CSV"/>
+      <probe_recording_frequency>1</probe_recording_frequency>
+      <probes_interpolation choice=""/>
+      <probes_snap choice=""/>
+      <writer id="-1" label="results">
+        <directory name="postprocessing"/>
+        <format name="ensight" options="separate_meshes"/>
+        <frequency period="none"/>
+        <output_at_end status="on"/>
+        <time_dependency choice="fixed_mesh"/>
+      </writer>
+    </output>
+    <profiles/>
+    <time_averages/>
+    <time_parameters>
+      <iterations>600</iterations>
+      <max_courant_num>1</max_courant_num>
+      <max_fourier_num>10</max_fourier_num>
+      <property label="CourantNb" name="courant_number"/>
+      <property label="FourierNb" name="fourier_number"/>
+      <property label="LocalTime" name="local_time_step"/>
+      <time_passing>2</time_passing>
+      <time_step_max_factor>1000</time_step_max_factor>
+      <time_step_min_factor>0.1</time_step_min_factor>
+      <time_step_ref>0.1</time_step_ref>
+      <time_step_var>0.1</time_step_var>
+    </time_parameters>
+  </analysis_control>
+  <boundary_conditions>
+    <boundary label="inlet1" name="1" nature="inlet">inlet1</boundary>
+    <boundary label="inlet2" name="2" nature="inlet">inlet2</boundary>
+    <boundary label="outlet" name="3" nature="outlet">outlet</boundary>
+    <boundary label="walls" name="4" nature="wall">walls</boundary>
+    <inlet field_id="none" label="inlet1">
+      <scalar choice="dirichlet" name="temperature" type="thermal">
+        <dirichlet>20</dirichlet>
+      </scalar>
+      <turbulence choice="hydraulic_diameter">
+        <hydraulic_diameter>0.2</hydraulic_diameter>
+      </turbulence>
+      <velocity_pressure choice="norm_formula" direction="normal">
+        <norm_formula>u_norm = main_inlet_velocity;</norm_formula>
+      </velocity_pressure>
+    </inlet>
+    <inlet field_id="none" label="inlet2">
+      <scalar choice="dirichlet" name="temperature" type="thermal">
+        <dirichlet>30</dirichlet>
+      </scalar>
+      <turbulence choice="hydraulic_diameter">
+        <hydraulic_diameter>0.05</hydraulic_diameter>
+      </turbulence>
+      <velocity_pressure choice="norm_formula" direction="normal">
+        <norm_formula>u_norm = side_inlet_velocity;</norm_formula>
+      </velocity_pressure>
+    </inlet>
+    <outlet field_id="none" label="outlet"/>
+    <wall field_id="none" label="walls">
+      <velocity_pressure choice="off"/>
+    </wall>
+  </boundary_conditions>
+  <calculation_management>
+    <start_restart>
+      <frozen_field status="off"/>
+    </start_restart>
+  </calculation_management>
+  <lagrangian model="off"/>
+  <numerical_parameters>
+    <extended_neighborhood choice="complete"/>
+    <gradient_reconstruction choice="lsq"/>
+    <velocity_pressure_algo choice="simplec"/>
+  </numerical_parameters>
+  <physical_properties>
+    <fluid_properties>
+      <material choice="user_material"/>
+      <method choice="user_properties"/>
+      <property choice="constant" label="Density" name="density">
+        <initial_value>1000</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="DiffDyn" name="dynamic_diffusion">
+        <initial_value>0.01</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="LamVisc" name="molecular_viscosity">
+        <initial_value>0.001</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="SpecHeat" name="specific_heat">
+        <initial_value>4190</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="SurfTen" name="surface_tension">
+        <initial_value>0</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property choice="constant" label="ThermalCond" name="thermal_conductivity">
+        <initial_value>0.604</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <reference_pressure>101325</reference_pressure>
+      <reference_temperature>20</reference_temperature>
+    </fluid_properties>
+    <gravity>
+      <gravity_x>0</gravity_x>
+      <gravity_y>0</gravity_y>
+      <gravity_z>0</gravity_z>
+    </gravity>
+    <notebook>
+      <var editable="No" id="0" name="main_inlet_velocity" oturns="No" value="0.5"/>
+      <var editable="No" id="1" name="side_inlet_velocity" oturns="No" value="2.0"/>
+    </notebook>
+  </physical_properties>
+  <solution_domain>
+    <extrusion>
+      <extrude_mesh name="1">
+        <layers_number>4</layers_number>
+        <reason>1</reason>
+        <selector>inlet1</selector>
+        <thickness>0.05</thickness>
+      </extrude_mesh>
+      <extrude_mesh name="2">
+        <layers_number>8</layers_number>
+        <reason>1</reason>
+        <selector>inlet2</selector>
+        <thickness>0.025</thickness>
+      </extrude_mesh>
+      <extrude_mesh name="3">
+        <layers_number>40</layers_number>
+        <reason>1.03</reason>
+        <selector>outlet</selector>
+        <thickness>1</thickness>
+      </extrude_mesh>
+    </extrusion>
+    <faces_cutting status="off"/>
+    <joining/>
+    <mesh_cartesian>
+      <x_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
+      <y_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
+      <z_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
+    </mesh_cartesian>
+    <mesh_smoothing status="off"/>
+    <meshes_list>
+      <mesh name="mesh_T_junction.med"/>
+    </meshes_list>
+    <periodicity/>
+    <thin_walls/>
+    <volumic_conditions>
+      <zone groundwater_law="off" head_losses="off" id="1" initialization="on" label="all_cells" momentum_source_term="off" physical_properties="on" porosity="off" scalar_source_term="off" solid="off" thermal_source_term="off">all[]</zone>
+    </volumic_conditions>
+  </solution_domain>
+  <thermophysical_models>
+    <ale_method/>
+    <atmospheric_flows model="off">
+      <large_scale_meteo status="off"/>
+    </atmospheric_flows>
+    <compressible_model model="off"/>
+    <conjugate_heat_transfer>
+      <external_coupling>
+        <syrthes_instances/>
+      </external_coupling>
+    </conjugate_heat_transfer>
+    <gas_combustion model="off">
+      <soot_model model="off"/>
+      <thermodynamical_pressure status="off"/>
+    </gas_combustion>
+    <groundwater_model model="off"/>
+    <hgn_model model="off"/>
+    <internal_coupling>
+      <coupled_scalars/>
+      <solid_zones/>
+    </internal_coupling>
+    <joule_effect model="off"/>
+    <porosities/>
+    <radiative_transfer model="off">
+      <absorption_coefficient type="constant">0</absorption_coefficient>
+      <restart status="on"/>
+    </radiative_transfer>
+    <reference_values>
+      <length/>
+    </reference_values>
+    <solid_fuels model="off"/>
+    <source_terms/>
+    <thermal_scalar model="temperature_celsius">
+      <property label="Dimensionless Thermal flux" name="boundary_layer_nusselt" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property label="Boundary temperature" name="boundary_temperature" support="boundary"/>
+      <property label="Thermal flux" name="thermal_flux" support="boundary"/>
+      <property label="Tplus" name="tplus" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <variable label="TempC" name="temperature" type="thermal">
+        <blending_factor>1</blending_factor>
+        <formula zone_id="1">temperature = 20.;</formula>
+        <max_value>30</max_value>
+        <min_value>20</min_value>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+    </thermal_scalar>
+    <turbomachinery model="off">
+      <joining/>
+    </turbomachinery>
+    <turbulence model="k-epsilon-PL">
+      <initialization choice="reference_value" zone_id="1"/>
+      <property label="TurbVisc" name="turbulent_viscosity"/>
+      <reference_velocity>1</reference_velocity>
+      <variable label="epsilon" name="epsilon">
+        <blending_factor>0</blending_factor>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <variable label="k" name="k">
+        <blending_factor>0</blending_factor>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+      <wall_function>3</wall_function>
+    </turbulence>
+    <velocity_pressure>
+      <initialization>
+        <formula zone_id="1">velocity[0] = 0.;
+velocity[1] = 0.;
+velocity[2] = 0.;</formula>
+      </initialization>
+      <property label="Stress" name="stress" support="boundary"/>
+      <property label="Stress, normal" name="stress_normal" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property label="Stress, tangential" name="stress_tangential" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property label="total_pressure" name="total_pressure"/>
+      <property label="Yplus" name="yplus" support="boundary"/>
+      <variable label="Pressure" name="pressure">
+        <rhs_reconstruction>2</rhs_reconstruction>
+      </variable>
+      <variable dimension="3" label="Velocity" name="velocity">
+        <blending_factor>1</blending_factor>
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+    </velocity_pressure>
+  </thermophysical_models>
+</Code_Saturne_GUI>
