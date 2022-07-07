@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><studymanager solver_version="7.3-alpha" version="2.0">
+  <destination/>
+  <repository/>
+  <study label="02_Full_Domain" status="on">
+    <case compute="on" label="case1" post="on" run_id="" status="on"/>
+    <case compute="on" label="case2" post="on" run_id="" status="on"/>
+    <case compute="on" label="case3" post="on" run_id="" status="on"/>
+  </study>
+</studymanager>
