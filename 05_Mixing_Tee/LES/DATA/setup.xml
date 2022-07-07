@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="RANS" solver_version="4.1;4.0;7.0;7.3-alpha" study="05_Mixing_Tee" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="LES" solver_version="4.1;4.0;7.0;7.3-alpha" study="05_Mixing_Tee" version="2.0">
   <additional_scalars/>
   <analysis_control>
     <output>
@@ -158,7 +158,6 @@ z = 0.14*s-0.07;</formula>
         <var_prop component="1" name="velocity"/>
         <var_prop component="2" name="velocity"/>
         <var_prop component="0" name="turbulent_viscosity"/>
-        <var_prop component="0" name="epsilon"/>
         <var_prop component="0" name="temperature"/>
       </profile>
       <profile label="p_u16Dh">
@@ -173,7 +172,6 @@ z = 0.0;</formula>
         <var_prop component="1" name="velocity"/>
         <var_prop component="2" name="velocity"/>
         <var_prop component="0" name="turbulent_viscosity"/>
-        <var_prop component="0" name="epsilon"/>
         <var_prop component="0" name="temperature"/>
       </profile>
       <profile label="p_u26Dh">
@@ -188,7 +186,6 @@ z = 0.0;</formula>
         <var_prop component="1" name="velocity"/>
         <var_prop component="2" name="velocity"/>
         <var_prop component="0" name="turbulent_viscosity"/>
-        <var_prop component="0" name="epsilon"/>
         <var_prop component="0" name="temperature"/>
       </profile>
       <profile label="p_u26Dv">
@@ -203,7 +200,6 @@ z = 0.14*s-0.07;</formula>
         <var_prop component="1" name="velocity"/>
         <var_prop component="2" name="velocity"/>
         <var_prop component="0" name="turbulent_viscosity"/>
-        <var_prop component="0" name="epsilon"/>
         <var_prop component="0" name="temperature"/>
       </profile>
       <profile label="p_u36Dh">
@@ -218,7 +214,6 @@ z = 0.0;</formula>
         <var_prop component="1" name="velocity"/>
         <var_prop component="2" name="velocity"/>
         <var_prop component="0" name="turbulent_viscosity"/>
-        <var_prop component="0" name="epsilon"/>
         <var_prop component="0" name="temperature"/>
       </profile>
       <profile label="p_u36Dv">
@@ -233,25 +228,63 @@ z = 0.14*s-0.07;</formula>
         <var_prop component="1" name="velocity"/>
         <var_prop component="2" name="velocity"/>
         <var_prop component="0" name="turbulent_viscosity"/>
-        <var_prop component="0" name="epsilon"/>
         <var_prop component="0" name="temperature"/>
       </profile>
     </profiles>
-    <time_averages/>
+    <time_averages>
+      <time_average id="1" label="average_T" name="average_T">
+        <time_start>-1</time_start>
+        <time_step_start>1</time_step_start>
+        <var_prop component="-1" name="temperature"/>
+      </time_average>
+      <time_average id="2" label="average_U" name="average_U">
+        <time_start>-1</time_start>
+        <time_step_start>1</time_step_start>
+        <var_prop component="0" name="velocity"/>
+      </time_average>
+      <time_average id="3" label="average_V" name="average_V">
+        <time_start>-1</time_start>
+        <time_step_start>1</time_step_start>
+        <var_prop component="1" name="velocity"/>
+      </time_average>
+      <time_average id="4" label="average_W" name="average_W">
+        <time_start>-1</time_start>
+        <time_step_start>1</time_step_start>
+        <var_prop component="2" name="velocity"/>
+      </time_average>
+      <time_average id="5" label="average_U_U" name="average_U_U">
+        <time_start>-1</time_start>
+        <time_step_start>1</time_step_start>
+        <var_prop component="0" name="velocity"/>
+        <var_prop component="0" name="velocity"/>
+      </time_average>
+      <time_average id="6" label="average_V_V" name="average_V_V">
+        <time_start>-1</time_start>
+        <time_step_start>1</time_step_start>
+        <var_prop component="1" name="velocity"/>
+        <var_prop component="1" name="velocity"/>
+      </time_average>
+      <time_average id="7" label="average_W_W" name="average_W_W">
+        <time_start>-1</time_start>
+        <time_step_start>1</time_step_start>
+        <var_prop component="2" name="velocity"/>
+        <var_prop component="2" name="velocity"/>
+      </time_average>
+      <time_average id="8" label="average_U_W" name="average_U_W">
+        <time_start>-1</time_start>
+        <time_step_start>1</time_step_start>
+        <var_prop component="0" name="velocity"/>
+        <var_prop component="2" name="velocity"/>
+      </time_average>
+    </time_averages>
     <time_parameters>
-      <iterations>3000</iterations>
-      <max_courant_num>1</max_courant_num>
-      <max_fourier_num>10</max_fourier_num>
+      <iterations>53334</iterations>
       <property label="CourantNb" name="courant_number"/>
       <property label="FourierNb" name="fourier_number"/>
-      <property label="LocalTime" name="local_time_step"/>
       <relaxation_coefficient>0.7</relaxation_coefficient>
       <thermal_time_step status="off"/>
-      <time_passing>2</time_passing>
-      <time_step_max_factor>1000</time_step_max_factor>
-      <time_step_min_factor>0.1</time_step_min_factor>
-      <time_step_ref>0.1</time_step_ref>
-      <time_step_var>0.1</time_step_var>
+      <time_passing>0</time_passing>
+      <time_step_ref>0.00015</time_step_ref>
     </time_parameters>
   </analysis_control>
   <boundary_conditions>
@@ -316,9 +349,8 @@ z = 0.14*s-0.07;</formula>
     <gradient_reconstruction choice="green_iter"/>
     <gradient_transposed status="on"/>
     <hydrostatic_pressure status="off"/>
-    <velocity_pressure_algo choice="simplec">
-      <piso_sweep_number>1</piso_sweep_number>
-    </velocity_pressure_algo>
+    <time_scheme_order>2</time_scheme_order>
+    <velocity_pressure_algo choice="simplec"/>
     <velocity_pressure_coupling status="off"/>
   </numerical_parameters>
   <physical_properties>
@@ -388,9 +420,7 @@ thermal_conductivity = (temperature*(temperature*(a2*temperature+b2)+c2)+d2)*spe
       <z_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
     </mesh_cartesian>
     <mesh_smoothing status="off"/>
-    <meshes_list>
-      <mesh name="T_junction_RANS_07042016_602712.med"/>
-    </meshes_list>
+    <meshes_list/>
     <periodicity/>
     <thin_walls/>
     <volumic_conditions>
@@ -439,12 +469,11 @@ thermal_conductivity = (temperature*(temperature*(a2*temperature+b2)+c2)+d2)*spe
         <postprocessing_recording status="off"/>
       </property>
       <variable label="TempC" name="temperature" type="thermal">
-        <blending_factor>1</blending_factor>
         <formula zone_id="1">temperature = 19;</formula>
         <max_iter_number>1000</max_iter_number>
         <max_value>36</max_value>
         <min_value>19</min_value>
-        <rhs_reconstruction>1</rhs_reconstruction>
+        <rhs_reconstruction>10</rhs_reconstruction>
         <solver_precision>1e-05</solver_precision>
         <turbulent_flux_model>SGDH</turbulent_flux_model>
       </variable>
@@ -452,24 +481,11 @@ thermal_conductivity = (temperature*(temperature*(a2*temperature+b2)+c2)+d2)*spe
     <turbomachinery model="off">
       <joining/>
     </turbomachinery>
-    <turbulence model="k-epsilon-PL">
+    <turbulence model="LES_Smagorinsky">
       <gravity_terms status="on"/>
       <initialization choice="reference_value" zone_id="1"/>
       <property label="TurbVisc" name="turbulent_viscosity"/>
       <reference_velocity>1</reference_velocity>
-      <variable label="epsilon" name="epsilon">
-        <blending_factor>0</blending_factor>
-        <max_iter_number>1000</max_iter_number>
-        <rhs_reconstruction>1</rhs_reconstruction>
-        <solver_precision>1e-05</solver_precision>
-      </variable>
-      <variable label="k" name="k">
-        <blending_factor>0</blending_factor>
-        <max_iter_number>1000</max_iter_number>
-        <rhs_reconstruction>1</rhs_reconstruction>
-        <solver_precision>1e-05</solver_precision>
-      </variable>
-      <wall_function>3</wall_function>
     </turbulence>
     <velocity_pressure>
       <initialization>
@@ -488,14 +504,12 @@ velocity[2] = 0.;</formula>
       <property label="Yplus" name="yplus" support="boundary"/>
       <variable label="Pressure" name="pressure">
         <max_iter_number>1000</max_iter_number>
-        <rhs_reconstruction>2</rhs_reconstruction>
+        <rhs_reconstruction>5</rhs_reconstruction>
         <solver_precision>1e-05</solver_precision>
       </variable>
       <variable dimension="3" label="Velocity" name="velocity">
-        <blending_factor>1</blending_factor>
         <max_iter_number>1000</max_iter_number>
-        <rhs_reconstruction>1</rhs_reconstruction>
-        <slope_test status="off"/>
+        <rhs_reconstruction>10</rhs_reconstruction>
         <solver_precision>1e-05</solver_precision>
       </variable>
     </velocity_pressure>
