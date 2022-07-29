@@ -1,1 +1,1 @@
-../../SRC/cs_user_boundary_conditions.f90
+../../GENERIC_SRC/cs_user_boundary_conditions.f90

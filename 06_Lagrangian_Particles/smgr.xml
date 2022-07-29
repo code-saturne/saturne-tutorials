@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><studymanager solver_version="7.3-alpha" version="2.0">
+  <destination/>
+  <repository/>
+  <study label="06_Lagrangian_Particles" status="on">
+    <case compute="on" label="RANS_rij_SSG" post="on" run_id="" status="on"/>
+    <case compute="on" label="RANS_rij_SSG_5UM" post="on" run_id="" status="on"/>
+  </study>
+</studymanager>

@@ -39,6 +39,7 @@
  *  Local headers
  *----------------------------------------------------------------------------*/
 
+#include "bft_printf.h"
 #include "bft_mem.h"
 #include "bft_error.h"
 
@@ -229,12 +230,14 @@ cs_user_postprocess_values(const char            *mesh_name,
 
     cs_field_t *stat_vel
       = cs_lagr_stat_get_moment(stat_type,
+                                CS_LAGR_STAT_GROUP_PARTICLE,
                                 CS_LAGR_MOMENT_MEAN,
                                 0,
                                 -1);
 
     cs_field_t *stat_vol_frac
       = cs_lagr_stat_get_moment(CS_LAGR_STAT_VOLUME_FRACTION,
+                                CS_LAGR_STAT_GROUP_PARTICLE,
                                 CS_LAGR_MOMENT_MEAN,
                                 0,
                                 -1);
