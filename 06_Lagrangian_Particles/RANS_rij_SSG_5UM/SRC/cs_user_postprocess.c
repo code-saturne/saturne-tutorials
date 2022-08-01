@@ -326,8 +326,10 @@ cs_user_postprocess_values(const char            *mesh_name,
 
             /* now normalize by value at point on profile closest to {0, 0, z} */
 
-            for (cs_lnum_t i = 0; i < n_cells; i++)
-              val[i] /= ref_v;
+            if (fabs(ref_v) > 1.e-12) {
+              for (cs_lnum_t i = 0; i < n_cells; i++)
+                val[i] /= ref_v;
+            }
 
           }
           break;
@@ -359,8 +361,10 @@ cs_user_postprocess_values(const char            *mesh_name,
 
             /* now normalize by value at point on profile closest to {0, 0, z} */
 
-            for (cs_lnum_t i = 0; i < n_cells; i++)
-              val[i] /= ref_v;
+            if (fabs(ref_v) > 1.e-12) {
+              for (cs_lnum_t i = 0; i < n_cells; i++)
+                val[i] /= ref_v;
+            }
 
           }
           break;
