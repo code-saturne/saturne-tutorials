@@ -89,6 +89,8 @@ BEGIN_C_DECLS
 void
 cs_user_parameters(cs_domain_t   *domain)
 {
+  CS_NO_WARN_IF_UNUSED(domain);
+
   /* Add boundary values for all scalars */
   {
     int n_fields = cs_field_n_fields();

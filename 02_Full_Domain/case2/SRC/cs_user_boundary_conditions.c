@@ -37,7 +37,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 /*----------------------------------------------------------------------------
  * Local headers
  *----------------------------------------------------------------------------*/
@@ -58,83 +57,79 @@ BEGIN_C_DECLS
  */
 /*----------------------------------------------------------------------------*/
 
-/*============================================================================
- * Public function definitions
+/*=============================================================================
+ * User function definitions
  *============================================================================*/
 
 /*----------------------------------------------------------------------------*/
 /*!
  * \brief User definition of boundary conditions
  *
- * \param[in]     nvar          total number of variable BC's
- * \param[in]     bc_type       boundary face types
- * \param[in]     icodcl        boundary face code
- *                                - 1  -> Dirichlet
- *                                - 2  -> convective outlet
- *                                - 3  -> flux density
- *                                - 4  -> sliding wall and u.n=0 (velocity)
- *                                - 5  -> friction and u.n=0 (velocity)
- *                                - 6  -> roughness and u.n=0 (velocity)
- *                                - 9  -> free inlet/outlet (velocity)
- *                                inflowing possibly blocked
- * \param[in]     rcodcl        boundary condition values
- *                                rcodcl(3) = flux density value
- *                                (negative for gain) in W/m2
+ * \param[in, out]  domain   pointer to a cs_domain_t structure
+ * \param[in, out]  bc_type  boundary face types
  *
  * The icodcl and rcodcl arrays are pre-initialized based on default
  * and GUI-defined definitions, and may be modified here.
  *
- * For a given variable id "ivar" and a given face "face_id", these arrays
+ * For a given variable field f, and a given face "face_id", these arrays
  * may be used as follows:
  *
  * - Boundary condition type code given at:
- *  icodcl[ivar*n_b_faces + face_id]
+ *   f->bc_coefficients->icodcl[face_id]
  *
  * - Dirichlet value defined at:
- *   rcodcl[ivar*n_b_faces + face_id]
+ *   f->bc_coefficients->rcodcl1[face_id]
  *
  * - Interior exchange coefficient (infinite if no exchange) at:
- *   rcodcl[(ivar +   nvar)*n_b_faces + face_id] = interior exchange
+ *   f->bc_coefficients->rcodcl2[face_id]
  *
  * - Flux density defined at:
- *   rcodcl[(ivar + 2*nvar)*n_b_faces + face_id];
+ *   f->bc_coefficients->rcodcl3[face_id]
  *
- * For a given field f, the "ivar" variable id may be obtained as follows:
- *   int ivar = cs_field_get_key_int(f, cs_field_key_id("variable_id")) - 1;
+ * For vector or tensor fields, these arrays are not interleaved,
+ * so for a given face "face_id" and field component "comp_id", acess
+ * is as follows (where n_b_faces is domain->mesh->n_b_faces):
+ *
+ *   f->bc_coefficients->rcodcl1[n_b_faces*comp_id + face_id]
+ *   f->bc_coefficients->rcodcl2[n_b_faces*comp_id + face_id]
+ *   f->bc_coefficients->rcodcl3[n_b_faces*comp_id + face_id]
+ *
+ * Only the icodcl code values from the first component are used in the case
+ * of vector or tensor fields, so the icodcl values can be defined as for
+ * a scalar.
  */
 /*----------------------------------------------------------------------------*/
 
 void
-cs_user_boundary_conditions(int         nvar,
-                            int         bc_type[],
-                            int         icodcl[],
-                            cs_real_t   rcodcl[])
+cs_user_boundary_conditions(cs_domain_t  *domain,
+                            int           bc_type[])
 {
+  CS_NO_WARN_IF_UNUSED(domain);
+  CS_NO_WARN_IF_UNUSED(bc_type);
+
   /* Shorter aliases to global variables */
 
-  const cs_time_step_t *ts = cs_glob_time_step;
-  const cs_lnum_t n_b_faces = cs_glob_mesh->n_b_faces;
+  const cs_time_step_t *ts = domain->time_step;
 
   const cs_zone_t *z = cs_boundary_zone_by_name("Inlet");
 
   /* Get access to boundary condition arrays for temperature field */
 
   const cs_field_t *f = cs_field_by_name("temperature");
-  cs_lnum_t ivar
-    = cs_field_get_key_int(f, cs_field_key_id("variable_id")) - 1;
+  cs_real_t *rcodcl1 = f->bc_coeffs->rcodcl1;
 
   /* Prescribe temperature (Dirichlet) value based on time */
 
   if (ts->t_cur < 3.8) {
     for (cs_lnum_t i = 0; i < z->n_elts; i++) {
       cs_lnum_t face_id = z->elt_ids[i];
-      rcodcl[ivar*n_b_faces + face_id] = 20. + 100.*ts->t_cur;
+      rcodcl1[face_id] = 20. + 100.*ts->t_cur;
     }
   }
   else {
     for (cs_lnum_t i = 0; i < z->n_elts; i++) {
       cs_lnum_t face_id = z->elt_ids[i];
-      rcodcl[ivar*n_b_faces + face_id] = 400.;
+      rcodcl1[face_id] = 400.;
     }
   }
 }
