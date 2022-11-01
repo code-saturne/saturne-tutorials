@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="Reynolds1000" solver_version="6.0;;7.0-patch;7.0" study="00_Driven_Cavity" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="Reynolds1000" solver_version="6.0;;7.0;7.2;7.3-alpha" study="00_Driven_Cavity" version="2.0">
   <additional_scalars>
     <users/>
   </additional_scalars>
@@ -89,22 +89,20 @@ z = 0;</formula>
     </time_parameters>
   </analysis_control>
   <boundary_conditions>
-    <boundary label="BC_1" name="1" nature="wall">Stationnary_walls</boundary>
-    <boundary label="BC_2" name="2" nature="wall">Sliding_wall</boundary>
-    <boundary label="BC_3" name="3" nature="symmetry">Symmetry_plane</boundary>
-    <symmetry field_id="none" label="BC_3"/>
-    <wall field_id="none" label="BC_1">
-      <velocity_pressure choice="off">
-        <dirichlet component="0" name="velocity">0</dirichlet>
-        <dirichlet component="1" name="velocity">0</dirichlet>
-        <dirichlet component="2" name="velocity">0</dirichlet>
-      </velocity_pressure>
-    </wall>
-    <wall field_id="none" label="BC_2">
+    <boundary label="Sliding_Wall" name="1" nature="wall">Y1</boundary>
+    <boundary label="Stationnary_Walls" name="2" nature="wall">X0 or X1 or Y0</boundary>
+    <boundary label="Symmetry_Walls" name="3" nature="symmetry">Z0 or Z1</boundary>
+    <symmetry field_id="none" label="Symmetry_Walls"/>
+    <wall field_id="none" label="Sliding_Wall">
       <velocity_pressure choice="on">
         <dirichlet component="0" name="velocity">1</dirichlet>
         <dirichlet component="1" name="velocity">0</dirichlet>
         <dirichlet component="2" name="velocity">0</dirichlet>
+      </velocity_pressure>
+    </wall>
+    <wall field_id="none" label="Stationnary_Walls">
+      <velocity_pressure choice="off">
+        <dirichlet component="0" name="velocity">0</dirichlet>
       </velocity_pressure>
     </wall>
   </boundary_conditions>
@@ -165,14 +163,13 @@ z = 0;</formula>
     <faces_cutting status="off"/>
     <joining/>
     <mesh_cartesian>
-      <x_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
-      <y_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
-      <z_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
+      <x_direction law="constant" max="1.0" min="0.0" ncells="50" prog="1.0"/>
+      <y_direction law="constant" max="1.0" min="0.0" ncells="50" prog="1.0"/>
+      <z_direction law="constant" max="0.01" min="0.0" ncells="1" prog="1.0"/>
     </mesh_cartesian>
+    <mesh_origin choice="mesh_cartesian"/>
     <mesh_smoothing status="off"/>
-    <meshes_list>
-      <mesh name="Cavity_mesh.med"/>
-    </meshes_list>
+    <meshes_list/>
     <periodicity/>
     <thin_walls/>
     <volumic_conditions>
