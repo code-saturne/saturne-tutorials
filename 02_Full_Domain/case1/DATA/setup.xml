@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="case1" solver_version="5.2;7.0" study="2-full_domain" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="case1" solver_version="5.2;7.0;7.2;7.3-alpha" study="02_Full_Domain" version="2.0">
   <additional_scalars>
     <variable label="scalar2" name="scalar2" type="user">
       <blending_factor>1</blending_factor>
@@ -92,15 +92,15 @@
     </time_parameters>
   </analysis_control>
   <boundary_conditions>
-    <boundary label="Inlet" name="1" nature="inlet">1</boundary>
-    <boundary label="Outlet" name="2" nature="outlet">34</boundary>
-    <boundary label="Symmetry" name="3" nature="symmetry">8 or 9 or 28 or 29 or 38 or 39</boundary>
-    <boundary label="Wall_1" name="4" nature="wall">24 and 0.1 &lt;= x and 0.5 &gt;= x</boundary>
-    <boundary label="Wall_2" name="5" nature="wall">2 or 3</boundary>
-    <boundary label="Wall_3" name="6" nature="wall">4 or 7 or 21 or 22 or 23</boundary>
-    <boundary label="Wall_4" name="7" nature="wall">6 and y &gt; 1</boundary>
-    <boundary label="Wall_5" name="8" nature="wall">6 and y &lt;= 1</boundary>
-    <boundary label="Wall_6" name="9" nature="wall">31 or 33</boundary>
+    <boundary label="Inlet" name="1" nature="inlet">INLET</boundary>
+    <boundary label="Outlet" name="2" nature="outlet">OUTLET</boundary>
+    <boundary label="Symmetry" name="3" nature="symmetry">DSym or VSym or CSym</boundary>
+    <boundary label="Wall_1" name="4" nature="wall">VFuse and 0.1 &lt;= x and 0.5 &gt;= x</boundary>
+    <boundary label="Wall_2" name="5" nature="wall">DWALL1 or DWALL2</boundary>
+    <boundary label="Wall_3" name="6" nature="wall">DWALL3 or DWALL5 or VWalls</boundary>
+    <boundary label="Wall_4" name="7" nature="wall">DWALL4 and y &gt; 1</boundary>
+    <boundary label="Wall_5" name="8" nature="wall">DWALL4 and y &lt;= 1</boundary>
+    <boundary label="Wall_6" name="9" nature="wall">CWalls</boundary>
     <inlet field_id="none" label="Inlet">
       <scalar choice="dirichlet" name="scalar2" type="user">
         <dirichlet>200</dirichlet>
@@ -147,7 +147,11 @@
       <scalar choice="neumann" name="temperature" type="thermal">
         <neumann>0</neumann>
       </scalar>
-      <velocity_pressure choice="off"/>
+      <velocity_pressure choice="off">
+        <dirichlet component="0" name="velocity">0</dirichlet>
+        <dirichlet component="1" name="velocity">0</dirichlet>
+        <dirichlet component="2" name="velocity">0</dirichlet>
+      </velocity_pressure>
     </wall>
     <wall field_id="none" label="Wall_3">
       <scalar choice="dirichlet" name="scalar2" type="user">
@@ -156,7 +160,11 @@
       <scalar choice="neumann" name="temperature" type="thermal">
         <neumann>0</neumann>
       </scalar>
-      <velocity_pressure choice="off"/>
+      <velocity_pressure choice="off">
+        <dirichlet component="0" name="velocity">0</dirichlet>
+        <dirichlet component="1" name="velocity">0</dirichlet>
+        <dirichlet component="2" name="velocity">0</dirichlet>
+      </velocity_pressure>
     </wall>
     <wall field_id="none" label="Wall_4">
       <scalar choice="dirichlet" name="scalar2" type="user">
@@ -165,7 +173,11 @@
       <scalar choice="neumann" name="temperature" type="thermal">
         <neumann>0</neumann>
       </scalar>
-      <velocity_pressure choice="off"/>
+      <velocity_pressure choice="off">
+        <dirichlet component="0" name="velocity">0</dirichlet>
+        <dirichlet component="1" name="velocity">0</dirichlet>
+        <dirichlet component="2" name="velocity">0</dirichlet>
+      </velocity_pressure>
     </wall>
     <wall field_id="none" label="Wall_5">
       <scalar choice="dirichlet" name="scalar2" type="user">
@@ -174,7 +186,11 @@
       <scalar choice="neumann" name="temperature" type="thermal">
         <neumann>0</neumann>
       </scalar>
-      <velocity_pressure choice="off"/>
+      <velocity_pressure choice="off">
+        <dirichlet component="0" name="velocity">0</dirichlet>
+        <dirichlet component="1" name="velocity">0</dirichlet>
+        <dirichlet component="2" name="velocity">0</dirichlet>
+      </velocity_pressure>
     </wall>
     <wall field_id="none" label="wall_6">
       <scalar choice="dirichlet" name="scalar2" type="user">
@@ -189,7 +205,6 @@
   <calculation_management>
     <block_io/>
     <partitioning/>
-    <run_type>standard</run_type>
     <start_restart>
       <frozen_field status="off"/>
     </start_restart>
@@ -224,6 +239,11 @@
         <listing_printing status="off"/>
         <postprocessing_recording status="off"/>
       </property>
+      <property choice="constant" label="SurfTen" name="surface_tension">
+        <initial_value>0</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
       <property choice="constant" label="ThermalCond" name="thermal_conductivity">
         <initial_value>0.02495</initial_value>
         <listing_printing status="off"/>
@@ -252,16 +272,22 @@
       <face_joining name="1">
         <fraction>0.1</fraction>
         <plane>25</plane>
-        <selector>5,24,32</selector>
+        <selector>DFuse,VFuse,CFuse</selector>
         <verbosity>1</verbosity>
         <visualization>1</visualization>
       </face_joining>
     </joining>
+    <mesh_cartesian>
+      <x_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
+      <y_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
+      <z_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
+    </mesh_cartesian>
+    <mesh_origin choice="mesh_import"/>
     <mesh_smoothing status="off"/>
     <meshes_list>
       <mesh name="downcomer.med"/>
-      <mesh name="fdc.des"/>
-      <mesh name="pic.des"/>
+      <mesh name="vessel.cgns"/>
+      <mesh name="core.med"/>
     </meshes_list>
     <periodicity/>
     <thin_walls/>
@@ -271,19 +297,41 @@
   </solution_domain>
   <thermophysical_models>
     <ale_method status="off"/>
-    <atmospheric_flows model="off"/>
+    <atmospheric_flows model="off">
+      <large_scale_meteo status="off"/>
+    </atmospheric_flows>
     <compressible_model model="off"/>
     <conjugate_heat_transfer>
-      <external_coupling/>
+      <external_coupling>
+        <syrthes_instances/>
+      </external_coupling>
     </conjugate_heat_transfer>
-    <gas_combustion model="off" option="off"/>
+    <gas_combustion model="off" option="off">
+      <soot_model model="off"/>
+      <thermodynamical_pressure status="off"/>
+    </gas_combustion>
     <groundwater_model model="off"/>
+    <hgn_model model="off"/>
+    <internal_coupling>
+      <coupled_scalars/>
+      <solid_zones/>
+    </internal_coupling>
+    <interparticles_radiative_transfer>
+      <elasticity>0.9</elasticity>
+      <emissivity>1.0</emissivity>
+      <status>off</status>
+    </interparticles_radiative_transfer>
     <joule_effect model="off"/>
-    <radiative_transfer model="off"/>
+    <porosities/>
+    <radiative_transfer model="off">
+      <absorption_coefficient type="constant">0</absorption_coefficient>
+      <restart status="on"/>
+    </radiative_transfer>
     <reference_values>
       <length/>
     </reference_values>
     <solid_fuels model="off"/>
+    <source_terms/>
     <thermal_scalar model="temperature_celsius">
       <property label="Dimensionless Thermal flux" name="boundary_layer_nusselt" support="boundary">
         <postprocessing_recording status="off"/>
@@ -302,6 +350,9 @@
         <turbulent_flux_model>SGDH</turbulent_flux_model>
       </variable>
     </thermal_scalar>
+    <turbomachinery model="off">
+      <joining/>
+    </turbomachinery>
     <turbulence model="k-epsilon">
       <initialization choice="reference_value" zone_id="1"/>
       <property label="TurbVisc" name="turbulent_viscosity"/>
@@ -316,6 +367,7 @@
         <listing_printing status="off"/>
         <rhs_reconstruction>1</rhs_reconstruction>
       </variable>
+      <wall_function>3</wall_function>
     </turbulence>
     <velocity_pressure>
       <initialization>

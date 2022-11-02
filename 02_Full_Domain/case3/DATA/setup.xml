@@ -96,15 +96,15 @@
     </time_parameters>
   </analysis_control>
   <boundary_conditions>
-    <boundary label="Inlet" name="1" nature="inlet">1</boundary>
-    <boundary label="Outlet" name="2" nature="outlet">34</boundary>
-    <boundary label="Symmetry" name="3" nature="symmetry">8 or 9 or 28 or 29 or 38 or 39</boundary>
-    <boundary label="Wall_1" name="4" nature="wall">24 and 0.1 &lt;= x and 0.5 &gt;= x</boundary>
-    <boundary label="Wall_2" name="5" nature="wall">2 or 3</boundary>
-    <boundary label="Wall_3" name="6" nature="wall">4 or 7 or 21 or 22 or 23</boundary>
-    <boundary label="Wall_4" name="7" nature="wall">6 and y &gt; 1</boundary>
-    <boundary label="Wall_5" name="8" nature="wall">6 and y &lt;= 1</boundary>
-    <boundary label="Wall_6" name="9" nature="wall">31 or 33</boundary>
+    <boundary label="Inlet" name="1" nature="inlet">INLET</boundary>
+    <boundary label="Outlet" name="2" nature="outlet">OUTLET</boundary>
+    <boundary label="Symmetry" name="3" nature="symmetry">DSym or VSym or CSym</boundary>
+    <boundary label="Wall_1" name="4" nature="wall">VFuse and 0.1 &lt;= x and 0.5 &gt;= x</boundary>
+    <boundary label="Wall_2" name="5" nature="wall">DWALL1 or DWALL2</boundary>
+    <boundary label="Wall_3" name="6" nature="wall">DWALL3 or DWALL5 or VWalls</boundary>
+    <boundary label="Wall_4" name="7" nature="wall">DWALL4 and y &gt; 1</boundary>
+    <boundary label="Wall_5" name="8" nature="wall">DWALL4 and y &lt;= 1</boundary>
+    <boundary label="Wall_6" name="9" nature="wall">CWalls</boundary>
     <inlet field_id="none" label="Inlet">
       <scalar choice="dirichlet" name="scalar2" type="user">
         <dirichlet>200</dirichlet>
@@ -256,7 +256,7 @@ density = temperature*(A*temperature +B) + C;</formula>
       <face_joining name="1">
         <fraction>0.1</fraction>
         <plane>25</plane>
-        <selector>5,24,32</selector>
+        <selector>DFuse,VFuse,CFuse</selector>
         <verbosity>1</verbosity>
         <visualization>1</visualization>
       </face_joining>
@@ -264,8 +264,8 @@ density = temperature*(A*temperature +B) + C;</formula>
     <mesh_smoothing status="off"/>
     <meshes_list>
       <mesh name="downcomer.med"/>
-      <mesh name="fdc.des"/>
-      <mesh name="pic.des"/>
+      <mesh name="vessel.cgns"/>
+      <mesh name="core.med"/>
     </meshes_list>
     <periodicity/>
     <volumic_conditions>
