@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="case1" solver_version="6.0;;7.0-patch" study="01_Simple_Junction" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="case1" solver_version="6.0;;7.0;7.2;7.3-alpha" study="01_Simple_Junction" version="2.0">
   <additional_scalars/>
   <analysis_control>
     <output>
@@ -19,7 +19,7 @@
       <probes_snap choice=""/>
       <writer id="-1" label="results">
         <directory name="postprocessing"/>
-        <format name="cgns" options="separate_meshes"/>
+        <format name="ensight" options="separate_meshes"/>
         <frequency period="time_step">1</frequency>
         <output_at_end status="on"/>
         <time_dependency choice="fixed_mesh"/>
@@ -43,10 +43,10 @@
     </time_parameters>
   </analysis_control>
   <boundary_conditions>
-    <boundary label="Inlet" name="1" nature="inlet">1</boundary>
-    <boundary label="Outlet" name="2" nature="outlet">5</boundary>
-    <boundary label="Symnetry" name="3" nature="symmetry">8 or 9</boundary>
-    <boundary label="Wall" name="4" nature="wall">2 or 3 or 4 or 6 or 7</boundary>
+    <boundary label="Inlet" name="1" nature="inlet">INLET</boundary>
+    <boundary label="Outlet" name="2" nature="outlet">OUTLET</boundary>
+    <boundary label="Symnetry" name="3" nature="symmetry">ZMIN or ZMAX</boundary>
+    <boundary label="Wall" name="4" nature="wall">WALL1 or WALL2 or WALL3 or WALL4 or WALL5</boundary>
     <inlet field_id="none" label="Inlet">
       <scalar choice="dirichlet" name="temperature" type="thermal">
         <dirichlet>300</dirichlet>
@@ -91,7 +91,6 @@
     <extended_neighborhood choice=""/>
     <gradient_reconstruction choice=""/>
     <gradient_transposed status="on"/>
-    <pressure_relaxation>1</pressure_relaxation>
     <velocity_pressure_algo choice="simplec">
       <piso_sweep_number>1</piso_sweep_number>
     </velocity_pressure_algo>
