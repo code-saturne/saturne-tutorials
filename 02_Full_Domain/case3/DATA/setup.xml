@@ -180,7 +180,7 @@
       </scalar>
       <velocity_pressure choice="off"/>
     </wall>
-    <wall field_id="none" label="wall_6">
+    <wall field_id="none" label="Wall_6">
       <scalar choice="dirichlet" name="scalar2" type="user">
         <dirichlet>40</dirichlet>
       </scalar>

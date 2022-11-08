@@ -192,14 +192,18 @@
         <dirichlet component="2" name="velocity">0</dirichlet>
       </velocity_pressure>
     </wall>
-    <wall field_id="none" label="wall_6">
+    <wall field_id="none" label="Wall_6">
       <scalar choice="dirichlet" name="scalar2" type="user">
         <dirichlet>40</dirichlet>
       </scalar>
       <scalar choice="neumann" name="temperature" type="thermal">
         <neumann>0</neumann>
       </scalar>
-      <velocity_pressure choice="off"/>
+      <velocity_pressure choice="off">
+        <dirichlet component="0" name="velocity">0</dirichlet>
+        <dirichlet component="1" name="velocity">0</dirichlet>
+        <dirichlet component="2" name="velocity">0</dirichlet>
+      </velocity_pressure>
     </wall>
   </boundary_conditions>
   <calculation_management>
