@@ -18,7 +18,7 @@
       <probe_recording_frequency>1</probe_recording_frequency>
       <writer id="-1" label="results">
         <directory name="postprocessing"/>
-        <format name="ensight" options="binary"/>
+        <format name="ensight" options="separate_meshes"/>
         <frequency period="time_step">100</frequency>
         <output_at_end status="on"/>
         <time_dependency choice="fixed_mesh"/>

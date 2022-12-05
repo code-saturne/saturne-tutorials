@@ -139,7 +139,7 @@
       <probes_snap choice=""/>
       <writer id="-1" label="results">
         <directory name="postprocessing"/>
-        <format name="ensight" options="binary"/>
+        <format name="ensight" options="separate_meshes"/>
         <frequency period="none"/>
         <output_at_end status="on"/>
         <time_dependency choice="fixed_mesh"/>

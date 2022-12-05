@@ -163,7 +163,7 @@ w = 0;</formula>
 		<output>
 			<writer id="-1" label="results">
 				<output_at_end status="on"/>
-				<format name="ensight" options="binary"/>
+				<format name="ensight" options="separate_meshes"/>
 				<directory name="postprocessing"/>
 				<time_dependency choice="fixed_mesh"/>
 				<frequency period="time_step">25</frequency>
