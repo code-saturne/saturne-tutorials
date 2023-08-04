@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="RANS_rij_SSG_5UM" solver_version="5.1;7.3-alpha" study="06_Lagrangian_Particles" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="RANS_rij_SSG_5UM" solver_version="5.1;7.3;8.1;8.0" study="06_Lagrangian_Particles" version="2.0">
   <additional_scalars>
     <users/>
   </additional_scalars>
@@ -53,10 +53,9 @@
       <probes_snap choice=""/>
       <writer id="-1" label="results">
         <directory name="postprocessing"/>
-        <format name="ensight" options=""/>
+        <format name="ensight" options="separate_meshes"/>
         <frequency period="none"/>
         <output_at_end status="on"/>
-        <output_at_start status="on"/>
         <time_dependency choice="fixed_mesh"/>
       </writer>
       <writer id="-3" label="particles">
@@ -85,22 +84,25 @@
     </time_parameters>
   </analysis_control>
   <boundary_conditions>
-    <boundary label="BC_1" name="1" nature="outlet">outlet</boundary>
-    <boundary label="BC_2" name="2" nature="wall">wall</boundary>
-    <boundary label="BC_3" name="3" nature="inlet">inlet</boundary>
-    <inlet field_id="none" label="BC_3">
+    <boundary label="outlet" name="1" nature="outlet">outlet</boundary>
+    <boundary label="wall" name="2" nature="wall">wall</boundary>
+    <boundary label="inlet" name="3" nature="inlet">inlet</boundary>
+    <inlet field_id="none" label="inlet">
       <particles choice="inlet"/>
       <turbulence choice="hydraulic_diameter">
-        <hydraulic_diameter>1</hydraulic_diameter>
+        <hydraulic_diameter>0.09</hydraulic_diameter>
       </turbulence>
-      <velocity_pressure choice="norm" direction="normal">
-        <norm>1</norm>
+      <velocity_pressure choice="norm_formula" direction="normal">
+        <norm_formula>x_c = 0, y_c = 0;
+r2 = (x-x_c)*(x-x_c) + (y-y_c)*(y-y_c);
+
+u_norm = 9.56 * (1.0 - 0.4*(r2 / 0.002025))*1.0488;</norm_formula>
       </velocity_pressure>
     </inlet>
-    <outlet field_id="none" label="BC_1">
+    <outlet field_id="none" label="outlet">
       <particles choice="outlet"/>
     </outlet>
-    <wall field_id="none" label="BC_2">
+    <wall field_id="none" label="wall">
       <particles choice="bounce"/>
       <velocity_pressure choice="off"/>
     </wall>
@@ -124,7 +126,9 @@
       <velocity_fluid_seen status="on"/>
       <velocity_particles status="on"/>
     </output>
-    <particles_models model="off"/>
+    <particles_models model="off">
+      <coal_fouling status="off"/>
+    </particles_models>
     <regular_particles>1</regular_particles>
     <restart status="off"/>
     <scheme_order choice="1"/>
@@ -187,6 +191,7 @@
       <gravity_z>-9.81</gravity_z>
     </gravity>
     <notebook/>
+    <time_tables/>
   </physical_properties>
   <solution_domain>
     <extrusion/>
@@ -216,7 +221,9 @@
     <atmospheric_flows model="off"/>
     <compressible_model model="off"/>
     <conjugate_heat_transfer>
-      <external_coupling/>
+      <external_coupling>
+        <syrthes_instances/>
+      </external_coupling>
     </conjugate_heat_transfer>
     <gas_combustion model="off" option="off">
       <thermodynamical_pressure status="off"/>
