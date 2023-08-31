@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><studymanager version="2.0" solver_version="8.0">
+  <destination/>
+  <repository/>
+  <study label="13_Fluid_Structure_Interaction" status="on">
+    <case label="18km_h" id="0" compute="on" post="on" status="on" run_id="18km_h"/>
+    <case label="180km_h" id="1" compute="on" post="on" status="on"/>
+  </study>
+</studymanager>
