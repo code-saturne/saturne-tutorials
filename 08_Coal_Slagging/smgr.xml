@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><studymanager version="2.0" solver_version="8.0">
+  <destination/>
+  <repository/>
+  <study label="08_Coal_Slagging" status="on">
+    <case label="Eulerian" id="0" compute="on" post="on" status="on"/>
+    <case label="Lagrangian" id="1" compute="on" post="on" status="on"/>
+  </study>
+</studymanager>

@@ -166,7 +166,7 @@ dir_z = -y/sqrt((y^2)+(z^2));</direction_formula>
     <run_type>standard</run_type>
     <start_restart>
       <frozen_field status="off"/>
-      <restart path="../Eulerian/20190503-1756/checkpoint"/>
+      <restart path="../Eulerian/RESU/run1/checkpoint"/>
     </start_restart>
   </calculation_management>
   <lagrangian model="frozen">
