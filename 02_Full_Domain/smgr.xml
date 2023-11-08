@@ -4,6 +4,7 @@
   <study label="02_Full_Domain" status="on">
     <case compute="on" label="case1" post="on" run_id="" status="on"/>
     <case compute="on" label="case2" post="on" run_id="" status="on"/>
+    <case compute="on" label="case2bis" post="on" run_id="" status="on"/>
     <case compute="on" label="case3" post="on" run_id="" status="on"/>
   </study>
 </studymanager>
