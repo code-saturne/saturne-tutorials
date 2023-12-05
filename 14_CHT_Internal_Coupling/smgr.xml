@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><studymanager version="2.0" solver_version="8.0">
+  <destination/>
+  <repository/>
+  <study label="14_CHT_Internal_Coupling" status="on">
+    <case label="lam"  compute="on" post="on" status="on"/>
+    <case label="keps"  compute="on" post="on" status="on"/>
+    <case label="ebrsm"  compute="on" post="on" status="on"/>
+  </study>
+</studymanager>
