@@ -173,6 +173,18 @@ cs_user_mesh_modify(cs_mesh_t  *mesh)
                                        face_list);
     }
 
+    BFT_FREE(face_list);
+
+    /* Determine vertex values for extrusion */
+
+    cs_mesh_extrude_vectors_t *e = cs_mesh_extrude_vectors_create(efi);
+
+    /* Insert boundary layer */
+
+    cs_mesh_extrude_face_info_destroy(&efi);
+    cs_mesh_boundary_layer_insert(mesh, e, 0.2, false, 0, NULL);
+    cs_mesh_extrude_vectors_destroy(&e);
+
   }
 
   {
