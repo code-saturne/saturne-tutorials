@@ -52,7 +52,7 @@
         <format name="ensight" options="binary, separate_meshes"/>
         <frequency period="time_step">5</frequency>
         <output_at_end status="on"/>
-        <time_dependency choice="transient_coordinates"/>
+        <time_dependency choice="fixed_mesh"/>
       </writer>
     </output>
     <profiles/>

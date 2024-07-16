@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="18km_h" solver_version="3.3;4.0;3.3;7.0-patch" study="FSI" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="18km_h" solver_version="3.3;4.0;7.0" study="13_Fluid_Structure_Interaction" version="2.0">
   <additional_scalars>
     <variable label="scalar" name="scalar" type="user">
       <blending_factor>1</blending_factor>
@@ -47,14 +47,12 @@
       </probe>
       <probe_format choice="CSV"/>
       <probe_recording_frequency>1</probe_recording_frequency>
-      <probes_interpolation choice=""/>
-      <probes_snap choice=""/>
       <writer id="-1" label="results">
         <directory name="postprocessing"/>
         <format name="ensight" options="binary, separate_meshes"/>
         <frequency period="time_step">5</frequency>
         <output_at_end status="on"/>
-        <time_dependency choice="transient_coordinates"/>
+        <time_dependency choice="fixed_mesh"/>
       </writer>
     </output>
     <profiles/>
