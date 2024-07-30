@@ -1,11 +1,13 @@
 /*============================================================================
- * Methods for lagrangian module
+ * Functions dealing with particle tracking
  *============================================================================*/
+
+/* VERS */
 
 /*
   This file is part of code_saturne, a general-purpose CFD tool.
 
-  Copyright (C) 1998-2022 EDF S.A.
+  Copyright (C) 1998-2024 EDF S.A.
 
   This program is free software; you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free Software
@@ -24,10 +26,6 @@
 
 /*----------------------------------------------------------------------------*/
 
-/*============================================================================
- * Functions dealing with particle tracking
- *============================================================================*/
-
 #include "cs_defs.h"
 
 /*----------------------------------------------------------------------------
@@ -45,59 +43,18 @@
 #include <assert.h>
 
 /*----------------------------------------------------------------------------
- *  Local headers
+ * Local headers
  *----------------------------------------------------------------------------*/
 
-#include "bft_printf.h"
-#include "bft_error.h"
-#include "bft_mem.h"
-
-#include "fvm_periodicity.h"
-
-#include "cs_base.h"
-#include "cs_halo.h"
-#include "cs_interface.h"
-#include "cs_math.h"
-#include "cs_mesh.h"
-#include "cs_mesh_quantities.h"
-#include "cs_order.h"
-#include "cs_parall.h"
-#include "cs_prototypes.h"
-#include "cs_random.h"
-#include "cs_search.h"
-#include "cs_time_step.h"
-#include "cs_timer_stats.h"
-#include "cs_thermal_model.h"
-
-#include "cs_field.h"
-#include "cs_field_pointer.h"
-
-#include "cs_lagr.h"
-#include "cs_lagr_particle.h"
-#include "cs_lagr_stat.h"
-#include "cs_lagr_geom.h"
-
-/*----------------------------------------------------------------------------
- *  Header for the current file
- *----------------------------------------------------------------------------*/
-
-#include "cs_lagr_prototypes.h"
+#include "cs_headers.h"
 
 /*----------------------------------------------------------------------------*/
 
 BEGIN_C_DECLS
 
-/*! \cond DOXYGEN_SHOULD_SKIP_THIS */
-
 /*============================================================================
  * Global variables
  *============================================================================*/
-
-/*============================================================================
- * Local (user defined) function definitions
- *============================================================================*/
-
-/*! (DOXYGEN_SHOULD_SKIP_THIS) \endcond */
 
 /*============================================================================
  * User function definitions
@@ -107,14 +64,13 @@ BEGIN_C_DECLS
 /*!
  * \brief User modification of newly injected particles.
  *
- * This function is called after the initialization of the new particles in
- * order to modify them according to new particle profiles (injection
- * profiles, position of the injection point, statistical weights,
- * correction of the diameter if the standard-deviation option is activated).
+ * This function aims at modifying injection coordinates, particle properties
+ * and cell_id depending on the position are updated based on the modified
+ * position after this function and before cs_user_lagr_in.
  *
  * This function is called for each injection zone and class. Particles
  * with ids between \c pset->n_particles and \c n_elts are initialized
- * but may be modidied by this function.
+ * but may be modified by this function.
  *
  * \param[in,out]  particles         particle set
  * \param[in]      zis               zone injection set data
@@ -128,11 +84,11 @@ BEGIN_C_DECLS
 /*----------------------------------------------------------------------------*/
 
 void
-cs_user_lagr_in(cs_lagr_particle_set_t         *particles,
-                const cs_lagr_injection_set_t  *zis,
-                const cs_lnum_t                 particle_range[2],
-                const cs_lnum_t                 particle_face_id[],
-                const cs_real_t                 visc_length[])
+cs_user_lagr_in_force_coords(cs_lagr_particle_set_t         *particles,
+                             const cs_lagr_injection_set_t  *zis,
+                             const cs_lnum_t                 particle_range[2],
+                             const cs_lnum_t                 particle_face_id[],
+                             const cs_real_t                 visc_length[])
 {
   /* Loop on new particles
      --------------------- */
