@@ -15,7 +15,7 @@
 /*
   This file is part of code_saturne, a general-purpose CFD tool.
 
-  Copyright (C) 1998-2022 EDF S.A.
+  Copyright (C) 1998-2024 EDF S.A.
 
   This program is free software; you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free Software
@@ -70,68 +70,6 @@ BEGIN_C_DECLS
 /*============================================================================
  * User function definitions
  *============================================================================*/
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Define mesh files to read and optional associated transformations.
- */
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_mesh_input(void)
-{
-
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Define mesh joinings.
- */
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_join(void)
-{
-
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Define periodic faces.
- */
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_periodicity(void)
-{
-
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Set options for cutting of warped faces.
- */
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_mesh_warping(void)
-{
-
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Insert boundaries into a mesh.
- *
- * \param[in,out] mesh  pointer to a cs_mesh_t structure
- */
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_mesh_boundary(cs_mesh_t  *mesh)
-{
-  CS_UNUSED(mesh);
-}
 
 /*----------------------------------------------------------------------------*/
 /*!
@@ -206,83 +144,6 @@ cs_user_mesh_modify(cs_mesh_t  *mesh)
 
     BFT_FREE(selected_cells);
   }
-
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Mesh smoothing.
- *
- * \param[in,out] mesh  pointer to a cs_mesh_t structure
-*/
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_mesh_smoothe(cs_mesh_t  *mesh)
-{
-  CS_UNUSED(mesh);
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Enable or disable mesh saving.
- *
- * By default, mesh is saved when modified.
- *
- * \param[in,out] mesh  pointer to a cs_mesh_t structure
-*/
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_mesh_save(cs_mesh_t  *mesh)
-{
-  CS_UNUSED(mesh);
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Tag bad cells within the mesh based on user-defined geometric criteria.
- *
- * \param[in,out] mesh  pointer to a cs_mesh_t structure
- * \param[in,out] mesh_quantities pointer to a cs_mesh_quantities_t structure
-*/
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_mesh_bad_cells_tag(cs_mesh_t             *mesh,
-                           cs_mesh_quantities_t  *mesh_quantities)
-{
-  CS_UNUSED(mesh);
-  CS_UNUSED(mesh_quantities);
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Apply partial modifications to the mesh after the preprocessing
- *        and initial postprocessing mesh building stage.
- *
- * \param[in,out] mesh  pointer to a cs_mesh_t structure
- * \param[in,out] mesh_quantities pointer to a cs_mesh_quantities_t structure
-*/
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_mesh_modify_partial(cs_mesh_t             *mesh,
-                            cs_mesh_quantities_t  *mesh_quantities)
-{
-  CS_UNUSED(mesh);
-  CS_UNUSED(mesh_quantities);
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Define a cartesian mesh.
-*/
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_mesh_cartesian_define(void)
-{
 
 }
 

@@ -7,7 +7,7 @@
 /*
   This file is part of code_saturne, a general-purpose CFD tool.
 
-  Copyright (C) 1998-2022 EDF S.A.
+  Copyright (C) 1998-2024 EDF S.A.
 
   This program is free software; you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free Software
@@ -36,35 +36,10 @@
 #include "string.h"
 
 /*----------------------------------------------------------------------------
- *  Local headers
+ * Local headers
  *----------------------------------------------------------------------------*/
 
-#include "bft_mem.h"
-#include "bft_error.h"
-
-#include "cs_base.h"
-#include "cs_field.h"
-#include "cs_geom.h"
-#include "cs_interpolate.h"
-#include "cs_mesh.h"
-#include "cs_selector.h"
-#include "cs_parall.h"
-#include "cs_post.h"
-#include "cs_post_util.h"
-#include "cs_probe.h"
-#include "cs_time_plot.h"
-
-#include "cs_field_pointer.h"
-#include "cs_notebook.h"
-#include "cs_parameters.h"
-#include "cs_physical_constants.h"
-#include "cs_turbulence_model.h"
-
-/*----------------------------------------------------------------------------
- *  Header for the current file
- *----------------------------------------------------------------------------*/
-
-#include "cs_prototypes.h"
+#include "cs_headers.h"
 
 /*----------------------------------------------------------------------------*/
 
@@ -73,6 +48,7 @@ BEGIN_C_DECLS
 /*============================================================================
  * Local (user defined) function definitions
  *============================================================================*/
+
 /*----------------------------------------------------------------------------
  * Example function for selection of cells with scalar field values above
  * a certain threshold.
@@ -157,7 +133,6 @@ cs_user_postprocess_writers(void)
                         true,                         /* output_at_end */
                         5,                            /* frequency_n */
                         -1);                          /* frequency_t */
-
 }
 
 /*----------------------------------------------------------------------------*/
@@ -190,21 +165,6 @@ cs_user_postprocess_meshes(void)
                                      false,           /* auto_variables */
                                      n_writers,
                                      writer_ids);
-
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * \brief Define monitoring probes and profiles.
- *
- * Profiles are defined as sets of probes.
- */
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_postprocess_probes(void)
-{
-
 }
 
 /*----------------------------------------------------------------------------*/
@@ -266,26 +226,6 @@ cs_user_postprocess_values(const char            *mesh_name,
                       NULL,                           /* b_face_vals */
                       ts);
   }
-
-}
-
-/*----------------------------------------------------------------------------*/
-/*!
- * Override default frequency or calculation end based output.
- *
- * This allows fine-grained control of activation or deactivation,
- *
- * \param  nt_max_abs  maximum time step number
- * \param  nt_cur_abs  current time step number
- * \param  t_cur_abs   absolute time at the current time step
- */
-/*----------------------------------------------------------------------------*/
-
-void
-cs_user_postprocess_activate(int     nt_max_abs,
-                             int     nt_cur_abs,
-                             double  t_cur_abs)
-{
 
 }
 

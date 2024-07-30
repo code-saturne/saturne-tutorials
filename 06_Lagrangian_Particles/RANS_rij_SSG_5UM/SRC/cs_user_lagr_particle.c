@@ -62,7 +62,7 @@ BEGIN_C_DECLS
 
 /*----------------------------------------------------------------------------*/
 /*!
- * \brief User modification of newly injected particles.
+ * \brief User modification of newly injected particle location.
  *
  * This function aims at modifying injection coordinates, particle properties
  * and cell_id depending on the position are updated based on the modified
