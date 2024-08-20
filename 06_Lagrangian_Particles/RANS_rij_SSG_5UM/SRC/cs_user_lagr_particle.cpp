@@ -97,9 +97,9 @@ cs_user_lagr_in_force_coords(cs_lagr_particle_set_t         *particles,
 
     /* particles are injected along pipe axis (x=0,y=0) */
 
-    cs_real_t *part_coords = cs_lagr_particles_attr(particles,
-                                                    p_id,
-                                                    CS_LAGR_COORDS);
+    cs_real_t *part_coords = (cs_real_t *)cs_lagr_particles_attr(particles,
+                                                                 p_id,
+                                                                 CS_LAGR_COORDS);
 
     part_coords[0] = 0.; // x = 0
     part_coords[1] = 0.; // y = 0
