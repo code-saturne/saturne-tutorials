@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><studymanager solver_version="8.3-alpha">
+  <destination/>
+  <repository/>
+  <study label="12_Tee_Junction" status="on">
+    <case label="CASE1" status="on" compute="on" post="on"/>
+    <case label="CASE2" status="on" compute="on" post="on">
+      <parametric args="--restart ../../CASE1/RESU/run1 --different-restart-mesh"/>
+    </case>
+    <case label="CASE3" status="on" compute="on" post="on">
+      <parametric args="--restart ../../CASE2/RESU/run1 --different-restart-mesh --different-restart-mesh-path ../CASE2/RESU/run1/mesh_output.csm"/>
+    </case>
+  </study>
+</studymanager>

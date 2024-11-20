@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="CASE1" solver_version="6.0;7.0;7.2;8.3-alpha" study="12_Tee_Junction" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="CASE2" solver_version="6.0;7.0;7.2;8.3;8.3-alpha" study="12_Tee_Junction" version="2.0">
   <additional_scalars/>
   <analysis_control>
     <output>
@@ -53,7 +53,7 @@
     <profiles/>
     <time_averages/>
     <time_parameters>
-      <iterations>600</iterations>
+      <iterations_add>200</iterations_add>
       <max_courant_num>1</max_courant_num>
       <max_fourier_num>10</max_fourier_num>
       <property label="CourantNb" name="courant_number"/>
