@@ -127,11 +127,11 @@ c32=0;</formula>
           <Y>0</Y>
           <Z>0</Z>
         </equilibrium_displacement>
-        <fluid_force_matrix>
+        <fluid_force>
           <formula>fx = 0;
 fy = 0;
 fz = fluid_fz;</formula>
-        </fluid_force_matrix>
+        </fluid_force>
         <initial_displacement>
           <X>0</X>
           <Y>0</Y>
@@ -254,12 +254,12 @@ k32=0;</formula>
   <thermophysical_models>
     <ale_method status="on">
       <displacement_prediction_alpha>0.5</displacement_prediction_alpha>
-      <displacement_prediction_beta>0</displacement_prediction_beta>
-      <external_coupling_post_synchronization status="off"/>
+      <displacement_prediction_beta>0.0</displacement_prediction_beta>
+      <external_coupling_post_synchronization status="off" />
       <fluid_initialization_sub_iterations>0</fluid_initialization_sub_iterations>
       <formula>mesh_viscosity = 1;</formula>
       <implicitation_precision>1e-05</implicitation_precision>
-      <max_iterations_implicitation>10</max_iterations_implicitation>
+      <max_iterations_implicitation>1</max_iterations_implicitation>
       <mesh_viscosity type="isotrop"/>
       <monitor_point_synchronisation status="off"/>
       <property label="mesh_vi1" name="mesh_viscosity_1"/>
