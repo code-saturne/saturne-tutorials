@@ -2,7 +2,6 @@
   <additional_scalars/>
   <analysis_control>
     <output>
-      <listing_printing_frequency>1</listing_printing_frequency>
       <mesh id="-1" label="Fluid domain" type="cells">
         <all_variables status="on"/>
         <location>all[]</location>

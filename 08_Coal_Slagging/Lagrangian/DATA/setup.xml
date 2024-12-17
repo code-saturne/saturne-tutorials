@@ -3,7 +3,6 @@
   <analysis_control>
     <error_estimator/>
     <output>
-      <listing_printing_frequency>1</listing_printing_frequency>
       <mesh id="-1" label="Fluid domain" type="cells">
         <all_variables status="on"/>
         <location>all[]</location>
@@ -178,7 +177,6 @@ dir_z = -y/sqrt((y^2)+(z^2));</direction_formula>
     <output>
       <char_mass_fraction status="on"/>
       <diameter status="on"/>
-      <listing_printing_frequency>1</listing_printing_frequency>
       <mass status="on"/>
       <moisture_mass_fraction status="on"/>
       <raw_coal_mass_fraction status="on"/>

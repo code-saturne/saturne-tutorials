@@ -5,7 +5,6 @@
   <analysis_control>
     <error_estimator/>
     <output>
-      <listing_printing_frequency>1</listing_printing_frequency>
       <mesh id="-1" label="Fluid domain" type="cells">
         <all_variables status="on"/>
         <location>all[]</location>
@@ -119,7 +118,6 @@ u_norm = 9.56 * (1.0 - 0.4*(r2 / 0.002025))*1.0488;</norm_formula>
     <deposition_submodel status="off"/>
     <output>
       <diameter status="on"/>
-      <listing_printing_frequency>1</listing_printing_frequency>
       <mass status="on"/>
       <resident_time status="on"/>
       <temperature status="on"/>

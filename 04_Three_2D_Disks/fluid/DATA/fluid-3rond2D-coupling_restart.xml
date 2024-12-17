@@ -178,7 +178,6 @@ w = 0;</formula>
 				<location>all[]</location>
 				<writer id="-1"/>
 			</mesh>
-			<listing_printing_frequency>1</listing_printing_frequency>
 			<probe_recording_frequency>1</probe_recording_frequency>
 			<probe_format choice="DAT"/>
 		</output>
