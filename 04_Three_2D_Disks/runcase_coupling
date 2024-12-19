@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Ensure the correct command is found:
-export PATH=/home/lp742c9n/salome-cfd/Salome_CFD-V9_2_0-Code_Saturne-6_1-c9_22220cb7/modules/CFDSTUDY_v60/bin:$PATH
-
-# Run command:
-\code_saturne run --coupling coupling_parameters.py --nprocs 4
