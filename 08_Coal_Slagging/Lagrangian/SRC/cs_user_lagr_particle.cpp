@@ -7,7 +7,7 @@
 /*
   This file is part of code_saturne, a general-purpose CFD tool.
 
-  Copyright (C) 1998-2024 EDF S.A.
+  Copyright (C) 1998-2025 EDF S.A.
 
   This program is free software; you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free Software
@@ -91,28 +91,32 @@ BEGIN_C_DECLS
  *
  *     \f$ P_{rt}\f$    : Prandtl number
  *
- * \param[in]   id_p   particle id
- * \param[in]   re_p   particle Reynolds number
- * \param[in]   uvwr   relative velocity of the particle
- *                     (flow-seen velocity - part. velocity)
- * \param[in]   rho_f  fluid density at  particle position
- * \param[in]   rho_p  particle density
- * \param[in]   nu_f   kinematic viscosity of the fluid at particle position
- * \param[out]  taup   thermal relaxation time
- * \param[in]   dt     time step (per cell)
+ * \param[in]   phase_id   carrier phase_id
+ * \param[in]   id_p       particle id
+ * \param[in]   re_p       particle Reynolds number
+ * \param[in]   uvwr       relative velocity of the particle
+ *                         (flow-seen velocity - part. velocity)
+ * \param[in]   rho_f      fluid density at  particle position
+ * \param[in]   rho_p      particle density
+ * \param[in]   nu_f       kinematic viscosity of the fluid at particle position
+ * \param[out]  taup       thermal relaxation time
+ * \param[in]   dt         time step associated to the particle
  */
 /*----------------------------------------------------------------------------*/
 
 void
-cs_user_lagr_rt(cs_lnum_t        id_p,
+cs_user_lagr_rt(int              phase_id,
+                cs_lnum_t        id_p,
                 cs_real_t        re_p,
                 cs_real_t        uvwr,
                 cs_real_t        rho_f,
                 cs_real_t        rho_p,
                 cs_real_t        nu_f,
-                cs_real_t        taup[],
-                const cs_real_t  dt[])
+                cs_real_t       *taup,
+                const cs_real_t  dt)
 {
+  CS_UNUSED(phase_id);
+
   /* Particles management */
   cs_lagr_particle_set_t  *p_set = cs_lagr_get_particle_set();
   const cs_lagr_attribute_map_t  *p_am = p_set->p_am;
