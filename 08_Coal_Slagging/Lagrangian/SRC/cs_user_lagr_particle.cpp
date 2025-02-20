@@ -151,7 +151,7 @@ cs_user_lagr_rt(int              phase_id,
   /* Intermediate calculation 2 */
   cs_real_t fdr = 3.0*cd*uvwr/p_diam;
 
-  taup[id_p] = rho_p / rho_f / fdr;
+  *taup = rho_p / rho_f / fdr;
 }
 
 /*----------------------------------------------------------------------------*/
