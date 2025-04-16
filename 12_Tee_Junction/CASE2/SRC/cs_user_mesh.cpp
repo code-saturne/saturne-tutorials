@@ -15,7 +15,7 @@
 /*
   This file is part of code_saturne, a general-purpose CFD tool.
 
-  Copyright (C) 1998-2024 EDF S.A.
+  Copyright (C) 1998-2025 EDF S.A.
 
   This program is free software; you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free Software
@@ -59,7 +59,7 @@ BEGIN_C_DECLS
 
 /*----------------------------------------------------------------------------*/
 /*!
- * \file cs_user_mesh.c
+ * \file cs_user_mesh.cpp
  *
  * \brief Definition and modification of the calculation mesh.
  *
@@ -82,7 +82,6 @@ BEGIN_C_DECLS
 void
 cs_user_mesh_modify(cs_mesh_t  *mesh)
 {
-
   {
     /* Define extrusion parameters for each face */
 
@@ -126,7 +125,6 @@ cs_user_mesh_modify(cs_mesh_t  *mesh)
   }
 
   mesh->modified |= CS_MESH_MODIFIED;
-
 }
 
 /*----------------------------------------------------------------------------*/
