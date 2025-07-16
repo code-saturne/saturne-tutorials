@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="solid" solver_version="9.0" study="02_cht_cdo" version="2.0">
+  <additional_scalars/>
+  <analysis_control>
+    <output>
+      <mesh id="-1" label="Fluid domain" type="cells">
+        <all_variables status="on"/>
+        <location>all[]</location>
+        <writer id="-1"/>
+      </mesh>
+      <mesh id="-2" label="Boundary" type="boundary_faces">
+        <all_variables status="on"/>
+        <location>all[]</location>
+        <writer id="-1"/>
+      </mesh>
+      <writer id="-1" label="results">
+        <directory name="postprocessing"/>
+        <format name="ensight" options="separate_meshes"/>
+        <frequency period="none"/>
+        <output_at_end status="on"/>
+        <time_dependency choice="fixed_mesh"/>
+      </writer>
+    </output>
+    <profiles/>
+    <time_averages/>
+    <time_parameters>
+      <property name="courant_number" label="CourantNb"/>
+      <property name="fourier_number" label="FourierNb"/>
+      <time_passing>0</time_passing>
+      <time_step_ref>0.1</time_step_ref>
+    </time_parameters>
+  </analysis_control>
+  <boundary_conditions/>
+  <calculation_management>
+    <run_type>none</run_type>
+  </calculation_management>
+  <lagrangian model="off"/>
+  <numerical_parameters>
+    <velocity_pressure_algo choice="simplec"/>
+  </numerical_parameters>
+  <physical_properties>
+    <fluid_properties>
+      <property name="density" choice="constant" label="Density">
+        <initial_value>1.17862</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property name="dynamic_diffusion" choice="constant" label="DiffDyn">
+        <initial_value>0.01</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+      <property name="molecular_viscosity" choice="constant" label="LamVisc">
+        <initial_value>1.83e-05</initial_value>
+        <listing_printing status="off"/>
+        <postprocessing_recording status="off"/>
+      </property>
+    </fluid_properties>
+    <notebook/>
+  </physical_properties>
+  <solution_domain>
+    <extrusion/>
+    <faces_cutting/>
+    <joining/>
+    <mesh_smoothing/>
+    <meshes_list>
+      <mesh name="solid.unv" path="solid"/>
+    </meshes_list>
+    <periodicity/>
+    <thin_walls/>
+    <volumic_conditions>
+      <zone label="all_cells" id="1" initialization="on" physical_properties="on">all[]</zone>
+    </volumic_conditions>
+  </solution_domain>
+  <thermophysical_models>
+    <ale_method/>
+    <atmospheric_flows model="off"/>
+    <compressible_model model="off"/>
+    <gas_combustion model="off"/>
+    <immersed_boundaries/>
+    <joule_effect model="off"/>
+    <reference_values>
+      <length/>
+    </reference_values>
+    <solid_fuels model="off"/>
+    <thermal_scalar model="off"/>
+    <turbulence model="k-epsilon-PL">
+      <initialization zone_id="1" choice="reference_value"/>
+      <property name="turbulent_viscosity" label="TurbVisc"/>
+      <variable name="epsilon" label="epsilon"/>
+      <variable name="k" label="k"/>
+    </turbulence>
+    <velocity_pressure>
+      <property name="stress" label="Stress" support="boundary"/>
+      <property name="stress_normal" label="Stress, normal" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property name="stress_tangential" label="Stress, tangential" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
+      <property name="total_pressure" label="total_pressure"/>
+      <property name="yplus" label="Yplus" support="boundary"/>
+      <variable name="pressure" label="Pressure">
+        <rhs_reconstruction>2</rhs_reconstruction>
+      </variable>
+      <variable name="velocity" dimension="3" label="Velocity">
+        <rhs_reconstruction>1</rhs_reconstruction>
+      </variable>
+    </velocity_pressure>
+  </thermophysical_models>
+</Code_Saturne_GUI>

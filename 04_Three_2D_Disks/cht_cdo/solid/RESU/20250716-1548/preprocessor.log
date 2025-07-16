@@ -1,0 +1,270 @@
+/home/D43345/Code_Saturne/arch/dbg_90/libexec/code_saturne/cs_preprocess --out 
+mesh_input.csm --log 
+/home/D43345/Code_Saturne/Validation/saturne-tutorials/04_Three_2D_Disks/02_cht_cdo/MESH/solid/solid.unv 
+
+  .------------------------------.
+  |                              |
+  |   code_saturne Preprocessor  |
+  |                              |
+  `------------------------------'
+
+  code_saturne version 9.0.0   (built Tue Jul  1 11:53:30 2025)
+
+  STAR-CCM+ file format support
+  CGNS 4.4.0 file format support
+  MED 5.0.0 (HDF5 1.12.3) file format support
+  Reading of compressed files ('.gz') with Zlib 1.2.13
+
+
+
+Case configuration
+------------------
+
+  Date                : Wed Jul 16 15:48:48 2025
+  System              : Linux 6.1.0-37-amd64
+  Machine             : dsp1145402
+  Processor           : 13th Gen Intel(R) Core(TM) i5-13600H
+  Memory              : 32489616
+  User                : D43345 (YVAN FOURNIER)
+  Directory           : /home/D43345/Code_Saturne/Validation/saturne-tutorials/04_Three_2D_Disks/02_cht_cdo/solid/RESU/20250716-1548
+
+  Case name           : preprocess
+  Mesh file           : /home/D43345/Code_Saturne/Validation/saturne-tutorials/04_Three_2D_Disks/02_cht_cdo/MESH/solid/solid.unv
+
+
+
+Reading mesh from file in I-deas universal format
+----------------------
+  Mesh file: /home/D43345/Code_Saturne/Validation/saturne-tutorials/04_Three_2D_Disks/02_cht_cdo/MESH/solid/solid.unv
+
+
+  Number of vertices                          :     3264
+  Number of faces                             :     6168
+                                    Color 7   :     6168
+  Number of cells                             :     2904
+                                    Color 7   :     2904
+  Group 1 "sheath_down"
+    Number of faces    :      360
+  Group 2 "disk3_down"
+    Number of faces    :      848
+  Group 3 "disk2_down"
+    Number of faces    :      848
+  Group 4 "disk1_down"
+    Number of faces    :      848
+  Group 18 "sheath"
+    Number of cells    :      360
+  Group 19 "sheath_up"
+    Number of faces    :      360
+  Group 20 "disk3"
+    Number of cells    :      848
+  Group 21 "disk3_up"
+    Number of faces    :      848
+  Group 22 "disk2"
+    Number of cells    :      848
+  Group 23 "disk2_up"
+    Number of faces    :      848
+  Group 24 "disk1"
+    Number of cells    :      848
+  Group 25 "disk1_up"
+    Number of faces    :      848
+  Group 26 "disk1_center"
+    Number of faces    :       20
+  Group 28 "disk1_border"
+    Number of faces    :       60
+  Group 30 "disk2_center"
+    Number of faces    :       20
+  Group 32 "disk2_border"
+    Number of faces    :       60
+  Group 34 "disk3_center"
+    Number of faces    :       20
+  Group 36 "disk3_border"
+    Number of faces    :       60
+  Group 38 "sheath_interior"
+    Number of faces    :       60
+  Group 40 "sheath_exterior"
+    Number of faces    :       60
+
+  Wall-clock time: 0.015639 s; CPU time: 0.015628 s
+
+
+Done reading mesh
+-----------------
+  Theoretical mesh size:               474.256 Kb
+  Theoretical current memory:          551.000 Kb
+  Theoretical peak memory:               1.126 Mb
+  Total memory used:                    23.098 Mb
+
+  Domain coordinate extents:
+
+  [-3.30000e-01, -1.73000e+00,  0.00000e+00]
+  [ 3.30000e-01, -1.07000e+00,  1.00000e-02]
+  Number of elements                    tria3 :     5808
+  Number of elements                    quad4 :      360
+  Number of elements                   penta6 :     2904
+
+
+
+Defining families
+-----------------
+
+
+  Element orientation check.
+
+
+End of conversion to descending connectivity
+--------------------------------------------
+  Theoretical mesh size:               525.523 Kb
+  Theoretical current memory:          602.000 Kb
+  Theoretical peak memory:               1.421 Mb
+  Total memory used:                    23.586 Mb
+
+
+Main mesh properties
+--------------------
+
+  Number of cells:                                  2904
+  Number of internal faces:                         4176
+  Number of boundary faces:                         6168
+  Number of vertices:                               3264
+
+
+Definition of face and cell families
+------------------------------------
+
+  Family 1
+         Group "7"
+         Group "disk1"
+  Number of cells          :      848
+  Family 2
+         Group "7"
+         Group "disk2"
+  Number of cells          :      848
+  Family 3
+         Group "7"
+         Group "disk3"
+  Number of cells          :      848
+  Family 4
+         Group "7"
+         Group "sheath"
+  Number of cells          :      360
+  Family 5
+         Group "7"
+         Group "disk1_border"
+  Number of boundary faces :       60
+  Family 6
+         Group "7"
+         Group "disk1_center"
+  Number of boundary faces :       20
+  Family 7
+         Group "7"
+         Group "disk1_down"
+  Number of boundary faces :      848
+  Family 8
+         Group "7"
+         Group "disk1_up"
+  Number of boundary faces :      848
+  Family 9
+         Group "7"
+         Group "disk2_border"
+  Number of boundary faces :       60
+  Family 10
+         Group "7"
+         Group "disk2_center"
+  Number of boundary faces :       20
+  Family 11
+         Group "7"
+         Group "disk2_down"
+  Number of boundary faces :      848
+  Family 12
+         Group "7"
+         Group "disk2_up"
+  Number of boundary faces :      848
+  Family 13
+         Group "7"
+         Group "disk3_border"
+  Number of boundary faces :       60
+  Family 14
+         Group "7"
+         Group "disk3_center"
+  Number of boundary faces :       20
+  Family 15
+         Group "7"
+         Group "disk3_down"
+  Number of boundary faces :      848
+  Family 16
+         Group "7"
+         Group "disk3_up"
+  Number of boundary faces :      848
+  Family 17
+         Group "7"
+         Group "sheath_down"
+  Number of boundary faces :      360
+  Family 18
+         Group "7"
+         Group "sheath_exterior"
+  Number of boundary faces :       60
+  Family 19
+         Group "7"
+         Group "sheath_interior"
+  Number of boundary faces :       60
+  Family 20
+         Group "7"
+         Group "sheath_up"
+  Number of boundary faces :      360
+  Family 20
+         Default family
+         (no group)
+  Number of internal faces :     4176
+
+
+Write output for Kernel
+-----------------------
+
+  Opening file: mesh_input.csm
+
+  Wrote: "start_block:dimensions"
+  Wrote: "n_cells"                         ; Type: "u8"; Size: 1
+  Wrote: "n_faces"                         ; Type: "u8"; Size: 1
+  Wrote: "n_vertices"                      ; Type: "u8"; Size: 1
+  Wrote: "face_vertices_size"              ; Type: "u8"; Size: 1
+  Wrote: "n_group_classes"                 ; Type: "i8"; Size: 1
+  Wrote: "n_group_class_props_max"         ; Type: "i8"; Size: 1
+  Wrote: "n_groups"                        ; Type: "u8"; Size: 1
+  Wrote: "group_name_index"                ; Type: "i8"; Size: 22
+  Wrote: "group_name"                      ; Type: "c "; Size: 219
+  Wrote: "group_class_properties"          ; Type: "i8"; Size: 42
+  Wrote: "end_block:dimensions"
+  Wrote: "start_block:data"
+  Wrote: "face_cells"                      ; Type: "i8"; Size: 20688
+  Wrote: "cell_group_class_id"             ; Type: "i8"; Size: 2904
+  Wrote: "face_group_class_id"             ; Type: "i8"; Size: 10344
+  Wrote: "face_vertices_index"             ; Type: "u8"; Size: 10345
+  Wrote: "face_vertices"                   ; Type: "i8"; Size: 35568
+  Wrote: "vertex_coords"                   ; Type: "r8"; Size: 9792
+  Wrote: "end_block:data"
+  Wrote: "EOF"
+
+  Closing file: mesh_input.csm
+
+
+Time and memory summary
+-----------------------
+
+  User CPU time                       (sec)   :        0.02
+  System CPU time                     (sec)   :        0.00
+  Total time                          (sec)   :        0.03
+  Total CPU time / Total time                 :        1.09
+
+Memory use summary:
+
+  Total memory used:                                  23.586 Mb
+  Theoretical instrumented dynamic memory:             1.421 Mb
+
+
+  .-----------------------.
+  |                       |
+  |  Preprocessor finish  |
+  |                       |
+  `-----------------------'
+
+

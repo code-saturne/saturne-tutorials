@@ -1,0 +1,1479 @@
+command: 
+ /home/D43345/Code_Saturne/arch/dbg_90/libexec/code_saturne/cs_solver
+
+***************************************************************
+
+                                  (R)
+                      code_saturne
+
+                      Version 9.0.0
+
+
+  Copyright (C) 1998-2025 EDF S.A., France
+
+  revision d6d3126ab
+  build mar. 01 juil. 2025 11:53:37
+
+  The code_saturne CFD tool is free software;
+  you can redistribute it and/or modify it under the terms
+  of the GNU General Public License as published by the
+  Free Software Foundation; either version 2 of the License,
+  or (at your option) any later version.
+
+  The code_saturne CFD tool is distributed in the hope that
+  it will be useful, but WITHOUT ANY WARRANTY; without even
+  the implied warranty of MERCHANTABILITY or FITNESS FOR A
+  PARTICULAR PURPOSE.  See the GNU General Public License
+  for more details.
+
+***************************************************************
+
+
+Local case configuration:
+
+  Date:                mer. 16 juil. 2025 15:48:48
+  System:              Linux 6.1.0-37-amd64 (Debian GNU/Linux 12 (bookworm))
+  Machine:             dsp1145402
+  Processor:           model name	: 13th Gen Intel(R) Core(TM) i5-13600H
+  Memory:              31728 MB
+  User:                D43345 (YVAN FOURNIER)
+  Directory:           /home/D43345/Code_Saturne/Validation/saturne-tutorials/04_Three_2D_Disks/02_cht_cdo/solid/RESU/20250716-1548
+  OpenMP threads:      1
+  Processors/node:     16
+
+  Debug build
+
+  Compilers used for build:
+    C compiler:        gcc (Debian 12.2.0-14+deb12u1) 12.2.0
+    C++ compiler:      g++ (Debian 12.2.0-14+deb12u1) 12.2.0
+    Fortran compiler:  GNU Fortran (Debian 12.2.0-14+deb12u1) 12.2.0
+
+  MPI version: 3.1 (Open MPI 4.1.4)
+  OpenMP version: 4.5
+
+  External libraries:
+    PETSc 3.20.1
+      SLEPc not available
+      HPDDM not available
+    HYPRE 2.30.0
+    METIS
+    PT-SCOTCH 7.0.4
+
+  I/O read method:     standard input and output, serial access
+  I/O write method:    standard input and output, serial access
+
+
+
+===============================================================
+
+
+                   CALCULATION PREPARATION
+                   =======================
+
+
+===============================================================
+
+
+
+No error detected during the data verification.
+
+ Reading file:        mesh_input.csm
+ Finished reading:    mesh_input.csm
+
+ Number of cells:                                      2904
+
+ ----------------------------------------------------------
+ Number of cells + halo cells:                         2904
+
+
+ ----------------------------------------------------------
+ Number of interior faces:                             4176
+
+ ----------------------------------------------------------
+ Number of boundary faces:                             6168
+
+ ----------------------------------------------------------
+
+ Histogram of the number of interior faces per cell:
+
+    minimum value =                  2
+    maximum value =                  3
+
+      1 : [          2 ;          3 ] =       2904
+
+ ----------------------------------------------------------
+
+ Renumbering mesh:
+
+   renumbering for cells:
+     pre-numbering:                       no renumbering
+     cells adjacent to ghost cells last:  no
+     numbering:                           no renumbering
+
+   renumbering for interior faces:
+     cell adjacency pre-ordering:         lowest id first
+     faces adjacent to ghost cells last:  no
+     numbering:                           multipass
+
+   renumbering for boundary faces:
+     numbering:                           no shared cell across threads
+
+   renumbering for vertices:
+     numbering:                           no renumbering
+
+ Numbering for cells:
+
+ type: default
+  number of halo-adjacent elements:       2904
+
+ Numbering for interior faces:
+
+ type: default
+  number of halo-adjacent elements:       4176
+
+ Numbering for boundary faces:
+
+ type: default
+  number of halo-adjacent elements:       6168
+
+ ----------------------------------------------------------
+
+ Matrix bandwidth for volume mesh :          424
+ Matrix profile/lines for volume mesh :      104
+
+ Mesh coordinates:               minimum    and maximum
+                       X : -3.3000001e-01  3.3000001e-01
+                       Y : -1.7300000e+00 -1.0699999e+00
+                       Z :  0.0000000e+00  1.0000000e-02
+ Mesh
+     Number of cells:          2904
+     Number of interior faces: 4176
+     Number of boundary faces: 6168
+     Number of vertices:       3264
+
+ Groups:
+    "7"
+       cells:                  2904
+       boundary faces:         6168
+    "disk1"
+       cells:                   848
+    "disk1_border"
+       boundary faces:           60
+    "disk1_center"
+       boundary faces:           20
+    "disk1_down"
+       boundary faces:          848
+    "disk1_up"
+       boundary faces:          848
+    "disk2"
+       cells:                   848
+    "disk2_border"
+       boundary faces:           60
+    "disk2_center"
+       boundary faces:           20
+    "disk2_down"
+       boundary faces:          848
+    "disk2_up"
+       boundary faces:          848
+    "disk3"
+       cells:                   848
+    "disk3_border"
+       boundary faces:           60
+    "disk3_center"
+       boundary faces:           20
+    "disk3_down"
+       boundary faces:          848
+    "disk3_up"
+       boundary faces:          848
+    "sheath"
+       cells:                   360
+    "sheath_down"
+       boundary faces:          360
+    "sheath_exterior"
+       boundary faces:           60
+    "sheath_interior"
+       boundary faces:           60
+    "sheath_up"
+       boundary faces:          360
+
+ --- Information on the volumes
+       Minimum control volume      =  4.4209908e-08
+       Maximum control volume      =  1.7247315e-06
+       Total volume for the domain =  1.5241622e-03
+
+  Criterion 1: Orthogonality:
+    Number of bad cells detected: 0 -->   0 %
+
+  Criterion 2: Offset:
+    Number of bad cells detected: 0 -->   0 %
+
+  Criterion 3: Least-Squares Gradient Quality:
+    Number of bad cells detected: 0 -->   0 %
+
+  Criterion 4: Cells Volume Ratio:
+    Number of bad cells detected: 0 -->   0 %
+
+  Criterion 5: Guilt by Association:
+    Number of bad cells detected: 0 -->   0 %
+
+ Computing geometric quantities (0.00392 s)
+
+ --- Information on volume zones
+  Volume zone "cells"
+    id              = 0
+    Number of cells = 2904
+    Volume          = 0.0015242
+    Center of gravity = (-1.8305e-17, -1.4, 0.005)
+  Volume zone "all_cells"
+    id              = 1
+    Number of cells = 2904
+    Volume          = 0.0015242
+    Center of gravity = (-1.8305e-17, -1.4, 0.005)
+
+ --- Information on boundary zones
+  Boundary zone "boundary_faces"
+    id              = 0
+    Number of faces = 6168
+    Surface         = 0.36512
+    Center of gravity = (2.6208e-17, -1.4, 0.005)
+
+ Characteristic values for turbulence:
+ -------------------------------------
+
+   almax:       0.115 (characteristic length for initialization)
+--------------------------------------------------------------------------------
+
+ ** VARIABLES INITIALIZATION
+    ------------------------
+
+ -----------------------------------------
+ Property           Min. value  Max. value
+ -----------------------------------------
+ density            1.1786e+00  1.1786e+00
+ molecular_viscos   1.8300e-05  1.8300e-05
+ turbulent_viscos   3.3225e-03  3.3225e-03
+ -----------------------------------------
+
+  ** Information on boundary faces type
+     ----------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces
+--------------------------------------------------------------------------------
+Inlet                     2           0
+Smooth wall               5        6168
+Rough wall                6           0
+Symmetry                  4           0
+Free outlet               3           0
+Free inlet               14           0
+Convective inlet         16           0
+Free surface             64           0
+Undefined                 1           0
+--------------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                         0.0006          0.0006          0.0006          0.0006
+v  epsilon               1.1494e-05      1.1494e-05      1.1494e-05      1.1494e-05
+v  TurbVisc               0.0033225       0.0033225       0.0033225       0.0033225
+v  CourantNb                      0               0               0               0
+v  FourierNb                      0               0               0               0
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                            0               0               0               0
+
+
+
+===============================================================
+
+
+
+                       MAIN CALCULATION
+                       ================
+
+
+===============================================================
+
+
+--------------------------------------------------------------------------------
+
+ INSTANT        0.100000000    TIME STEP NUMBER               1
+ ==============================================================
+
+
+
+   ** BOUNDARY MASS FLOW INFORMATION
+      ------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces           Mass flow
+--------------------------------------------------------------------------------
+Inlet                     2           0         0.000000000e+00
+Smooth wall               5        6168         0.000000000e+00
+Rough wall                6           0         0.000000000e+00
+Symmetry                  4           0         0.000000000e+00
+Free outlet               3           0         0.000000000e+00
+Free inlet               14           0         0.000000000e+00
+Convective inlet         16           0         0.000000000e+00
+Free surface             64           0         0.000000000e+00
+Undefined                 1           0         0.000000000e+00
+--------------------------------------------------------------------------------
+
+  ** Boundary conditions for walls
+     -----------------------------
+
+--------------------------------------------------------------------------------
+                                         Minimum     Maximum
+--------------------------------------------------------------------------------
+   Rel velocity at the wall uiptn :  0.00000e+00  5.47167e-13
+   Friction velocity        uet   :  1.26793e-13  2.51668e-12
+   Friction velocity        uk    :  5.27310e-03  9.59841e-03
+   Dimensionless distance   yplus :  3.97348e-01  3.09095e+00
+   ------------------------------------------------------
+   Nb of reversals of the velocity at the wall: 0
+   Nb of faces within the viscous sub-layer   : 360
+   Total number of wall faces                 : 6168
+------------------------------------------------------------
+@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@
+@ @@ Warning: mesh too fine at the wall
+@    ========
+@    The mesh seems to be too fine at the wall to use
+@      a high-Reynolds turbulence model.
+@
+@    The last time step at which too small values for the
+@      dimensionless distance to the wall (yplus) have been
+@      observed is the time step          1
+@
+@    The minimum value for yplus must be greater than the
+@      limit value 'ypluli' =    2.38095e+00
+@
+@    Visualize the distribution of yplus at the wall
+@      (with ParaView for example) to conclude on
+@      the way the results quality might be affected.
+@
+@    This warning is only printed at the first two
+@    occurences of the problem and at the last time step
+@    of the calculation. The vanishing of the message does
+@    not necessarily mean the vanishing of the problem.
+@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@
+
+  ** Information on convergence
+     --------------------------
+
+----------------------------------------------------------------------------
+   Variable     Rhs norm      N_iter  Norm. residual   Drift   Time residual
+----------------------------------------------------------------------------
+c  Velocity     0.00000e+00       0    0.00000e+00  0.00000e+00  0.00000e+00
+c  Pressure     0.00000e+00       0    0.00000e+00 -0.00000e+00  0.00000e+00
+c  k            3.59385e-06      22    3.84848e-02  1.09040e-06  1.16955e+01
+c  epsilon      6.40728e-06     117    5.51075e-06  2.14927e-03  9.99217e+00
+----------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                     8.2549e-05      0.00033093      0.00029022      0.00027556
+v  epsilon                 0.014672        0.014672        0.014672        0.014672
+v  TurbVisc               0.0033225       0.0033225       0.0033225       0.0033225
+v  CourantNb                      0               0               0               0
+v  FourierNb                 10.934           302.5           47.95           31.43
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                      0.39735           3.091          2.9867          2.8224
+
+
+  ** Computed values on cells
+     ------------------------
+
+   criterion               minimum         maximum        set mean    spatial mean
+   ---------------  --------------  --------------  --------------  --------------
+   Courant/Fourier          10.934           302.5           47.95           31.43
+
+
+ INSTANT        0.200000000    TIME STEP NUMBER               2
+ ==============================================================
+
+
+
+   ** BOUNDARY MASS FLOW INFORMATION
+      ------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces           Mass flow
+--------------------------------------------------------------------------------
+Inlet                     2           0         0.000000000e+00
+Smooth wall               5        6168         0.000000000e+00
+Rough wall                6           0         0.000000000e+00
+Symmetry                  4           0         0.000000000e+00
+Free outlet               3           0         0.000000000e+00
+Free inlet               14           0         0.000000000e+00
+Convective inlet         16           0         0.000000000e+00
+Free surface             64           0         0.000000000e+00
+Undefined                 1           0         0.000000000e+00
+--------------------------------------------------------------------------------
+
+  ** Boundary conditions for walls
+     -----------------------------
+
+--------------------------------------------------------------------------------
+                                         Minimum     Maximum
+--------------------------------------------------------------------------------
+   Rel velocity at the wall uiptn : -0.00000e+00  0.00000e+00
+   Friction velocity        uet   :  4.85015e-13  1.08559e-11
+   Friction velocity        uk    :  1.22245e-03  6.40254e-03
+   Dimensionless distance   yplus :  9.21159e-02  2.06179e+00
+   ------------------------------------------------------
+   Nb of reversals of the velocity at the wall: 0
+   Nb of faces within the viscous sub-layer   : 6168
+   Total number of wall faces                 : 6168
+------------------------------------------------------------
+@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@
+@ @@ Warning: mesh too fine at the wall
+@    ========
+@    The mesh seems to be too fine at the wall to use
+@      a high-Reynolds turbulence model.
+@
+@    The last time step at which too small values for the
+@      dimensionless distance to the wall (yplus) have been
+@      observed is the time step          2
+@
+@    The minimum value for yplus must be greater than the
+@      limit value 'ypluli' =    2.38095e+00
+@
+@    Visualize the distribution of yplus at the wall
+@      (with ParaView for example) to conclude on
+@      the way the results quality might be affected.
+@
+@    This warning is only printed at the first two
+@    occurences of the problem and at the last time step
+@    of the calculation. The vanishing of the message does
+@    not necessarily mean the vanishing of the problem.
+@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@
+
+  ** Information on convergence
+     --------------------------
+
+----------------------------------------------------------------------------
+   Variable     Rhs norm      N_iter  Norm. residual   Drift   Time residual
+----------------------------------------------------------------------------
+c  Velocity     0.00000e+00       0    0.00000e+00  0.00000e+00  0.00000e+00
+c  Pressure     0.00000e+00       0    0.00000e+00 -0.00000e+00  0.00000e+00
+c  k            7.96899e-07       3    5.30386e-04  5.53898e-07  4.95625e+01
+c  epsilon      7.85534e-05       2    1.27157e-05  1.78833e-03  1.00587e+02
+----------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                     4.0579e-06      6.0199e-05      4.8869e-05      4.4615e-05
+v  epsilon               0.00043394       0.0015424        0.001365       0.0013018
+v  TurbVisc              4.9267e-08      7.9179e-07      6.3504e-07      5.7634e-07
+v  CourantNb                      0               0               0               0
+v  FourierNb               0.060918          1.6737          0.2715         0.17811
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                     0.092116          2.0618          1.7922          1.6034
+
+
+  ** Computed values on cells
+     ------------------------
+
+   criterion               minimum         maximum        set mean    spatial mean
+   ---------------  --------------  --------------  --------------  --------------
+   Courant/Fourier        0.060918          1.6737          0.2715         0.17811
+
+
+ INSTANT        0.300000000    TIME STEP NUMBER               3
+ ==============================================================
+
+
+
+   ** BOUNDARY MASS FLOW INFORMATION
+      ------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces           Mass flow
+--------------------------------------------------------------------------------
+Inlet                     2           0         0.000000000e+00
+Smooth wall               5        6168         0.000000000e+00
+Rough wall                6           0         0.000000000e+00
+Symmetry                  4           0         0.000000000e+00
+Free outlet               3           0         0.000000000e+00
+Free inlet               14           0         0.000000000e+00
+Convective inlet         16           0         0.000000000e+00
+Free surface             64           0         0.000000000e+00
+Undefined                 1           0         0.000000000e+00
+--------------------------------------------------------------------------------
+
+  ** Boundary conditions for walls
+     -----------------------------
+
+--------------------------------------------------------------------------------
+                                         Minimum     Maximum
+--------------------------------------------------------------------------------
+   Rel velocity at the wall uiptn :  0.00000e+00  0.00000e+00
+   Friction velocity        uet   :  1.62107e-12  1.01740e-10
+   Friction velocity        uk    :  1.30438e-04  1.91560e-03
+   Dimensionless distance   yplus :  9.82899e-03  6.16876e-01
+   ------------------------------------------------------
+   Nb of reversals of the velocity at the wall: 0
+   Nb of faces within the viscous sub-layer   : 6168
+   Total number of wall faces                 : 6168
+------------------------------------------------------------
+
+  ** Information on convergence
+     --------------------------
+
+----------------------------------------------------------------------------
+   Variable     Rhs norm      N_iter  Norm. residual   Drift   Time residual
+----------------------------------------------------------------------------
+c  Velocity     0.00000e+00       0    0.00000e+00  0.00000e+00  0.00000e+00
+c  Pressure     0.00000e+00       0    0.00000e+00 -0.00000e+00  0.00000e+00
+c  k            7.62468e-08       3    7.19377e-04  1.22660e-08  2.79737e+01
+c  epsilon      3.98210e-06       3    1.93238e-04  1.26317e-05  5.41314e+01
+----------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                     4.8351e-07      1.6607e-05      1.2836e-05      1.1392e-05
+v  epsilon               2.1908e-05      0.00026055      0.00021379      0.00019628
+v  TurbVisc              3.9901e-09      2.4923e-07      1.8993e-07      1.6729e-07
+v  CourantNb                      0               0               0               0
+v  FourierNb               0.060125          1.6609          0.2653         0.17393
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                     0.009829         0.61688         0.49787         0.42569
+
+
+  ** Computed values on cells
+     ------------------------
+
+   criterion               minimum         maximum        set mean    spatial mean
+   ---------------  --------------  --------------  --------------  --------------
+   Courant/Fourier        0.060125          1.6609          0.2653         0.17393
+
+
+ INSTANT        0.400000000    TIME STEP NUMBER               4
+ ==============================================================
+
+
+
+   ** BOUNDARY MASS FLOW INFORMATION
+      ------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces           Mass flow
+--------------------------------------------------------------------------------
+Inlet                     2           0         0.000000000e+00
+Smooth wall               5        6168         0.000000000e+00
+Rough wall                6           0         0.000000000e+00
+Symmetry                  4           0         0.000000000e+00
+Free outlet               3           0         0.000000000e+00
+Free inlet               14           0         0.000000000e+00
+Convective inlet         16           0         0.000000000e+00
+Free surface             64           0         0.000000000e+00
+Undefined                 1           0         0.000000000e+00
+--------------------------------------------------------------------------------
+
+  ** Boundary conditions for walls
+     -----------------------------
+
+--------------------------------------------------------------------------------
+                                         Minimum     Maximum
+--------------------------------------------------------------------------------
+   Rel velocity at the wall uiptn :  0.00000e+00  0.00000e+00
+   Friction velocity        uet   :  4.14853e-12  4.96124e-10
+   Friction velocity        uk    :  2.67488e-05  7.48537e-04
+   Dimensionless distance   yplus :  2.01562e-03  2.41049e-01
+   ------------------------------------------------------
+   Nb of reversals of the velocity at the wall: 0
+   Nb of faces within the viscous sub-layer   : 6168
+   Total number of wall faces                 : 6168
+------------------------------------------------------------
+
+  ** Information on convergence
+     --------------------------
+
+----------------------------------------------------------------------------
+   Variable     Rhs norm      N_iter  Norm. residual   Drift   Time residual
+----------------------------------------------------------------------------
+c  Velocity     0.00000e+00       0    0.00000e+00  0.00000e+00  0.00000e+00
+c  Pressure     0.00000e+00       0    0.00000e+00 -0.00000e+00  0.00000e+00
+c  k            1.24540e-08       3    8.99690e-04  6.24622e-10  1.70835e+01
+c  epsilon      3.64677e-07       3    4.47213e-04  2.50862e-07  3.20310e+01
+----------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                     2.1486e-07      6.3112e-06      4.7271e-06      4.1152e-06
+v  epsilon               3.1374e-06      6.4932e-05      5.0797e-05      4.5372e-05
+v  TurbVisc              1.1319e-09      1.1229e-07      8.2793e-08       7.147e-08
+v  CourantNb                      0               0               0               0
+v  FourierNb               0.059974          1.6585         0.26381         0.17293
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                    0.0020156         0.24105         0.18531         0.15334
+
+
+  ** Computed values on cells
+     ------------------------
+
+   criterion               minimum         maximum        set mean    spatial mean
+   ---------------  --------------  --------------  --------------  --------------
+   Courant/Fourier        0.059974          1.6585         0.26381         0.17293
+
+
+ INSTANT        0.500000000    TIME STEP NUMBER               5
+ ==============================================================
+
+
+
+   ** BOUNDARY MASS FLOW INFORMATION
+      ------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces           Mass flow
+--------------------------------------------------------------------------------
+Inlet                     2           0         0.000000000e+00
+Smooth wall               5        6168         0.000000000e+00
+Rough wall                6           0         0.000000000e+00
+Symmetry                  4           0         0.000000000e+00
+Free outlet               3           0         0.000000000e+00
+Free inlet               14           0         0.000000000e+00
+Convective inlet         16           0         0.000000000e+00
+Free surface             64           0         0.000000000e+00
+Undefined                 1           0         0.000000000e+00
+--------------------------------------------------------------------------------
+
+  ** Boundary conditions for walls
+     -----------------------------
+
+--------------------------------------------------------------------------------
+                                         Minimum     Maximum
+--------------------------------------------------------------------------------
+   Rel velocity at the wall uiptn :  0.00000e+00  0.00000e+00
+   Friction velocity        uet   :  8.47517e-12  9.25289e-10
+   Friction velocity        uk    :  1.43423e-05  3.66403e-04
+   Dimensionless distance   yplus :  1.08074e-03  1.17992e-01
+   ------------------------------------------------------
+   Nb of reversals of the velocity at the wall: 0
+   Nb of faces within the viscous sub-layer   : 6168
+   Total number of wall faces                 : 6168
+------------------------------------------------------------
+
+  ** Information on convergence
+     --------------------------
+
+----------------------------------------------------------------------------
+   Variable     Rhs norm      N_iter  Norm. residual   Drift   Time residual
+----------------------------------------------------------------------------
+c  Velocity     0.00000e+00       0    0.00000e+00  0.00000e+00  0.00000e+00
+c  Pressure     0.00000e+00       0    0.00000e+00 -0.00000e+00  0.00000e+00
+c  k            3.16984e-09       4    1.02019e-03  6.03510e-11  1.13114e+01
+c  epsilon      5.54218e-08       3    6.96455e-04  1.11068e-08  2.06338e+01
+----------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                     1.1211e-07      3.0177e-06      2.2153e-06      1.9036e-06
+v  epsilon               1.3706e-06      2.1819e-05      1.6558e-05       1.451e-05
+v  TurbVisc              1.4989e-09       6.507e-08      4.6997e-08      4.0045e-08
+v  CourantNb                      0               0               0               0
+v  FourierNb               0.059932          1.6578         0.26331          0.1726
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                    0.0010807         0.11799        0.087956        0.071173
+
+
+  ** Computed values on cells
+     ------------------------
+
+   criterion               minimum         maximum        set mean    spatial mean
+   ---------------  --------------  --------------  --------------  --------------
+   Courant/Fourier        0.059932          1.6578         0.26331          0.1726
+
+
+ INSTANT        0.600000000    TIME STEP NUMBER               6
+ ==============================================================
+
+
+
+   ** BOUNDARY MASS FLOW INFORMATION
+      ------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces           Mass flow
+--------------------------------------------------------------------------------
+Inlet                     2           0         0.000000000e+00
+Smooth wall               5        6168         0.000000000e+00
+Rough wall                6           0         0.000000000e+00
+Symmetry                  4           0         0.000000000e+00
+Free outlet               3           0         0.000000000e+00
+Free inlet               14           0         0.000000000e+00
+Convective inlet         16           0         0.000000000e+00
+Free surface             64           0         0.000000000e+00
+Undefined                 1           0         0.000000000e+00
+--------------------------------------------------------------------------------
+
+  ** Boundary conditions for walls
+     -----------------------------
+
+--------------------------------------------------------------------------------
+                                         Minimum     Maximum
+--------------------------------------------------------------------------------
+   Rel velocity at the wall uiptn :  0.00000e+00  0.00000e+00
+   Friction velocity        uet   :  1.46568e-11  1.10667e-09
+   Friction velocity        uk    :  1.09392e-05  2.11870e-04
+   Dimensionless distance   yplus :  9.03613e-04  6.82279e-02
+   ------------------------------------------------------
+   Nb of reversals of the velocity at the wall: 0
+   Nb of faces within the viscous sub-layer   : 6168
+   Total number of wall faces                 : 6168
+------------------------------------------------------------
+
+  ** Information on convergence
+     --------------------------
+
+----------------------------------------------------------------------------
+   Variable     Rhs norm      N_iter  Norm. residual   Drift   Time residual
+----------------------------------------------------------------------------
+c  Velocity     0.00000e+00       0    0.00000e+00  0.00000e+00  0.00000e+00
+c  Pressure     0.00000e+00       0    0.00000e+00 -0.00000e+00  0.00000e+00
+c  k            1.13868e-09       4    1.06361e-03  9.44029e-12  8.09087e+00
+c  epsilon      1.27212e-08       3    8.87931e-04  9.06984e-10  1.43555e+01
+----------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                     6.0801e-08        1.69e-06      1.2243e-06      1.0428e-06
+v  epsilon               4.9762e-07      9.1339e-06      6.7954e-06      5.8764e-06
+v  TurbVisc              9.7276e-10      4.4272e-08      3.1574e-08      2.6676e-08
+v  CourantNb                      0               0               0               0
+v  FourierNb               0.059917          1.6576          0.2631         0.17246
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                   0.00090361        0.068228        0.049898        0.039784
+
+
+  ** Computed values on cells
+     ------------------------
+
+   criterion               minimum         maximum        set mean    spatial mean
+   ---------------  --------------  --------------  --------------  --------------
+   Courant/Fourier        0.059917          1.6576          0.2631         0.17246
+
+
+ INSTANT        0.700000000    TIME STEP NUMBER               7
+ ==============================================================
+
+
+
+   ** BOUNDARY MASS FLOW INFORMATION
+      ------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces           Mass flow
+--------------------------------------------------------------------------------
+Inlet                     2           0         0.000000000e+00
+Smooth wall               5        6168         0.000000000e+00
+Rough wall                6           0         0.000000000e+00
+Symmetry                  4           0         0.000000000e+00
+Free outlet               3           0         0.000000000e+00
+Free inlet               14           0         0.000000000e+00
+Convective inlet         16           0         0.000000000e+00
+Free surface             64           0         0.000000000e+00
+Undefined                 1           0         0.000000000e+00
+--------------------------------------------------------------------------------
+
+  ** Boundary conditions for walls
+     -----------------------------
+
+--------------------------------------------------------------------------------
+                                         Minimum     Maximum
+--------------------------------------------------------------------------------
+   Rel velocity at the wall uiptn :  0.00000e+00  0.00000e+00
+   Friction velocity        uet   :  2.25686e-11  1.39660e-09
+   Friction velocity        uk    :  6.91530e-06  1.37595e-04
+   Dimensionless distance   yplus :  7.16025e-04  4.43094e-02
+   ------------------------------------------------------
+   Nb of reversals of the velocity at the wall: 0
+   Nb of faces within the viscous sub-layer   : 6168
+   Total number of wall faces                 : 6168
+------------------------------------------------------------
+
+  ** Information on convergence
+     --------------------------
+
+----------------------------------------------------------------------------
+   Variable     Rhs norm      N_iter  Norm. residual   Drift   Time residual
+----------------------------------------------------------------------------
+c  Velocity     0.00000e+00       0    0.00000e+00  0.00000e+00  0.00000e+00
+c  Pressure     0.00000e+00       0    0.00000e+00 -0.00000e+00  0.00000e+00
+c  k            5.25247e-10       4    1.04649e-03  2.10742e-12  6.18645e+00
+c  epsilon      4.01750e-09       4    1.00025e-03  1.17298e-10  1.06667e+01
+----------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                     3.9666e-08      1.0542e-06      7.5669e-07      6.4048e-07
+v  epsilon               2.4149e-07      4.4812e-06      3.2891e-06      2.8179e-06
+v  TurbVisc              7.8803e-10      3.3168e-08      2.3464e-08      1.9716e-08
+v  CourantNb                      0               0               0               0
+v  FourierNb                0.05991          1.6575         0.26298         0.17238
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                   0.00071602        0.044309        0.032017        0.025284
+
+
+  ** Computed values on cells
+     ------------------------
+
+   criterion               minimum         maximum        set mean    spatial mean
+   ---------------  --------------  --------------  --------------  --------------
+   Courant/Fourier         0.05991          1.6575         0.26298         0.17238
+
+
+ INSTANT        0.800000000    TIME STEP NUMBER               8
+ ==============================================================
+
+
+
+   ** BOUNDARY MASS FLOW INFORMATION
+      ------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces           Mass flow
+--------------------------------------------------------------------------------
+Inlet                     2           0         0.000000000e+00
+Smooth wall               5        6168         0.000000000e+00
+Rough wall                6           0         0.000000000e+00
+Symmetry                  4           0         0.000000000e+00
+Free outlet               3           0         0.000000000e+00
+Free inlet               14           0         0.000000000e+00
+Convective inlet         16           0         0.000000000e+00
+Free surface             64           0         0.000000000e+00
+Undefined                 1           0         0.000000000e+00
+--------------------------------------------------------------------------------
+
+  ** Boundary conditions for walls
+     -----------------------------
+
+--------------------------------------------------------------------------------
+                                         Minimum     Maximum
+--------------------------------------------------------------------------------
+   Rel velocity at the wall uiptn :  0.00000e+00  0.00000e+00
+   Friction velocity        uet   :  3.20889e-11  1.81452e-09
+   Friction velocity        uk    :  5.02092e-06  9.67726e-05
+   Dimensionless distance   yplus :  5.51109e-04  3.11634e-02
+   ------------------------------------------------------
+   Nb of reversals of the velocity at the wall: 0
+   Nb of faces within the viscous sub-layer   : 6168
+   Total number of wall faces                 : 6168
+------------------------------------------------------------
+
+  ** Information on convergence
+     --------------------------
+
+----------------------------------------------------------------------------
+   Variable     Rhs norm      N_iter  Norm. residual   Drift   Time residual
+----------------------------------------------------------------------------
+c  Velocity     0.00000e+00       0    0.00000e+00  0.00000e+00  0.00000e+00
+c  Pressure     0.00000e+00       0    0.00000e+00 -0.00000e+00  0.00000e+00
+c  k            2.87878e-10       4    9.96358e-04  6.10480e-13  4.99060e+00
+c  epsilon      1.60797e-09       4    1.04402e-03  2.13781e-11  8.35852e+00
+----------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                     2.8466e-08      7.0864e-07      5.0514e-07       4.256e-07
+v  epsilon               1.3925e-07      2.4666e-06       1.793e-06      1.5257e-06
+v  TurbVisc              6.9113e-10      2.6308e-08      1.8505e-08       1.549e-08
+v  CourantNb                      0               0               0               0
+v  FourierNb               0.059906          1.6574         0.26292         0.17234
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                   0.00055111        0.031163        0.022337        0.017531
+
+
+  ** Computed values on cells
+     ------------------------
+
+   criterion               minimum         maximum        set mean    spatial mean
+   ---------------  --------------  --------------  --------------  --------------
+   Courant/Fourier        0.059906          1.6574         0.26292         0.17234
+
+
+ INSTANT        0.900000000    TIME STEP NUMBER               9
+ ==============================================================
+
+
+
+   ** BOUNDARY MASS FLOW INFORMATION
+      ------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces           Mass flow
+--------------------------------------------------------------------------------
+Inlet                     2           0         0.000000000e+00
+Smooth wall               5        6168         0.000000000e+00
+Rough wall                6           0         0.000000000e+00
+Symmetry                  4           0         0.000000000e+00
+Free outlet               3           0         0.000000000e+00
+Free inlet               14           0         0.000000000e+00
+Convective inlet         16           0         0.000000000e+00
+Free surface             64           0         0.000000000e+00
+Undefined                 1           0         0.000000000e+00
+--------------------------------------------------------------------------------
+
+  ** Boundary conditions for walls
+     -----------------------------
+
+--------------------------------------------------------------------------------
+                                         Minimum     Maximum
+--------------------------------------------------------------------------------
+   Rel velocity at the wall uiptn :  0.00000e+00  0.00000e+00
+   Friction velocity        uet   :  4.31664e-11  2.32948e-09
+   Friction velocity        uk    :  3.91557e-06  7.19385e-05
+   Dimensionless distance   yplus :  4.29281e-04  2.31662e-02
+   ------------------------------------------------------
+   Nb of reversals of the velocity at the wall: 0
+   Nb of faces within the viscous sub-layer   : 6168
+   Total number of wall faces                 : 6168
+------------------------------------------------------------
+@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@
+@ @@ Warning: mesh too fine at the wall
+@    ========
+@    The mesh seems to be too fine at the wall to use
+@      a high-Reynolds turbulence model.
+@
+@    The last time step at which too small values for the
+@      dimensionless distance to the wall (yplus) have been
+@      observed is the time step          9
+@
+@    The minimum value for yplus must be greater than the
+@      limit value 'ypluli' =    2.38095e+00
+@
+@    Visualize the distribution of yplus at the wall
+@      (with ParaView for example) to conclude on
+@      the way the results quality might be affected.
+@
+@    This warning is only printed at the first two
+@    occurences of the problem and at the last time step
+@    of the calculation. The vanishing of the message does
+@    not necessarily mean the vanishing of the problem.
+@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@
+
+  ** Information on convergence
+     --------------------------
+
+----------------------------------------------------------------------------
+   Variable     Rhs norm      N_iter  Norm. residual   Drift   Time residual
+----------------------------------------------------------------------------
+c  Velocity     0.00000e+00       0    0.00000e+00  0.00000e+00  0.00000e+00
+c  Pressure     0.00000e+00       0    0.00000e+00 -0.00000e+00  0.00000e+00
+c  k            1.77286e-10       4    9.34783e-04  2.14236e-13  4.19651e+00
+c  epsilon      7.64285e-10       4    1.03968e-03  5.04003e-12  6.82909e+00
+----------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                     2.1518e-08      5.0236e-07      3.5613e-07      2.9896e-07
+v  epsilon               8.9058e-08       1.478e-06      1.0666e-06      9.0287e-07
+v  TurbVisc              6.1729e-10      2.1596e-08      1.5123e-08      1.2623e-08
+v  CourantNb                      0               0               0               0
+v  FourierNb               0.059904          1.6573         0.26287         0.17231
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                   0.00042928        0.023166         0.01651        0.012903
+
+
+  ** Computed values on cells
+     ------------------------
+
+   criterion               minimum         maximum        set mean    spatial mean
+   ---------------  --------------  --------------  --------------  --------------
+   Courant/Fourier        0.059904          1.6573         0.26287         0.17231
+
+
+ INSTANT        1.000000000    TIME STEP NUMBER              10
+ ==============================================================
+
+
+
+   ** BOUNDARY MASS FLOW INFORMATION
+      ------------------------------
+
+--------------------------------------------------------------------------------
+Boundary type          Code    Nb faces           Mass flow
+--------------------------------------------------------------------------------
+Inlet                     2           0         0.000000000e+00
+Smooth wall               5        6168         0.000000000e+00
+Rough wall                6           0         0.000000000e+00
+Symmetry                  4           0         0.000000000e+00
+Free outlet               3           0         0.000000000e+00
+Free inlet               14           0         0.000000000e+00
+Convective inlet         16           0         0.000000000e+00
+Free surface             64           0         0.000000000e+00
+Undefined                 1           0         0.000000000e+00
+--------------------------------------------------------------------------------
+
+  ** Boundary conditions for walls
+     -----------------------------
+
+--------------------------------------------------------------------------------
+                                         Minimum     Maximum
+--------------------------------------------------------------------------------
+   Rel velocity at the wall uiptn :  0.00000e+00  0.00000e+00
+   Friction velocity        uet   :  5.58196e-11  2.92839e-09
+   Friction velocity        uk    :  3.17503e-06  5.56315e-05
+   Dimensionless distance   yplus :  3.41484e-04  1.79149e-02
+   ------------------------------------------------------
+   Nb of reversals of the velocity at the wall: 0
+   Nb of faces within the viscous sub-layer   : 6168
+   Total number of wall faces                 : 6168
+------------------------------------------------------------
+@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@
+@ @@ Warning: mesh too fine at the wall
+@    ========
+@    The mesh seems to be too fine at the wall to use
+@      a high-Reynolds turbulence model.
+@
+@    The last time step at which too small values for the
+@      dimensionless distance to the wall (yplus) have been
+@      observed is the time step         10
+@
+@    The minimum value for yplus must be greater than the
+@      limit value 'ypluli' =    2.38095e+00
+@
+@    Visualize the distribution of yplus at the wall
+@      (with ParaView for example) to conclude on
+@      the way the results quality might be affected.
+@
+@    This warning is only printed at the first two
+@    occurences of the problem and at the last time step
+@    of the calculation. The vanishing of the message does
+@    not necessarily mean the vanishing of the problem.
+@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@
+
+
+ Write final restart files
+   Checkpoint at iteration 10, physical time         1.00000
+
+** Writing the main restart file
+   -----------------------------
+ Start writing
+  Wrote field names and types to checkpoint at iteration 10: checkpoint/main.csc
+ End writing the options
+  Wrote main variables to checkpoint: checkpoint/main.csc
+  Wrote notebook variables to checkpoint: checkpoint/main.csc
+ End writing
+** Writing the auxiliary restart file
+   ----------------------------------
+ Start writing
+ End writing the dimensions and options
+ End writing the physical properties
+ End writing the time step
+  Wrote boundary condition coefficients to checkpoint: checkpoint/auxiliary.csc
+ End writing
+
+  ** Information on convergence
+     --------------------------
+
+----------------------------------------------------------------------------
+   Variable     Rhs norm      N_iter  Norm. residual   Drift   Time residual
+----------------------------------------------------------------------------
+c  Velocity     0.00000e+00       0    0.00000e+00  0.00000e+00  0.00000e+00
+c  Pressure     0.00000e+00       0    0.00000e+00 -0.00000e+00  0.00000e+00
+c  k            1.18224e-10       4    8.73493e-04  8.67547e-14  3.64285e+00
+c  epsilon      4.11400e-10       4    1.00683e-03  1.44526e-12  5.76424e+00
+----------------------------------------------------------------------------
+
+  ** Clippings for computed fields
+     -----------------------------
+
+   field       initial min     initial max  clips to min  clips to max
+-  -------  --------------  --------------  ------------  ------------
+a  k      
+a  epsilon
+
+
+  ** Field values on cells
+     ---------------------
+
+   field                    minimum         maximum        set mean    spatial mean
+-  ----------------  --------------  --------------  --------------  --------------
+v  Velocity[X]                    0               0               0               0
+v  Velocity[Y]                    0               0               0               0
+v  Velocity[Z]                    0               0               0               0
+v  ǁVelocityǁ                     0               0               0               0
+v  Pressure                       0               0               0               0
+v  k                     1.6789e-08      3.7026e-07      2.6127e-07      2.1866e-07
+v  epsilon               6.0879e-08      9.4416e-07      6.7741e-07      5.7104e-07
+v  TurbVisc              5.5153e-10      1.8112e-08      1.2635e-08      1.0522e-08
+v  CourantNb                      0               0               0               0
+v  FourierNb               0.059902          1.6573         0.26284         0.17228
+v  total_pressure        1.0132e+05      1.0132e+05      1.0132e+05      1.0132e+05
+v  volume_forces[X]               0               0               0               0
+v  volume_forces[Y]               0               0               0               0
+v  volume_forces[Z]               0               0               0               0
+v  ǁvolume_forcesǁ                0               0               0               0
+
+  ** Field values on boundary_faces
+     ------------------------------
+
+   field                      minimum         maximum        set mean    spatial mean
+-  ------------------  --------------  --------------  --------------  --------------
+v  boundary_stress[X]               0               0               0               0
+v  boundary_stress[Y]               0               0               0               0
+v  boundary_stress[Z]               0               0               0               0
+v  ǁboundary_stressǁ                0               0               0               0
+v  Yplus                   0.00034148        0.017915        0.012711       0.0099041
+
+
+  ** Computed values on cells
+     ------------------------
+
+   criterion               minimum         maximum        set mean    spatial mean
+   ---------------  --------------  --------------  --------------  --------------
+   Courant/Fourier        0.059902          1.6573         0.26284         0.17228
+
+
+
+===============================================================
+
+
+                 FINAL STAGE OF THE CALCULATION
+                 ==============================
+
+
+===============================================================
+
+
+
+
+===============================================================
+
+
+                      END OF CALCULATION
+                      ==================
+
+
+===============================================================
+
+
+
+ Destroying structures and ending computation

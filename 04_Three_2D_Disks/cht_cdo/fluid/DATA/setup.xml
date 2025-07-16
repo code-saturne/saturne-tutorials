@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="FLUID" solver_version="5.3;6.0-beta" study="3_2D_DISKS" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="fluid" solver_version="9.0" study="02_cht_cdo" version="2.0">
   <additional_scalars>
     <users/>
   </additional_scalars>
@@ -14,8 +14,10 @@
         <location>all[]</location>
         <writer id="-1"/>
       </mesh>
-      <probe_format choice="DAT"/>
+      <probe_format choice="CSV"/>
       <probe_recording_frequency>1</probe_recording_frequency>
+      <probes_interpolation choice=""/>
+      <probes_snap choice=""/>
       <writer id="-1" label="results">
         <directory name="postprocessing"/>
         <format name="ensight" options="separate_meshes"/>
@@ -27,7 +29,7 @@
     <profiles/>
     <time_averages/>
     <time_parameters>
-      <iterations>100</iterations>
+      <iterations>600</iterations>
       <property label="CourantNb" name="courant_number"/>
       <property label="FourierNb" name="fourier_number"/>
       <thermal_time_step status="off"/>
@@ -40,10 +42,8 @@
     <boundary label="BC_2" name="2" nature="symmetry">2 or 3</boundary>
     <symmetry field_id="none" label="BC_2"/>
     <wall field_id="none" label="BC_1">
-      <scalar choice="exchange_coefficient" name="temperature" type="thermal">
-        <dirichlet>30</dirichlet>
-        <exchange_coefficient>10</exchange_coefficient>
-      </scalar>
+      <scalar choice="syrthes_coupling" name="temperature" type="thermal"/>
+      <syrthes instance_name="solid"/>
       <velocity_pressure choice="off">
         <dirichlet component="0" name="velocity">0</dirichlet>
         <dirichlet component="1" name="velocity">0</dirichlet>
@@ -58,15 +58,11 @@
   </calculation_management>
   <lagrangian model="off"/>
   <numerical_parameters>
-    <gradient_reconstruction choice="0"/>
     <gradient_transposed status="on"/>
-    <hydrostatic_pressure status="off"/>
-    <pressure_relaxation>1</pressure_relaxation>
     <velocity_pressure_algo choice="simplec">
       <piso_sweep_number>1</piso_sweep_number>
     </velocity_pressure_algo>
     <velocity_pressure_coupling status="off"/>
-    <wall_pressure_extrapolation>0</wall_pressure_extrapolation>
   </numerical_parameters>
   <physical_properties>
     <fluid_properties>
@@ -107,6 +103,7 @@
       <omega_y>0</omega_y>
       <omega_z>0</omega_z>
     </omega>
+    <time_tables/>
   </physical_properties>
   <solution_domain>
     <extrusion/>
@@ -120,36 +117,51 @@
     <periodicity/>
     <thin_walls/>
     <volumic_conditions>
-      <zone groundwater_law="off" head_losses="off" id="1" initialization="on" label="all_cells" mass_source_term="off" momentum_source_term="off" porosity="off" scalar_source_term="off" thermal_source_term="off">all[]</zone>
+      <zone groundwater_law="off" head_losses="off" id="1" initialization="on" label="all_cells" mass_source_term="off" momentum_source_term="off" porosity="off" scalar_source_term="off" thermal_source_term="off" physical_properties="on">all[]</zone>
     </volumic_conditions>
   </solution_domain>
   <thermophysical_models>
     <ale_method/>
-    <atmospheric_flows model="off"/>
+    <atmospheric_flows model="off">
+      <large_scale_meteo status="off"/>
+      <read_meteo_data status="off"/>
+    </atmospheric_flows>
     <compressible_model model="off"/>
     <conjugate_heat_transfer>
-      <external_coupling/>
+      <external_coupling>
+        <syrthes_instances>
+          <instance name="solid">
+            <coupled_boundary label="BC_1"/>
+          </instance>
+        </syrthes_instances>
+      </external_coupling>
     </conjugate_heat_transfer>
-    <gas_combustion model="off" option="off"/>
-    <groundwater_model model="off"/>
-    <joule_effect model="off"/>
+    <gas_combustion model="off" option="off">
+      <soot_model model="off"/>
+      <thermodynamical_pressure status="off"/>
+    </gas_combustion>
+    <immersed_boundaries/>
+    <internal_coupling>
+      <coupled_scalars/>
+      <solid_zones/>
+    </internal_coupling>
+    <porosities/>
     <radiative_transfer model="off">
       <absorption_coefficient type="constant">0</absorption_coefficient>
       <restart status="on"/>
     </radiative_transfer>
-    <reference_values/>
-    <solid_fuels model="off"/>
+    <reference_values>
+      <length/>
+    </reference_values>
+    <source_terms/>
     <thermal_scalar model="temperature_celsius">
       <property label="Dimensionless Thermal flux" name="boundary_layer_nusselt" support="boundary">
         <postprocessing_recording status="off"/>
       </property>
       <property label="Boundary temperature" name="boundary_temperature" support="boundary"/>
       <property label="Thermal flux" name="thermal_flux" support="boundary"/>
-      <property label="Tplus" name="tplus" support="boundary">
-        <postprocessing_recording status="off"/>
-      </property>
+      <property label="Tplus" name="tplus" support="boundary"/>
       <variable label="TempC" name="temperature" type="thermal">
-        <blending_factor>1</blending_factor>
         <formula zone_id="1">temperature = 20.;</formula>
         <max_value>1e+12</max_value>
         <min_value>-273.15</min_value>
@@ -165,22 +177,18 @@
       <property label="TurbVisc" name="turbulent_viscosity"/>
       <reference_velocity>1</reference_velocity>
       <variable label="epsilon" name="epsilon">
-        <blending_factor>0</blending_factor>
         <rhs_reconstruction>1</rhs_reconstruction>
       </variable>
       <variable label="k" name="k">
-        <blending_factor>0</blending_factor>
         <rhs_reconstruction>1</rhs_reconstruction>
       </variable>
       <wall_function>3</wall_function>
     </turbulence>
     <velocity_pressure>
-      <initialization>
-        <formula zone_id="1">velocity[0] = 0.;
-velocity[1] = 0.;
-velocity[2] = 0.;</formula>
-      </initialization>
-      <property label="Stress" name="stress" support="boundary"/>
+      <initialization/>
+      <property label="Stress" name="stress" support="boundary">
+        <postprocessing_recording status="off"/>
+      </property>
       <property label="Stress, normal" name="stress_normal" support="boundary">
         <postprocessing_recording status="off"/>
       </property>
@@ -193,7 +201,6 @@ velocity[2] = 0.;</formula>
         <rhs_reconstruction>2</rhs_reconstruction>
       </variable>
       <variable dimension="3" label="Velocity" name="velocity">
-        <blending_factor>1</blending_factor>
         <rhs_reconstruction>1</rhs_reconstruction>
       </variable>
     </velocity_pressure>

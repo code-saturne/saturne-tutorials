@@ -4,12 +4,20 @@
 /********************************************************************
 /********************************************************************
 /
-TITRE ETUDE= 3rond2d - conductivity 3 different disks + coupling
+TITRE ETUDE= 3_2D_DISKS_coupled
 DIMENSION DU PROBLEME= 2D_CART
 /
 / Rayonnement
 /------------
 PRISE EN COMPTE DU RAYONNEMENT CONFINE= NON
+/
+/ Fluide 1D
+/------------
+MODELE 1D FLUIDE= NON
+/
+/ Fluide 0D
+/------------
+MODELE 0D FLUIDE= NON
 /
 /Transferts couples
 /------------------
@@ -21,9 +29,8 @@ MODELISATION DES TRANSFERTS D HUMIDITE= 0
 /                NOMS DES FICHIERS 
 /********************************************************************
 /********************************************************************
-MAILLAGE CONDUCTION= 3rond2d.syr
-PREFIXE DU RESULTAT PRECEDENT POUR SUITE DE CALCUL= /local00/home/B16457/valid/tuto/case1/4-2Ddisks/RESU_COUPLING/20130215-1710/solid/resu1
-PREFIXE DES FICHIERS RESULTATS= resu2
+MAILLAGE CONDUCTION= ../MESH/solid/3rond2d.syr
+PREFIXE DES FICHIERS RESULTATS= resu1
 /
 /********************************************************************
 /********************************************************************
@@ -31,13 +38,13 @@ PREFIXE DES FICHIERS RESULTATS= resu2
 /********************************************************************
 /********************************************************************
 /
-SUITE DE CALCUL= OUI
+SUITE DE CALCUL= NON
 /
 / Pas de temps
 /---------------
-NOMBRE DE PAS DE TEMPS SOLIDES= 1200
+NOMBRE DE PAS DE TEMPS SOLIDES= 600
 PAS DE TEMPS SOLIDE= 0.5
-NOMBRE ITERATIONS SOLVEUR TEMPERATURE= 500
+NOMBRE ITERATIONS SOLVEUR TEMPERATURE= 100
 PRECISION POUR LE SOLVEUR TEMPERATURE= 1.e-6
 /
 /********************************************************************
@@ -45,17 +52,17 @@ PRECISION POUR LE SOLVEUR TEMPERATURE= 1.e-6
 /                DONNEES POUR LA CONDUCTION
 /********************************************************************
 /********************************************************************
-/+ 20 degres everywhere
+/+ 20 ° C everywhere
 CINI_T= 20 -1 
-/+ extern faces of disks
+/+ Extern faces of the disks
 CLIM_T= COEF_ECH  90 1000 2 5 8 
-/+ isotropic conductivity disk1 and pipe
-CPHY_MAT_ISO= 7700 460 25 1 4 
-/+ orthotropic conductivity disk2
+/+ Isotropic conductivity for disk 1 and 4
+CPHY_MAT_ISO= 7700 460 25 1 4
+/+ Orthotropic conductivity for disk 2
 CPHY_MAT_ORTHO_2D= 7700 460 25 5 2 
-/+ disk3
+/+ Anisotropic conductivity for disk 3
 CPHY_MAT_ANISO_2D= 7700 460 25 5 45 3 
-/+ 
+/+ Coupling Zone
 CLIM= COUPLAGE_SURF_FLUIDE Code_Saturne 1 4 7 11 
 /
 /********************************************************************
@@ -64,8 +71,12 @@ CLIM= COUPLAGE_SURF_FLUIDE Code_Saturne 1 4 7 11
 /********************************************************************
 /********************************************************************
 PAS DES SORTIES CHRONO SOLIDE ITERATIONS= 25
+HIST= FREQ_ITER 10
+CHAMP DE FLUX THERMIQUE= NON
+CHAMP DE TEMPERATURES MAXIMALES= NON
+SUPPRESSION DU CHAMP RESULTAT FINAL= NON
 /+ disk1
-/# HIST= COORD  0.003 -1.2 
+HIST= COORD  0.003 -1.2 
 /
 /********************************************************************
 /********************************************************************

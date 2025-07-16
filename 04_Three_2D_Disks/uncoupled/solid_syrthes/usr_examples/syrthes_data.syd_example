@@ -1,0 +1,469 @@
+/********************************************************************
+/********************************************************************
+/                DONNEES POUR L'ENSEMBLE DE L'ETUDE                 *
+/********************************************************************
+/********************************************************************
+/
+TITRE ETUDE= xxxxx
+/
+/ dimension (3D, 2D_CART, 2D_AXI_OX, 2D_AXI_OY)
+DIMENSION DU PROBLEME= 3D
+/
+/ -------- Rayonnement (OUI/NON)
+PRISE EN COMPTE DU RAYONNEMENT CONFINE= NON
+/
+/ -------- Fluide 1D (OUI/NON)
+MODELE 1D FLUIDE= OUI
+/
+/ -------- Fluide 0D (OUI/NON)
+MODELE 0D FLUIDE= NON
+/
+/ -------- Transferts couples (0, 2, 3)
+MODELISATION DES TRANSFERTS D HUMIDITE= 0
+/
+/ -------- Rayonnement solaire (OUI/NON)
+PRISE EN COMPTE DU RAYONNEMENT SOLAIRE= NON
+/
+/
+/********************************************************************
+/********************************************************************
+/                NOMS DES FICHIERS 
+/********************************************************************
+/********************************************************************
+MAILLAGE CONDUCTION= mesh.syr
+/MAILLAGE RAYONNEMENT= mesh_rad.syr
+/
+/MAILLAGE FL1D= PRE/meshF1d_00001part00000.syr
+/
+PREFIXE DES FICHIERS RESULTATS= resu1
+/
+/PREFIXE DU RESULTAT PRECEDENT POUR SUITE DE CALCUL= resus1
+/PREFIXE DU RESULTAT FLUIDE 1D PRECEDENT POUR SUITE DE CALCUL= resus1_0d
+/PREFIXE DU RESULTAT FLUIDE 0D PRECEDENT POUR SUITE DE CALCUL= resus1
+/
+/FICHIER METEO= meteo.dat
+/
+/*********************************************************************
+/*********************************************************************
+/                 DONNEES GENERALES
+/*********************************************************************
+/*********************************************************************
+/
+SUITE DE CALCUL= NON
+/SUITE : NOUVEAU TEMPS INITIAL= 0
+/ Pas de temps
+/---------------
+PAS DE TEMPS SOLIDE=    10.
+/PAS DE TEMPS AUTOMATIQUE=  1 10000.
+/PAS DE TEMPS MULTIPLES=   100 1.
+/PAS DE TEMPS MULTIPLES=   200 10.
+NOMBRE DE PAS DE TEMPS SOLIDES= 1
+/
+/
+/ Sorties
+/--------
+PAS DES SORTIES CHRONO SOLIDE ITERATIONS=    -1
+/PAS DES SORTIES CHRONO SOLIDE SECONDES=    1.2
+/INSTANTS SORTIES CHRONO SOLIDE SECONDES=    1.2 5.2  9.3
+/
+CHAMP DE TEMPERATURES MAXIMALES=   NON
+/
+/
+/ Choix numeriques
+/-----------------
+NOMBRE ITERATIONS SOLVEUR TEMPERATURE=   100
+PRECISION POUR LE SOLVEUR TEMPERATURE= 1.E-5
+/
+/NOMBRE ITERATIONS SOLVEUR PRESSION VAPEUR=   100
+/PRECISION POUR LE SOLVEUR PRESSION VAPEUR= 1.E-6
+/
+/NOMBRE ITERATIONS SOLVEUR PRESSION TOTALE=   100
+/PRECISION POUR LE SOLVEUR PRESSION TOTALE= 1.E-14
+/
+/
+/*********************************************************************
+/*********************************************************************
+/                 CONDUCTION
+/*********************************************************************
+/*********************************************************************
+
+/***************************************************************
+/ les variables qui peuvent etre utilisees dans les fonctions
+/ sont les suivantes :
+/
+/    tt        --> temps physique courant (s)
+/    x y (z)   --> coordonnees centre de gravite de l'element
+/    T         --> temperature de l'element
+/    PV        --> pression de vapeur de l'element
+/    PT        --> pression totale de l'element
+/
+/***************************************************************
+/
+/ -------------------------------
+/ Entree des conditions initiales
+/ -------------------------------
+/ mot-cle       valeur       liste des references
+CINI_T=          20.          -1
+/CINI_T_FCT=      20.+T/2.    -1
+/CINI_T_PROG=                 -1
+/
+/
+/ --------------------------------------
+/ Definition des conditions aux limites 
+/ --------------------------------------
+/
+/
+/ mot-cle  type           valeur       liste des references
+/
+/.................................................................
+/ pour un calcul en conduction/rayonnement sans transferts couples
+/
+/CLIM_T=       COEF_ECH    25.  5.              1 2
+/CLIM_T_FCT=   COEF_ECH    2*T+12  1000+0.1*X   2 4 23
+/CLIM_T_PROG=  COEF_ECH                         5 6
+/
+/CLIM_T=       DIRICHLET       0.       3
+/CLIM_T_FCT=   DIRICHLET      3*X-2     3
+/CLIM_T_PROG=  DIRICHLET                3
+/
+/CLIM_T=       FLUX          1000.      4 5 6 
+/CLIM_T_FCT=   FLUX           3*X-2     4 5 6 
+/CLIM_T_PROG=  FLUX                     4 5 6 
+/
+/CLIM_T=       RES_CONTACT    50.       7 4 -1 12 
+/CLIM_T_FCT=   RES_CONTACT    3*X-2.    8 -1 23 34
+/CLIM_T_PROG=  RES_CONTACT              8 -1 3
+/
+/CLIM_T=       RAY_INFINI    0.3 20.           8 9
+/CLIM_T_FCT=   RAY_INFINI    3*X-2. 0.1*X      8 9
+/CLIM_T_PROG=  RAY_INFINI                      8 9
+/
+/.................................................................
+/ dans tous les cas :
+/
+/
+/
+/
+/CLIM=  PERIODICITE_2D  T   1. 0.     5 -1 2 3
+/CLIM=  PERIODICITE_3D  T   1. 0. 0.    5 -1 2 3
+/
+/CLIM=  PERIODICITE_2D  R   0. 0.   90    5  -1  1 2
+/CLIM=  PERIODICITE_3D  R   0. 0. 0.    1. 0. 0.  90  5  -1  1 2
+/
+/CLIM=  COUPLAGE_RAYONNEMENT     1 2
+/
+/
+/CLIM=  COUPLAGE_SURF_FLUIDE  nom_saturne      1 2
+/
+/CLIM=  COUPLAGE_VOL_FLUIDE  nom_saturne  3
+
+/
+/
+/
+/ -------------------------------------
+/ Definition des conditions volumiques
+/  flux_vol = val1 * T + val2
+/ -------------------------------------
+/CVOL_T=       0.   1000000.  12
+/CVOL_T_FCT=   0.  23000*T/X   13
+/CVOL_T_PROG=              13
+/
+/CVOL_PV=        0.  2300.     12
+/CVOL_PV_FCT=    0. 230*PV/X   13
+/CVOL_PV_PROG=             13
+/
+/CVOL_PT=     0.  1000000.       12
+/CVOL_PT_FCT=   0.  23*PT/X    13
+/CVOL_PT_PROG=             13
+/
+/ ----------------------------------------------------------
+/  Definition des conditions physiques (SYRTHES conduction)
+/ ----------------------------------------------------------
+/ mot-cle   type           valeur       liste des references
+/
+/
+/CPHY_MAT_ISO=   rho  cp   k       ref
+/
+/CPHY_MAT_ORTHO_2D=   rho  cp   kx  ky       ref
+/CPHY_MAT_ORTHO_3D=   rho  cp   kx  ky  kz     ref
+/
+/CPHY_MAT_ANISO_2D=   rho  cp   kx  ky  alpha     ref
+/CPHY_MAT_ANISO_3D=   rho  cp   kx  ky  kz   axe1(3 reals)  axe2(3 reals)  axe3(3 reals)  ref
+/
+/--------------
+/
+/CPHY_MAT_ISO_FCT=   rho  cp   k       ref
+/
+/CPHY_MAT_ORTHO_2D_FCT=   rho  cp   kx  ky       ref
+/CPHY_MAT_ORTHO_3D_FCT=   rho  cp   kx  ky  kz     ref
+/
+/CPHY_MAT_ANISO_2D_FCT=   rho  cp   kx  ky  alpha     ref
+/CPHY_MAT_ANISO_3D_FCT=   rho  cp   kx  ky  kz   axe1(3 reals)  axe2(3 reals)  axe3(3 reals)  ref
+/
+/--------------
+/
+/CPHY_MAT_ISO_PROG=         ref
+/
+/CPHY_MAT_ORTHO_2D_PROG=    ref
+/CPHY_MAT_ORTHO_3D_PROG=    ref
+/
+/CPHY_MAT_ANISO_2D_PROG=    ref
+/CPHY_MAT_ANISO_3D_PROG=    ref
+/
+/
+/ -----------
+/ Historiques
+/ -----------
+/HIST= FREQ_SECONDS 100.
+/HIST= FREQ_ITER  10
+/HIST= FREQ_LIST_TIMES 100.2   140.6   170.3
+/
+/Sonde pour maillage fin
+/HIST= NOEUDS 93 96 125 128
+/HIST= NOEUDS 
+/
+/HIST= COORD 0. 0.  0. 1.   1. 2. (en 2d)
+/HIST= COORD 0. 0. 0.    0. 1. 0.      1. 2. 1. (en 3d)
+/
+/ -----------
+/ Bilans
+/ -----------
+/BILAN FLUX SURFACIQUES=   12 4
+/BILAN FLUX VOLUMIQUES=   2  6 7
+/*********************************************************************
+/*********************************************************************
+/                 DONNEES POUR LE RAYONNEMENT
+/*********************************************************************
+/*********************************************************************
+NOMBRE DE BANDES SPECTRALES POUR LE RAYONNEMENT= 1
+/
+/ Sorties
+/ -------
+ECRITURES OPTIONNELLES RAYONNEMENT=  NON
+/
+/
+CALCUL DES FDF PAR RAY TRACING= OUI
+NIVEAU D OPTIMISATION FDF RAY-TRACING= 0
+CALCUL DU COUPLAGE COND-RAYT PAR RAY TRACING= OUI
+LECTURE DES FACTEURS DE FORME SUR FICHIER=  NON
+POSTPROCESSING DISTANCES DE CORRESPONDANCE COND-RAYT= NON
+/
+/ -----------------------------------------
+/ Entree des conditions pour le rayonnement
+/ -----------------------------------------
+/
+/ RAYT= VOLUME_CONNEXE     Px   Py   Pz    
+RAYT= VOLUME_CONNEXE    20.   1.  0.0     
+/
+/ RAYT= VOLUME_CONNEXE_OUVERT     Px   Py   Pz    emiss_ouvert[b1 b2...]  T_ouvert
+/RAYT= VOLUME_CONNEXE_OUVERT     20.   1.  0.0        1                       20
+/RAYT= VOLUME_CONNEXE_OUVERT     20.   1.  0.0        0.8 0.9                 20
+/
+/RAYT= SYMETRIE_2D  ax + by + c = 0
+/RAYT= SYMETRIE_3D  ax + by + cz + d = 0
+/RAYT= PERIODICITE_2D Ix Iy teta
+/RAYT= PERIODICITE_3D Ix Iy Iz  Vx Vy Vz teta
+/
+/                              bande    lbd1     lbd2   
+RAYT= BANDES_SPECTRALES     1     1.e-10      10.   
+/
+RAYT= TEMPERATURE_INFINI    20
+/
+/                   bande    emissi  transm   reflect  speculaire  ref
+RAYT= PROP_RAD        1        0.9     0.       0.1        0.      -1
+/
+/ ------------------------------------------
+/ Conditions aux limites pour le rayonnement 
+/ ------------------------------------------
+/
+/CLIM_RAYT=   COUPLAGE_CONDUCTION  1 3 4
+/
+/CLIM_RAYT=   TEMPERATURE_IMPOSEE   temp (degre C)        ref
+/CLIM_RAYT=   TEMPERATURE_IMPOSEE      30.                  3
+/
+/CLIM_RAYT=   FLUX_IMPOSE_PAR_BANDE    bande     flux (w/m2)    ref
+/
+/*********************************************************************
+/*********************************************************************
+/    DONNEES COMPLEMENTAIRES POUR LES TRANSFERTS COUPLES
+/*********************************************************************
+/*********************************************************************
+/ ------------------------
+/ Definition des materiaux
+/ ------------------------
+/HMT_MAT=   BETON   2 4 32
+/
+/ ---------------------------------
+/ Conditions initiales sur PV et PT
+/ ---------------------------------
+/ mot-cle       valeur       liste des references
+/
+/CINI_PV=          2800.             1
+/CINI_PV_FCT=      2800.+x             1
+/CINI_PV_PROG=      2800.+x             1
+/
+/CINI_PT=          101300.             1
+/CINI_PT_FCT=      101300.+x             1
+/CINI_PT_PROG=      101300.+x             1
+/
+/ -----------------------------------
+/ Conditions aux limites sur PV et PT
+/ -----------------------------------
+/
+/CLIM_HMT=      HHH T_ext ht_ext   PVext  hpv_pv  h_pv_as    PT_ext  h_pt_pv  h_pt_as    Hliq     References
+/CLIM_HMT=      HHH  20.     2.    2600.    1.e-4.  1.e-4.    101300.  1.e-4.  1.e-4.      0.       3 4 23 1
+/CLIM_HMT_FCT=  HHH  20*x    2*T   2600.    1.e-4.  1.e-4..   101300.  1.e-4.  1.e-4.      0.       3 4 23 1
+/CLIM_HMT_PROG= HHH                                                    3 4 23 1
+/
+/CLIM_HMT=       RES_CONTACT  20. 30.  50.         7
+/CLIM_HMT_FCT=   RES_CONTACT  20*x 30*pv  50*pt    7
+/CLIM_HMT_PROG=  RES_CONTACT                       7
+/
+/*********************************************************************
+/*********************************************************************
+/                 DONNEES POUR LE MODELE FLUID 0D
+/*********************************************************************
+/*********************************************************************
+/ Geometrie de la cavite
+/GEOM_FL0D=    #num  volume    ref_bord
+/GEOM_FL0D=     1    4.18879     8 9 12
+/
+/ proprietes physiques des fluides
+/CPHY_FL0D_T= cavite  rho  cp  Tini
+/CPHY_FL0D_T=    1       1 1017  20
+/CPHY_FL0D_FCT=     1       1    1000     20
+/CPHY_FL0D_PROG=    1  
+/
+/ ventilation
+/ cavite avec fluide entrant : #num_cavite  Tfluide_entrant   Q_fluide_entrant(kg/s)
+/VENT_FL0D_CAVIN=   1 20 0.02 
+/VENT_FL0D_CAVIN_FCT=   1 20 0.02 
+/VENT_FL0D_CAVIN_PROG=   1 20 
+/
+/ fluide passant d'une cavite à une autre : #num_cavite1   #num_cavite2  debit(kg/s)
+/VENT_FL0D_CAV2CAV=  1 2 0.02 
+/VENT_FL0D_CAV2CAV_FCT=  1 2 0.02 
+/VENT_FL0D_CAV2CAV_PROG=  1 2 
+/
+/ fluide sortant d'une cavite : #num_cavite  debit(kg/s)
+/VENT_FL0D_CAVOUT=  2 0.02
+/VENT_FL0D_CAVOUT_FCT=  2 0.02
+/VENT_FL0D_CAVOUT_PROG=  2 
+/
+/ Affichages et calculs de bilans
+PRINTING FL0D TEMPERATURES= OUI
+BILAN FL0D CAVITES= OUI
+/
+/+ echange a la surface solide
+/CLIM_T= ECH_0D       h          ref
+/CLIM_T= ECH_0D      300          8 
+/CLIM_T_FCT= ECH_0D  300*0.01*T   8 
+/CLIM_T_PROG= ECH_0D  300*0.01*T  
+/
+/ terme source   #num_cavite   a   b   (phi=aT+b  W/m3)
+/CVOL_FL0D_T=             1         0.  15
+/CVOL_FL0D_T_FCT=         1         0.  15+0.01*tt
+/CVOL_FL0D_T_PROG=        1
+/
+/ rayonnement pour fluide gris : coefficient d'absorption
+/RAYT_FL0D=      #num_cavite    #num_bande   coef_absorption
+/RAYT_FL0D=           1             1             12.5
+/
+/  rayonnement pour fluide gris : references sur maillage de rayonnement de la cavite
+/RAYT_REF_FL0D        #num_cavite  list_ref
+/RAYT_REF_FL0D            1          3 6 2
+/
+/*********************************************************************
+/*********************************************************************
+/                 DONNEES POUR LE MODELE FLUID 1D
+/*********************************************************************
+/*********************************************************************
+/
+/PAS DE TEMPS FLUIDE 1D= 100
+/ECRITURES OPTIONNELLES FLUIDE 1D= NON
+/BILANS SUR LES FIBRES 1D FLUIDES= NON
+/
+/geometrie du fluide
+/GEOM_FL1D=   Dh  section  rugosite     ref 
+/GEOM_FL1D=  0.1  0.00785     0          6 
+/
+/GRAVITE_FL1D= 0 0 -9.81
+/
+/ cond initiale
+/CINI_FL1D=  Tini   debit_ini  ref
+/CINI_FL1D=   20      7.85      6  
+/
+/ definition d'une entree fluide
+/CLIM_FL1D=       ENTREE_3D  x   y   z     debit(kg/s)   Temp
+/CLIM_FL1D=       ENTREE_3D  0   0   0       7.85         40
+/CLIM_FL1D_FCT=   ENTREE_3D  0   0   0       7.85         40
+/
+/CLIM_FL1D=       DELTA_P  x   y   z     Pin(Pa)  Pout(Pa)   Temp
+/CLIM_FL1D=       DELTA_P  0   0   0    101300      101280    40
+/CLIM_FL1D_FCT=   DELTA_P  0   0   0    101300      101280    40
+/
+/CLIM_FL1D=       LOOP_DEBIT  x   y   z     vx   vy    vz  debit(kg/s)
+/CLIM_FL1D=       LOOP_DEBIT  0   0   0     0.    0.    1.  3.12
+/CLIM_FL1DD_FCT=  LOOP_DEBIT  0   0   0     0.    0.    1.  3.12
+/
+/CLIM_FL1D=       LOOP_THERMOSYPHON  x   y   z     
+/CLIM_FL1D=       LOOP_THERMOSYPHON  0   0   0     
+/CLIM_FL1D_FCT=   LOOP_THERMOSYPHON  0   0   0     
+/
+/prop phy du fluide
+/CPHY_FL1D=       rho   cp conductivite   diffusivite   ref 
+/CPHY_FL1D=      1000  4185    0.6           0.001       4
+/CPHY_FL1D_FCT   1000  4185    0.6           0.001       4
+/
+/ ref du solide couple au fluide 1d
+/CLIM= COUPLAGE_FLUIDE_1D 6
+/
+/ref du fluide 1d couple au solide et type d'echange 
+/CLIM_FL1D= COUPLAGE_CONDUCTION    H_COLBURN       6
+/CLIM_FL1D= COUPLAGE_CONDUCTION    H_PROG          7
+/CLIM_FL1D= COUPLAGE_CONDUCTION    H_CONSTANT   h  8
+/+ 
+/terme source thermique 
+/CVOL_FL1D_T=      a   b   ref 
+/CVOL_FL1D_T=      0. 23.5     4
+/CVOL_FL1D_T_FCT   0. 23.5     4
+/CVOL_FL1D_T_PROG              4
+/
+/pertes de charges lineaires
+/PDC_LIN_FL1D=   K      ref 
+/PDC_LIN_FL1D=   0.23    9
+/
+/pertes de charges singulieres
+/PDC_SING_FL1D=  K      ref 
+/PDC_SING_FL1D  0.23    10
+/
+/ frequence egale a celle des historiques solides
+/HIST_FL1D= COORD 0.1 0.2 0.3
+/
+/
+/*********************************************************************
+/*********************************************************************
+/                 DONNEES POUR LE RAYONNEMENT SOLAIRE
+/*********************************************************************
+/*********************************************************************
+/
+/(1=fichier_meteo 2=modele de ciel 3=angle_constant)
+/SOLAIRE=  TYPE_DE_MODELE   1
+/
+/SOLAIRE= REFERENCES_DE_LA_VOUTE_CELESTE liste_ref
+/
+/ Paris - latitude 48 51  - longitude 2 20
+/SOLAIRE=  LATITUDE_DU_LIEU  degres minutes
+/SOLAIRE=  LONGITUDE_DU_LIEU degres minutes
+/SOLAIRE=  MOIS_JOUR_HEURE_MINUTE mois jour heure minute
+/
+/SOLAIRE=  COEFFICIENTS_DE_CLARTE_DU_CIEL   coeff_a    coeff_b
+/SOLAIRE=  SOURCE_REPART_AUTO_SUR_LES_BANDES  NON     
+/
+/ angles en degres
+/SOLAIRE=  H_AZIMUT   35   22
+/        
+/  flux   num_bande   valeur (W/m2)
+/SOLAIRE=  FLUX   1    350.
+/
+/SOLAIRE=  BILAN liste_ref
