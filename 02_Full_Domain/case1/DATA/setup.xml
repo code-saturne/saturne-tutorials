@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="case1" solver_version="5.2;7.0;7.2;7.3-alpha" study="02_Full_Domain" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="case1" solver_version="5.2;7.0;7.2;7.3;9.0" study="02_Full_Domain" version="2.0">
   <additional_scalars>
     <variable label="scalar2" name="scalar2" type="user">
       <blending_factor>1</blending_factor>
@@ -66,10 +66,12 @@
       </probe>
       <probe_format choice="DAT"/>
       <probe_recording_frequency>1</probe_recording_frequency>
+      <probes_interpolation choice=""/>
+      <probes_snap choice=""/>
       <writer id="-1" label="results">
         <directory name="postprocessing"/>
         <format name="ensight" options="separate_meshes"/>
-        <frequency period="time_step">2</frequency>
+        <frequency period="time_value">0.2</frequency>
         <output_at_end status="on"/>
         <output_at_start status="on"/>
         <time_dependency choice="fixed_mesh"/>
@@ -79,7 +81,7 @@
     <scalar_balances/>
     <time_averages/>
     <time_parameters>
-      <iterations>300</iterations>
+      <maximum_time>15</maximum_time>
       <property label="CourantNb" name="courant_number">
         <postprocessing_recording status="off"/>
       </property>
@@ -267,6 +269,7 @@
       <omega_y>0</omega_y>
       <omega_z>0</omega_z>
     </omega>
+    <time_tables/>
   </physical_properties>
   <solution_domain>
     <extrusion/>
@@ -280,12 +283,6 @@
         <visualization>1</visualization>
       </face_joining>
     </joining>
-    <mesh_cartesian>
-      <x_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
-      <y_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
-      <z_direction law="constant" max="1.0" min="0.0" ncells="1" prog="1.0"/>
-    </mesh_cartesian>
-    <mesh_origin choice="mesh_import"/>
     <mesh_smoothing status="off"/>
     <meshes_list>
       <mesh name="downcomer.med"/>
@@ -302,6 +299,7 @@
     <ale_method status="off"/>
     <atmospheric_flows model="off">
       <large_scale_meteo status="off"/>
+      <read_meteo_data status="off"/>
     </atmospheric_flows>
     <compressible_model model="off"/>
     <conjugate_heat_transfer>
@@ -313,8 +311,7 @@
       <soot_model model="off"/>
       <thermodynamical_pressure status="off"/>
     </gas_combustion>
-    <groundwater_model model="off"/>
-    <hgn_model model="off"/>
+    <immersed_boundaries/>
     <internal_coupling>
       <coupled_scalars/>
       <solid_zones/>
@@ -324,7 +321,6 @@
       <emissivity>1.0</emissivity>
       <status>off</status>
     </interparticles_radiative_transfer>
-    <joule_effect model="off"/>
     <porosities/>
     <radiative_transfer model="off">
       <absorption_coefficient type="constant">0</absorption_coefficient>
@@ -333,7 +329,6 @@
     <reference_values>
       <length/>
     </reference_values>
-    <solid_fuels model="off"/>
     <source_terms/>
     <thermal_scalar model="temperature_celsius">
       <property label="Dimensionless Thermal flux" name="boundary_layer_nusselt" support="boundary">
@@ -346,7 +341,6 @@
       </property>
       <variable label="TempC" name="temperature" type="thermal">
         <blending_factor>1</blending_factor>
-        <formula zone_id="1">temperature = 20.;</formula>
         <max_value>400</max_value>
         <min_value>0</min_value>
         <rhs_reconstruction>1</rhs_reconstruction>
@@ -373,11 +367,7 @@
       <wall_function>3</wall_function>
     </turbulence>
     <velocity_pressure>
-      <initialization>
-        <formula zone_id="1">velocity[0] = 0.;
-velocity[1] = 0.;
-velocity[2] = 0.;</formula>
-      </initialization>
+      <initialization/>
       <property label="Stress" name="stress" support="boundary"/>
       <property label="Stress, normal" name="stress_normal" support="boundary">
         <postprocessing_recording status="off"/>

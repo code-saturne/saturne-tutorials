@@ -9,7 +9,7 @@
 /*
   This file is part of code_saturne, a general-purpose CFD tool.
 
-  Copyright (C) 1998-2024 EDF S.A.
+  Copyright (C) 1998-2025 EDF S.A.
 
   This program is free software; you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free Software
@@ -92,33 +92,33 @@ cs_user_extra_operations(cs_domain_t     *domain)
   static FILE *file = NULL;
 
   /* Get pointers to the mesh and mesh quantities structures */
-  const cs_mesh_t *m= cs_glob_mesh;
+  const cs_mesh_t *m = cs_glob_mesh;
   const cs_mesh_quantities_t *fvq = cs_glob_mesh_quantities;
 
   /* Number of cells */
-  const int n_cells = m->n_cells;
+  const cs_lnum_t n_cells = m->n_cells;
 
   /* Cell volumes */
   const cs_real_t *cell_vol = fvq->cell_vol;
 
   /* Get the temperature field */
-  const cs_field_t *temp = cs_field_by_name_try("temperature");
+  const cs_real_t *cvar_temp = cs_field_by_name("temperature")->val;
 
   /* Total domain volume */
   cs_real_t voltot = fvq->tot_vol;
 
-  /* Temp * volumes sum and Tavg */
-  cs_real_t temptot =0., Tavg =0.;
+  /* Temp * volumes Tavg */
+  cs_real_t tavg = 0.;
 
   /* Compute the sum T*vol */
-  for (int ii = 0 ; ii < n_cells ; ii++)
-    temptot += temp->val[ii]*cell_vol[ii];
+  for (cs_lnum_t ii = 0 ; ii < n_cells ; ii++)
+    tavg += cvar_temp[ii]*cell_vol[ii];
 
   /* Parallel sums */
-  cs_parall_sum(1, CS_REAL_TYPE, &temptot);
+  cs_parall_sum(1, CS_REAL_TYPE, &tavg);
 
   /* Compute Tavg */
-  Tavg = temptot / voltot;
+  tavg /= voltot;
 
   /* Open the file moy.dat at the first iteration
      and write the first comment line only on the
@@ -128,15 +128,15 @@ cs_user_extra_operations(cs_domain_t     *domain)
     fprintf(file, "#Time (s)   Average Temperature (C) \n");
   }
 
-/* Print the average temperature at the current time step
-   on the first processor only */
+  /* Print the average temperature at the current time step
+     on the first processor only */
   if (cs_glob_rank_id <= 0)
-    fprintf(file, "%.6f  %.6f\n",cs_glob_time_step->t_cur, Tavg);
+    fprintf(file, "%.6f  %.6f\n",cs_glob_time_step->t_cur, tavg);
 
-/* Close the file moy.dat at the last iteration
-   on the first processor only */
+  /* Close the file moy.dat at the last iteration
+     on the first processor only */
   if (cs_glob_time_step->nt_cur == cs_glob_time_step->nt_max
-   && cs_glob_rank_id <= 0)
+      && cs_glob_rank_id <= 0)
     fclose(file);
 }
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="case3" solver_version="5.2;7.0" study="02_Full_Domain" version="2.0">
+<?xml version="1.0" encoding="utf-8"?><Code_Saturne_GUI case="case3" solver_version="5.2;7.0;9.0" study="02_Full_Domain" version="2.0">
   <additional_scalars>
     <variable label="scalar2" name="scalar2" type="user">
       <formula zone_id="1">scalar2 = 10.;</formula>
@@ -70,10 +70,12 @@
       </probe>
       <probe_format choice="CSV"/>
       <probe_recording_frequency>1</probe_recording_frequency>
+      <probes_interpolation choice=""/>
+      <probes_snap choice=""/>
       <writer id="-1" label="results">
         <directory name="postprocessing"/>
         <format name="ensight" options="separate_meshes"/>
-        <frequency period="time_step">2</frequency>
+        <frequency period="time_value">0.2</frequency>
         <output_at_end status="on"/>
         <time_dependency choice="fixed_mesh"/>
       </writer>
@@ -82,7 +84,7 @@
     <scalar_balances/>
     <time_averages/>
     <time_parameters>
-      <iterations>900</iterations>
+      <maximum_time>9</maximum_time>
       <property label="CourantNb" name="courant_number">
         <postprocessing_recording status="off"/>
       </property>
@@ -199,10 +201,8 @@
   </calculation_management>
   <lagrangian model="off"/>
   <numerical_parameters>
-    <gradient_reconstruction choice="green_iter"/>
     <gradient_transposed status="on"/>
     <hydrostatic_pressure status="off"/>
-    <pressure_relaxation>1</pressure_relaxation>
     <velocity_pressure_algo choice="simplec">
       <piso_sweep_number>1</piso_sweep_number>
     </velocity_pressure_algo>
@@ -250,6 +250,7 @@ density = temperature*(A*temperature +B) + C;</formula>
     <notebook/>
   </physical_properties>
   <solution_domain>
+    <extrusion/>
     <faces_cutting status="off"/>
     <joining>
       <face_joining name="1">
@@ -267,6 +268,7 @@ density = temperature*(A*temperature +B) + C;</formula>
       <mesh name="core.med"/>
     </meshes_list>
     <periodicity/>
+    <thin_walls/>
     <volumic_conditions>
       <zone groundwater_law="off" head_losses="off" id="1" initialization="on" label="all_cells" mass_source_term="off" momentum_source_term="off" physical_properties="on" porosity="off" scalar_source_term="off" thermal_source_term="off">all[]</zone>
       <zone groundwater_law="off" head_losses="on" id="2" initialization="off" label="Zone_1" mass_source_term="off" momentum_source_term="off" physical_properties="off" porosity="off" scalar_source_term="off" thermal_source_term="off">x&gt;=0.2 and x&lt;=0.4 and y&gt;= -0.75 and y&lt;=-0.25</zone>
@@ -281,7 +283,6 @@ density = temperature*(A*temperature +B) + C;</formula>
     </conjugate_heat_transfer>
     <fans/>
     <gas_combustion model="off" option="off"/>
-    <groundwater_model model="off"/>
     <head_losses>
       <head_loss zone_id="2">
         <a11>1</a11>
@@ -299,12 +300,11 @@ density = temperature*(A*temperature +B) + C;</formula>
         <kzz>20000</kzz>
       </head_loss>
     </head_losses>
-    <joule_effect model="off"/>
+    <immersed_boundaries/>
     <radiative_transfer model="off"/>
     <reference_values>
       <length/>
     </reference_values>
-    <solid_fuels model="off"/>
     <thermal_scalar model="temperature_celsius">
       <property label="Dimensionless Thermal flux" name="boundary_layer_nusselt" support="boundary">
         <postprocessing_recording status="off"/>
@@ -336,11 +336,7 @@ density = temperature*(A*temperature +B) + C;</formula>
       </variable>
     </turbulence>
     <velocity_pressure>
-      <initialization>
-        <formula zone_id="1">velocity[0] = 0.;
-velocity[1] = 0.;
-velocity[2] = 0.;</formula>
-      </initialization>
+      <initialization/>
       <property label="Stress" name="stress" support="boundary"/>
       <property label="Stress, normal" name="stress_normal" support="boundary">
         <postprocessing_recording status="off"/>
