@@ -96,7 +96,7 @@ cs_user_mesh_modify(cs_mesh_t  *mesh)
     cs_lnum_t n_faces;
     cs_lnum_t *face_list;
 
-    BFT_MALLOC(face_list, mesh->n_b_faces, cs_lnum_t);
+    CS_MALLOC(face_list, mesh->n_b_faces, cs_lnum_t);
 
     for (int z_id = 0; z_id < n_zones; z_id++) {
 
@@ -110,7 +110,7 @@ cs_user_mesh_modify(cs_mesh_t  *mesh)
                                        face_list);
     }
 
-    BFT_FREE(face_list);
+    CS_FREE(face_list);
 
     /* Determine vertex values for extrusion */
 

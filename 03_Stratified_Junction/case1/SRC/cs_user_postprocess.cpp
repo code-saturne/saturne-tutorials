@@ -84,7 +84,7 @@ _t_lt_21_select(void        *input,
 
   if (f->val != NULL) {
 
-    BFT_MALLOC(_cell_ids, m->n_cells, cs_lnum_t); /* Allocate selection list */
+    CS_MALLOC(_cell_ids, m->n_cells, cs_lnum_t); /* Allocate selection list */
 
     for (i = 0; i < m->n_cells; i++) {
       if (f->val[i] < 21) {
@@ -93,7 +93,7 @@ _t_lt_21_select(void        *input,
       }
     }
 
-    BFT_REALLOC(_cell_ids, _n_cells, cs_lnum_t); /* Adjust size (good practice,
+    CS_REALLOC(_cell_ids, _n_cells, cs_lnum_t); /* Adjust size (good practice,
                                                     but not required) */
 
   }

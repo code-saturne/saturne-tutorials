@@ -108,7 +108,7 @@ cs_user_postprocess_values(const char            *mesh_name,
     const cs_lnum_t n_cells_ext = m->n_cells_with_ghosts;
 
     cs_real_33_t *gradv;
-    BFT_MALLOC(gradv, n_cells_ext, cs_real_33_t);
+    CS_MALLOC(gradv, n_cells_ext, cs_real_33_t);
 
     cs_field_gradient_vector(CS_F_(vel),
                              false,   /* use_previous_t, */
@@ -117,7 +117,7 @@ cs_user_postprocess_values(const char            *mesh_name,
 
 
     cs_real_t *vorticity;
-    BFT_MALLOC(vorticity, n_cells, cs_real_t);
+    CS_MALLOC(vorticity, n_cells, cs_real_t);
     for (cs_lnum_t i = 0; i < n_cells; i++) {
       cs_lnum_t c_id = cell_list[i];
       cs_real_t v[3] = {gradv[c_id][2][1] - gradv[c_id][1][2],
@@ -126,7 +126,7 @@ cs_user_postprocess_values(const char            *mesh_name,
       vorticity[i] = cs_math_3_square_norm(v);
     }
 
-    BFT_FREE(gradv);
+    CS_FREE(gradv);
 
     cs_post_write_var(mesh_id,
                       CS_POST_WRITER_ALL_ASSOCIATED,  /* writer id filter */
@@ -140,7 +140,7 @@ cs_user_postprocess_values(const char            *mesh_name,
                       NULL,                           /* b_face_vals */
                       ts);
 
-    BFT_FREE(vorticity);
+    CS_FREE(vorticity);
 
   }
 }

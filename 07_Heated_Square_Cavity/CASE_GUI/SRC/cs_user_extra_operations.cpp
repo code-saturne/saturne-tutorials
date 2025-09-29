@@ -169,7 +169,7 @@ cs_user_extra_operations(cs_domain_t  *domain)
     cs_lnum_t  nelts = 0;
     cs_lnum_t *lstelt = NULL;
 
-    BFT_MALLOC(lstelt, n_i_faces, cs_lnum_t);    
+    CS_MALLOC(lstelt, n_i_faces, cs_lnum_t);    
     cs_selector_get_i_face_list("(x > 0.499) and (x < 0.501)", &nelts, lstelt);
 
     for (cs_lnum_t elt_id = 0; elt_id < nelts; elt_id++) {
@@ -260,7 +260,7 @@ cs_user_extra_operations(cs_domain_t  *domain)
     bft_printf(" Nu0 %f Nu1/2 %f Ux_max %f y_Ux_max %f Uy_max %f x_Uy_max %f\n",
                Nu0, Nu12, max_vel_x, y_vel_x, max_vel_y, x_vel_y);
 
-    BFT_FREE(lstelt);
+    CS_FREE(lstelt);
   }
 }
 

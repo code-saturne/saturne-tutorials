@@ -89,7 +89,7 @@ cs_user_extra_operations(cs_domain_t     *domain)
       = cs_notebook_parameter_value_by_name("v_heat_flux");
 
     cs_lnum_t *b_face_list;
-    BFT_MALLOC(b_face_list, domain->mesh->n_b_faces, cs_lnum_t);
+    CS_MALLOC(b_face_list, domain->mesh->n_b_faces, cs_lnum_t);
 
     const cs_real_t *b_face_surf = domain->mesh_quantities->b_face_surf;
 
@@ -107,7 +107,7 @@ cs_user_extra_operations(cs_domain_t     *domain)
       /* Get thermal flux */
 
       cs_real_t *th_flux_density;
-      BFT_MALLOC(th_flux_density, n_sel_faces, cs_real_t);
+      CS_MALLOC(th_flux_density, n_sel_faces, cs_real_t);
 
       cs_function_evaluate(th_flux_func,
                            domain->time_step,
@@ -121,10 +121,10 @@ cs_user_extra_operations(cs_domain_t     *domain)
         wall_flux[i] += th_flux_density[idx] * b_face_surf[f_id];
       }
 
-      BFT_FREE(th_flux_density);
+      CS_FREE(th_flux_density);
     }
 
-    BFT_FREE(b_face_list);
+    CS_FREE(b_face_list);
 
     cs_parall_sum(2, CS_REAL_TYPE, wall_flux);
 

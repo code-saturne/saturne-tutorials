@@ -225,7 +225,7 @@ cs_user_postprocess_values(const char            *mesh_name,
     if (strncmp(name, "Z", 1) == 0) {
 
       cs_real_t *val;
-      BFT_MALLOC(val, n_cells, cs_real_t);
+      CS_MALLOC(val, n_cells, cs_real_t);
 
       char var_name[64];
 
@@ -358,7 +358,7 @@ cs_user_postprocess_values(const char            *mesh_name,
 
       }
 
-      BFT_FREE(val);
+      CS_FREE(val);
 
     }
   }
