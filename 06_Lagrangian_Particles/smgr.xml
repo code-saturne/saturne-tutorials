@@ -2,7 +2,9 @@
   <destination/>
   <repository/>
   <study label="06_Lagrangian_Particles" status="on">
-    <case compute="on" label="RANS_rij_SSG" post="on" run_id="" status="on"/>
-    <case compute="on" label="RANS_rij_SSG_5UM" post="on" run_id="" status="on"/>
+    <case compute="on" label="RANS_rij_SSG" post="on" run_id="ssg" status="on"/>
+    <case compute="on" label="RANS_rij_SSG_5UM" post="on" run_id="ssg" status="on">
+      <parametric args="-r ../../RANS_rij_SSG/RESU/ssg/"/>
+    </case>
   </study>
 </studymanager>
