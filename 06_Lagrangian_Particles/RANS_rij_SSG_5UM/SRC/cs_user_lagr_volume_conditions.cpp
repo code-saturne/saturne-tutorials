@@ -85,7 +85,7 @@ cs_user_lagr_volume_conditions(void)
   zis->stat_weight = 1.0;
 
   zis->diameter = 5e-6;
-  zis->diameter_variance = 1e-6;
+  zis->diameter_variance = 1e-12;
 
   zis->density = 2475.;
 }
