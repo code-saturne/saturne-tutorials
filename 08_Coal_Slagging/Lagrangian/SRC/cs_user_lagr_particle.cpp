@@ -26,10 +26,10 @@
 
 /*----------------------------------------------------------------------------*/
 
-#include "cs_defs.h"
+#include "cs_headers.h"
 
 /*----------------------------------------------------------------------------
- * Standard C library headers
+ * Standard library headers
  *----------------------------------------------------------------------------*/
 
 #include <limits.h>
@@ -46,11 +46,7 @@
  * Local headers
  *----------------------------------------------------------------------------*/
 
-#include "cs_headers.h"
-
 /*----------------------------------------------------------------------------*/
-
-BEGIN_C_DECLS
 
 /*============================================================================
  * Global variables
@@ -59,6 +55,8 @@ BEGIN_C_DECLS
 /*============================================================================
  * User function definitions
  *============================================================================*/
+
+#if defined(__cplusplus)
 
 /*----------------------------------------------------------------------------*/
 /*!
@@ -92,7 +90,8 @@ BEGIN_C_DECLS
  *     \f$ P_{rt}\f$    : Prandtl number
  *
  * \param[in]   phase_id   carrier phase_id
- * \param[in]   id_p       particle id
+ * \param[in]   p_set  reference to particle set
+ * \param[in]   p_id       particle id
  * \param[in]   re_p       particle Reynolds number
  * \param[in]   uvwr       relative velocity of the particle
  *                         (flow-seen velocity - part. velocity)
@@ -105,25 +104,25 @@ BEGIN_C_DECLS
 /*----------------------------------------------------------------------------*/
 
 void
-cs_user_lagr_rt(int              phase_id,
-                cs_lnum_t        id_p,
-                cs_real_t        re_p,
-                cs_real_t        uvwr,
-                cs_real_t        rho_f,
-                cs_real_t        rho_p,
-                cs_real_t        nu_f,
-                cs_real_t       *taup,
-                const cs_real_t  dt)
+cs_user_lagr_rt
+(
+  [[maybe_unused]] int                             phase_id,
+  [[maybe_unused]] cs_lagr_particle_set_t         &p_set,
+  [[maybe_unused]] cs_lnum_t                       p_id,
+  [[maybe_unused]] cs_real_t                       re_p,
+  [[maybe_unused]] cs_real_t                       uvwr,
+  [[maybe_unused]] cs_real_t                       rho_f,
+  [[maybe_unused]] cs_real_t                       rho_p,
+  [[maybe_unused]] cs_real_t                       nu_f,
+  [[maybe_unused]] cs_real_t                      *taup,
+  [[maybe_unused]] const cs_real_t                 dt
+)
 {
   CS_UNUSED(phase_id);
 
   /* Particles management */
-  cs_lagr_particle_set_t  *p_set = cs_lagr_get_particle_set();
-  const cs_lagr_attribute_map_t  *p_am = p_set->p_am;
 
-  unsigned char *particle = p_set->p_buffer + p_am->extents * id_p;
-  cs_real_t p_diam = cs_lagr_particle_get_real(particle, p_am,
-                                               CS_LAGR_DIAMETER);
+  cs_real_t p_diam = p_set.attr_real(p_id, CS_LAGR_DIAMETER);
 
   /*==========================================================================
    * Relaxation time with Haider and Levenspiel drag coefficient
@@ -156,4 +155,4 @@ cs_user_lagr_rt(int              phase_id,
 
 /*----------------------------------------------------------------------------*/
 
-END_C_DECLS
+#endif /* __cplusplus */
