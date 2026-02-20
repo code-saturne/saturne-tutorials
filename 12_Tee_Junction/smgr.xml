@@ -7,7 +7,7 @@
       <parametric args="--restart ../../CASE1/RESU/run1 --different-restart-mesh"/>
     </case>
     <case label="CASE3" status="on" compute="on" post="on">
-      <parametric args="--restart ../../CASE2/RESU/run1 --different-restart-mesh --different-restart-mesh-path ../CASE2/RESU/run1/mesh_output.csm"/>
+      <parametric args="--restart ../../CASE2/RESU/run1 --different-restart-mesh"/>
     </case>
   </study>
 </studymanager>
