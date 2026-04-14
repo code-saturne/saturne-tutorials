@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><studymanager solver_version="9.1" version="2.0">
+  <destination/>
+  <repository/>
+  <study label="15_Sod_Shock_Tube" status="on">
+    <case label="CASE" run_id="" status="on"/>
+  </study>
+</studymanager>
