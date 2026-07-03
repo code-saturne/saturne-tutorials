@@ -33,7 +33,6 @@
     <time_averages/>
     <time_parameters>
       <iterations>100</iterations>
-      <property name="courant_number" label="CourantNb"/>
       <property name="fourier_number" label="FourierNb"/>
       <time_passing>0</time_passing>
       <time_step_ref>10</time_step_ref>
@@ -98,11 +97,6 @@
       <method choice="user_properties"/>
       <property name="density" choice="constant" label="Density">
         <initial_value>7700</initial_value>
-        <listing_printing status="off"/>
-        <postprocessing_recording status="off"/>
-      </property>
-      <property name="dynamic_diffusion" choice="constant" label="DiffDyn">
-        <initial_value>0.01</initial_value>
         <listing_printing status="off"/>
         <postprocessing_recording status="off"/>
       </property>
