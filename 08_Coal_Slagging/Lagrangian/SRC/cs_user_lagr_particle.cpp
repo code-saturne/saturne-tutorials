@@ -7,7 +7,7 @@
 /*
   This file is part of code_saturne, a general-purpose CFD tool.
 
-  Copyright (C) 1998-2025 EDF S.A.
+  Copyright (C) 1998-2026 EDF S.A.
 
   This program is free software; you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free Software
@@ -56,11 +56,9 @@
  * User function definitions
  *============================================================================*/
 
-#if defined(__cplusplus)
-
 /*----------------------------------------------------------------------------*/
-/*!
- * \brief Modification of the calculation of the particle relaxation time
+/*
+ *  Modification of the calculation of the particle relaxation time
  *  with respect to the chosen formulation for the drag coefficient
  *
  * This function is called in a loop on the particles, so be careful
@@ -118,8 +116,6 @@ cs_user_lagr_rt
   [[maybe_unused]] const cs_real_t                 dt
 )
 {
-  CS_UNUSED(phase_id);
-
   /* Particles management */
 
   cs_real_t p_diam = p_set.attr_real(p_id, CS_LAGR_DIAMETER);
@@ -154,5 +150,3 @@ cs_user_lagr_rt
 }
 
 /*----------------------------------------------------------------------------*/
-
-#endif /* __cplusplus */
