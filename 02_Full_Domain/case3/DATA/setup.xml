@@ -202,7 +202,6 @@
   <lagrangian model="off"/>
   <numerical_parameters>
     <gradient_transposed status="on"/>
-    <hydrostatic_pressure status="off"/>
     <velocity_pressure_algo choice="simplec">
       <piso_sweep_number>1</piso_sweep_number>
     </velocity_pressure_algo>
@@ -295,9 +294,9 @@ density = temperature*(A*temperature +B) + C;</formula>
         <a32>0</a32>
         <a33>1</a33>
         <choice>off</choice>
-        <kxx>20000</kxx>
-        <kyy>20000</kyy>
-        <kzz>20000</kzz>
+        <kxx>2000</kxx>
+        <kyy>2000</kyy>
+        <kzz>2000</kzz>
       </head_loss>
     </head_losses>
     <immersed_boundaries/>
