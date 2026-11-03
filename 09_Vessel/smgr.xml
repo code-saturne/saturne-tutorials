@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><studymanager>
+  <destination/>
+  <repository/>
+  <study label="09_Vessel" status="on">
+    <case label="downcomer" status="on"/>
+    <case label="full_domain1" status="on"/>
+    <case label="full_domain2" status="on"/>
+    <case label="full_domain2bis" status="on"/>
+    <case label="full_domain3" status="on"/>
+  </study>
+</studymanager>
